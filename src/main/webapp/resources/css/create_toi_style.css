@@ -1,0 +1,11 @@
+:root {
+    --main-color-dark: #18556B;
+    --main-color: #2E85A5;
+    --main-color-light: #48A9CD;
+    --complementary-color: #CF2B5A;
+    --success-color: #2EA54E;
+}
+
+p {
+    text-align: center;
+}
