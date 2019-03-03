@@ -21,8 +21,21 @@
 
 <tag:navbar/>
 
-<h1>ERROR</h1>
-<h2>Fucking error doesn't allow me to live normally!</h2>
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col mb-2">
+            <h2>ERROR</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h4>Some error occured!</h4>
+        </div>
+    </div>
+
+</div>
 
 <tag:footer/>
 

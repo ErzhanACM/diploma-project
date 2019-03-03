@@ -91,18 +91,18 @@
 
                 <li class="nav-item">
                     <div class="mt-1">
-                        <form class="form-inline" action="/registration" method="get">
-                            <button class="btn btn-sm px-2 mr-4 nuv-btn" type="submit">Sign Up <i
-                                    class="fa fa-user-plus"></i></button>
+                        <form class="form-inline" action="/login" method="get">
+                            <button class="btn btn-sm px-2 mr-4 nuv-btn nuv-btn-sign-in" type="submit">Sign In <i
+                                    class="fa fa-sign-in"></i></button>
                         </form>
                     </div>
                 </li>
 
                 <li class="nav-item">
                     <div class="mt-1">
-                        <form class="form-inline" action="/login" method="get">
-                            <button class="btn btn-sm px-2 mr-4 nuv-btn nuv-btn-sign-in" type="submit">Sign In <i
-                                    class="fa fa-sign-in"></i></button>
+                        <form class="form-inline" action="/registration" method="get">
+                            <button class="btn btn-sm px-2 mr-4 nuv-btn" type="submit">Sign Up <i
+                                    class="fa fa-user-plus"></i></button>
                         </form>
                     </div>
                 </li>
