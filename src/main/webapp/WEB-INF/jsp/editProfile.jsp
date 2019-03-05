@@ -1,15 +1,19 @@
 <%@ page language="java" session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <html>
 <head>
     <title>Spring Boot Test App</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -34,7 +38,7 @@
         <p class="hint">You don't have to fill in all fields, just only you would like</p>
     </div>
 
-    <form:form method="post" action="/updateUser" class="needs-validation" novalidate="true">
+    <form:form method="post" action="/user/updateUser" class="needs-validation" novalidate="true">
 
         <div class="form-row">
 
@@ -42,7 +46,7 @@
                 <label for="secondName">Second Name</label>
                 <input class="form-control" type="text"
                        id="secondName" name="secondName" placeholder="Enter second name"
-                       value="">
+                       value="<c:if test="${empty user}"><security:authentication property="principal.secondName" /></c:if><c:if test="${not empty user}">${user.secondName}</c:if>">
                 <div class="invalid-feedback">
                     SECOND_NAME_ERROR
                 </div>
@@ -52,7 +56,7 @@
                 <label for="firstName">First Name</label>
                 <input class="form-control" type="text"
                        id="firstName" name="firstName" placeholder="Enter first name"
-                       value="">
+                       value="<c:if test="${empty user}"><security:authentication property="principal.firstName" /></c:if><c:if test="${not empty user}">${user.firstName}</c:if>">
                 <div class="invalid-feedback">
                     FIRST_NAME_ERROR
                 </div>
@@ -62,7 +66,7 @@
                 <label for="patronymic">Patronymic</label>
                 <input class="form-control" type="text"
                        id="patronymic" name="patronymic" placeholder="Enter patronymic"
-                       value="">
+                       value="<c:if test="${empty user}"><security:authentication property="principal.patronymic" /></c:if><c:if test="${not empty user}">${user.patronymic}</c:if>">
                 <div class="invalid-feedback">
                     PATRONYMIC_ERROR
                 </div>
@@ -154,6 +158,7 @@
         </div>
 
         <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type="hidden" name="id" value="<security:authentication property="principal.id" />">
         <div class="row justify-content-center">
             <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit">Save</button>
         </div>

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -35,7 +36,7 @@ public class UserService implements UserDetailsService {
         model.addAttribute("roles", Role.values());
     }
 
-    public void updateUser(String username, Map<String, String> formData, User user) {
+    public void updateUserRoles(String username, Map<String, String> formData, User user) {
         user.setUsername(username);
         user.getRoles().clear();
 
@@ -53,4 +54,7 @@ public class UserService implements UserDetailsService {
     }
 
 
+    public boolean updateUser(User user, Model model) {
+        return true;
+    }
 }

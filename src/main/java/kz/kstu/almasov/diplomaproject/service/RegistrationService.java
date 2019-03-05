@@ -61,8 +61,8 @@ public class RegistrationService {
             userRepository.save(user);
         }
         model.addAttribute("withButton", true);
-        model.addAttribute("href", "/additionalRegistration");
-        model.addAttribute("buttonTitle", "Additional registration");
+        model.addAttribute("href", "/login");
+        model.addAttribute("buttonTitle", "login");
     }
 
 }
