@@ -41,7 +41,7 @@
             <div class="col-md-4 mb-3">
                 <label for="secondName">Second Name</label>
                 <input class="form-control" type="text"
-                       id="secondName" name="secondname" placeholder="Enter second name"
+                       id="secondName" name="secondName" placeholder="Enter second name"
                        value="">
                 <div class="invalid-feedback">
                     SECOND_NAME_ERROR
@@ -51,7 +51,7 @@
             <div class="col-md-4 mb-3">
                 <label for="firstName">First Name</label>
                 <input class="form-control" type="text"
-                       id="firstName" name="firstname" placeholder="Enter first name"
+                       id="firstName" name="firstName" placeholder="Enter first name"
                        value="">
                 <div class="invalid-feedback">
                     FIRST_NAME_ERROR

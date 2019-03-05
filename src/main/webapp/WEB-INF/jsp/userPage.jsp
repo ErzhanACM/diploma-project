@@ -39,7 +39,7 @@
                 <div class="col-md-6">
                     <div class="profile-head">
                         <h5>
-                            ${user.username}
+                            ${user.secondName} ${user.firstName} ${user.patronymic}
                         </h5>
                         <h6>
                             Creator of this App and Admin

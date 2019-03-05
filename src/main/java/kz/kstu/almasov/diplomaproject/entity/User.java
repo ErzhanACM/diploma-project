@@ -36,7 +36,9 @@ public class User implements UserDetails {
 
     private boolean active;
     private String activationCode;
+
     private String avatarFileName;
+
     private String firstName;
     private String secondName;
     private String patronymic;
