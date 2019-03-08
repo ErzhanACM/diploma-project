@@ -1,6 +1,7 @@
 package kz.kstu.almasov.diplomaproject.controller;
 
 import kz.kstu.almasov.diplomaproject.entity.User;
+import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,13 +30,13 @@ public class UserController {
     }
 
     @GetMapping("/editProfile")
-    public String geditProfile() {
+    public String editProfile() {
         return "editProfile";
     }
 
     @PostMapping("/updateUser")
     public String updateUser(
-            @Valid User user,
+            @Valid UserDTO user,
             BindingResult bindingResult,
             Model model
     ) {
@@ -43,8 +44,8 @@ public class UserController {
         view = "/editProfile";
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtil.getErrors(bindingResult);
-            model.addAttribute("user", user);
             model.mergeAttributes(errorsMap);
+            model.addAttribute("user", user);
         } else {
             if (userService.updateUser(user, model)) {
                 view = "userPage";

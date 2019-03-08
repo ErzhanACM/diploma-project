@@ -72,7 +72,7 @@
             <security:authorize access="isAuthenticated()">
 
                 <li class="nav-item  mr-3">
-                    <a class="nav-link" href="/user/6"><i class="fa fa-user-circle"></i> My page</a>
+                    <a class="nav-link" href="/user/<security:authentication property="principal.id" />"><i class="fa fa-user-circle"></i> My page</a>
                 </li>
 
                 <li class="nav-item">

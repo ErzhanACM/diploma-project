@@ -27,15 +27,15 @@
 <div class="container px-4 pt-4">
 
     <div class="row justify-content-center mt-4">
-        <h4 class="page-title">Additional registration</h4>
+        <h4 class="page-title">Edit profile</h4>
     </div>
 
     <div class="row justify-content-center mt-2">
-        <p>You have created your account, but you can also tell us more about yourself!</p>
+        <p>Here you can edit your profile. Remember to fill all required fields!</p>
     </div>
 
     <div class="row justify-content-center mb-4">
-        <p class="hint">You don't have to fill in all fields, just only you would like</p>
+        <p class="hint">All required fields are marked with such symbol <span class="hint-span">*</span></p>
     </div>
 
     <form:form method="post" action="/user/updateUser" class="needs-validation" novalidate="true">
@@ -116,7 +116,7 @@
         <div class="divider"></div>
 
         <div class="row justify-content-center mb-1">
-            <p>You can also add your contact information</p>
+            <p>Contact information</p>
         </div>
 
         <div class="form-row">
@@ -141,13 +141,23 @@
                 </div>
             </div>
 
+            <div class="col-md-4 mb-3">
+                <label for="email">E-mail</label>
+                <input class="form-control" type="text"
+                       id="email" name="email" placeholder="Enter email"
+                       value="">
+                <div class="invalid-feedback">
+                    EMAIL_ERROR
+                </div>
+            </div>
+
         </div>
 
         <div class="form-row">
 
             <div class="col-md-8 mb-3">
                 <label for="aboutYourself">About yourself</label>
-                <textarea class="form-control" type="textarea" rows="5" minlength="10"
+                <textarea class="form-control" type="textarea" rows="8" minlength="10"
                           id="aboutYourself" name="aboutYourself" placeholder="add some about yourself"
                           value=""></textarea>
                 <div class="invalid-feedback">

@@ -2,6 +2,7 @@ package kz.kstu.almasov.diplomaproject.service;
 
 import kz.kstu.almasov.diplomaproject.entity.Role;
 import kz.kstu.almasov.diplomaproject.entity.User;
+import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,7 +55,7 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public boolean updateUser(User user, Model model) {
+    public boolean updateUser(UserDTO user, Model model) {
         return true;
     }
 }
