@@ -135,6 +135,14 @@ p {
     color: var(--main-color);
 }
 
+.errorColor {
+    color: var(--complementary-color);
+}
+
+.successColor {
+    color: var(--success-color);
+}
+
 .hint {
     font-size: 0.9rem;
     font-style: italic;

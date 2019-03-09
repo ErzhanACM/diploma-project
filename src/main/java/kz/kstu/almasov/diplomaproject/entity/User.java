@@ -36,16 +36,22 @@ public class User implements UserDetails {
 
     private boolean active;
     private String activationCode;
-    private String avatarFileName;
-    private String firstName;
-    private String secondName;
-    private String patronymic;
-
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    private String avatarFileName;
+
+    private String firstName;
+    private String secondName;
+    private String patronymic;
+    private String city;
+    private String address;
+    private String phone;
+    private String skype;
+    private String aboutMyself;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

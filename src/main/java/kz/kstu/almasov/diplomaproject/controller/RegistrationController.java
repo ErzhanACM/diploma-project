@@ -60,4 +60,9 @@ public class RegistrationController {
         return "information";
     }
 
+    @PostMapping("/updateUser")
+    public String updateUser() {
+        return "/login";
+    }
+
 }

@@ -38,7 +38,7 @@ public class AdminController {
             @RequestParam Map<String, String> formData,
             @RequestParam("userId") User user
     ) {
-        userService.updateUser(username, formData, user);
+        userService.updateUserRoles(username, formData, user);
         return "redirect:/user/userList";
     }
 
