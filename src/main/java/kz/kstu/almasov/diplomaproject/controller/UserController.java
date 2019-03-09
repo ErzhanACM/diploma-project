@@ -42,19 +42,19 @@ public class UserController {
             BindingResult bindingResult,
             Model model
     ) {
-        String view;
-        view = "/editProfile";
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtil.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
             model.addAttribute("user", user);
         } else {
             if (userService.updateUser(user, model)) {
-                view = "userPage";
+                model.addAttribute("message", "Changes successfully saved!");
+            } else {
+                System.out.println("error here :(");
             }
         }
         System.out.println(user);
-        return view;
+        return "/editProfile";
     }
 
 }

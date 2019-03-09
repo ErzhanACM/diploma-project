@@ -135,8 +135,12 @@ p {
     color: var(--main-color);
 }
 
-.errorMessage {
+.errorColor {
     color: var(--complementary-color);
+}
+
+.successColor {
+    color: var(--success-color);
 }
 
 .hint {

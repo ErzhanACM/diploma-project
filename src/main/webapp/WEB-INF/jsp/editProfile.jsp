@@ -39,7 +39,7 @@
     </div>
 
     <div class="row justify-content-center mb-4">
-        <p class="errorMessage">${message}</p>
+        <p class="successColor">${message}</p>
     </div>
 
     <form:form method="post" action="/user/updateUser" class="needs-validation" novalidate="true">
@@ -176,6 +176,7 @@
 
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="hidden" name="id" value="${user.id}">
+        <input type="hidden" name="oldEmail" value="<security:authentication property="principal.email" />">
         <div class="row justify-content-center">
             <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit">Save</button>
         </div>

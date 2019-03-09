@@ -62,12 +62,12 @@ public class UserService implements UserDetailsService {
     public boolean updateUser(UserDTO userDTO, Model model) {
         User user = getUserFromUserDto(userDTO);
         if (!userValidator.validate(user, userDTO.getOldEmail())) {
-            model.addAttribute("message", userValidator.getMessage());
-            System.out.println(userValidator.getMessage());
+            model.mergeAttributes(userValidator.getErrorMap());
             model.addAttribute("user", userDTO);
             return false;
         }
         userRepository.save(user);
+        model.addAttribute("user", UserDTO.from(user));
         return true;
     }
 

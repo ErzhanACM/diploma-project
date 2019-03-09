@@ -24,7 +24,7 @@ public class RegistrationService {
 
     public boolean registrateUser(User user, Model model) {
         if (!userValidator.validate(user)) {
-            model.addAttribute("message", userValidator.getMessage());
+            model.mergeAttributes(userValidator.getErrorMap());
             model.addAttribute("user", user);
             return false;
         }
