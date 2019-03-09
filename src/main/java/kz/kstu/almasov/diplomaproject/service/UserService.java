@@ -4,6 +4,7 @@ import kz.kstu.almasov.diplomaproject.entity.Role;
 import kz.kstu.almasov.diplomaproject.entity.User;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
+import kz.kstu.almasov.diplomaproject.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,6 +23,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserValidator userValidator;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -55,7 +59,36 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public boolean updateUser(UserDTO user, Model model) {
+    public boolean updateUser(UserDTO userDTO, Model model) {
+        User user = getUserFromUserDto(userDTO);
+        if (!userValidator.validate(user, userDTO.getOldEmail())) {
+            model.addAttribute("message", userValidator.getMessage());
+            System.out.println(userValidator.getMessage());
+            model.addAttribute("user", userDTO);
+            return false;
+        }
+        userRepository.save(user);
         return true;
+    }
+
+    protected User getUserFromUserDto(UserDTO userDTO) {
+        User user = userRepository.findById(userDTO.getId()).get();
+        user.setEmail(userDTO.getEmail());
+        user.setFirstName(userDTO.getFirstName());
+        user.setSecondName(userDTO.getSecondName());
+        user.setPatronymic(userDTO.getPatronymic());
+        user.setCity(userDTO.getCity());
+        user.setAddress(userDTO.getAddress());
+        user.setPhone(userDTO.getPhone());
+        user.setSkype(userDTO.getSkype());
+        user.setAboutMyself(userDTO.getAboutMyself());
+        return user;
+    }
+
+
+    public UserDTO getUserDtoByUsername(String username) {
+        User userFromDb = userRepository.findByUsername(username);
+        UserDTO user = UserDTO.from(userFromDb);
+        return user;
     }
 }

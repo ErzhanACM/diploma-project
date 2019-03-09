@@ -135,6 +135,10 @@ p {
     color: var(--main-color);
 }
 
+.errorMessage {
+    color: var(--complementary-color);
+}
+
 .hint {
     font-size: 0.9rem;
     font-style: italic;

@@ -3,9 +3,14 @@ package kz.kstu.almasov.diplomaproject.repository;
 import kz.kstu.almasov.diplomaproject.entity.User;
 import org.springframework.data.repository.CrudRepository;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByUsername(String username);
 
     User findByActivationCode(String code);
+
+    User findByEmail(String email);
 }

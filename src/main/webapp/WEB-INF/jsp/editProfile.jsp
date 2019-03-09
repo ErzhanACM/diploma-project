@@ -34,8 +34,12 @@
         <p>Here you can edit your profile. Remember to fill all required fields!</p>
     </div>
 
-    <div class="row justify-content-center mb-4">
+    <div class="row justify-content-center mt-3">
         <p class="hint">All required fields are marked with such symbol <span class="hint-span">*</span></p>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+        <p class="errorMessage">${message}</p>
     </div>
 
     <form:form method="post" action="/user/updateUser" class="needs-validation" novalidate="true">
@@ -46,7 +50,7 @@
                 <label for="secondName">Second Name</label>
                 <input class="form-control" type="text"
                        id="secondName" name="secondName" placeholder="Enter second name"
-                       value="<c:if test="${empty user}"><security:authentication property="principal.secondName" /></c:if><c:if test="${not empty user}">${user.secondName}</c:if>">
+                       value="${user.secondName}">
                 <div class="invalid-feedback">
                     SECOND_NAME_ERROR
                 </div>
@@ -56,7 +60,7 @@
                 <label for="firstName">First Name</label>
                 <input class="form-control" type="text"
                        id="firstName" name="firstName" placeholder="Enter first name"
-                       value="<c:if test="${empty user}"><security:authentication property="principal.firstName" /></c:if><c:if test="${not empty user}">${user.firstName}</c:if>">
+                       value="${user.firstName}">
                 <div class="invalid-feedback">
                     FIRST_NAME_ERROR
                 </div>
@@ -66,7 +70,7 @@
                 <label for="patronymic">Patronymic</label>
                 <input class="form-control" type="text"
                        id="patronymic" name="patronymic" placeholder="Enter patronymic"
-                       value="<c:if test="${empty user}"><security:authentication property="principal.patronymic" /></c:if><c:if test="${not empty user}">${user.patronymic}</c:if>">
+                       value="${user.patronymic}">
                 <div class="invalid-feedback">
                     PATRONYMIC_ERROR
                 </div>
@@ -90,6 +94,9 @@
                 <label for="city">City/Town</label>
                 <select class="form-control" name="city"
                         id="city" required>
+                    <c:if test="${not empty user.city}">
+                        <option value="${user.city}" selected>${user.city}</option>
+                    </c:if>
                     <option value="">undefined</option>
                     <option value="wedding">Темиртау</option>
                     <option value="anniversary">Караганда</option>
@@ -105,7 +112,7 @@
                 <label for="address">Address</label>
                 <input class="form-control" type="text"
                        id="address" name="address" placeholder="enter address"
-                       value="" required>
+                       value="${user.address}" required>
                 <div class="invalid-feedback">
                     ADDRESS_ERROR
                 </div>
@@ -125,7 +132,7 @@
                 <label for="phoneNumber">Phone</label>
                 <input class="form-control" type="tel"
                        id="phoneNumber" name="phone" placeholder="Enter phone number"
-                       value="">
+                       value="${user.phone}">
                 <div class="invalid-feedback">
                     PHONE_ERROR
                 </div>
@@ -135,7 +142,7 @@
                 <label for="skype">Skype</label>
                 <input class="form-control" type="text"
                        id="skype" name="skype" placeholder="Enter skype"
-                       value="">
+                       value="${user.skype}">
                 <div class="invalid-feedback">
                     SKYPE_ERROR
                 </div>
@@ -143,11 +150,11 @@
 
             <div class="col-md-4 mb-3">
                 <label for="email">E-mail</label>
-                <input class="form-control" type="text"
+                <input class="form-control <c:if test="${not empty emailError}">is-invalid</c:if>" type="email"
                        id="email" name="email" placeholder="Enter email"
-                       value="">
+                       value="${user.email}">
                 <div class="invalid-feedback">
-                    EMAIL_ERROR
+                        ${emailError}
                 </div>
             </div>
 
@@ -159,7 +166,7 @@
                 <label for="aboutYourself">About yourself</label>
                 <textarea class="form-control" type="textarea" rows="8" minlength="10"
                           id="aboutYourself" name="aboutYourself" placeholder="add some about yourself"
-                          value=""></textarea>
+                          value="${user.aboutMyself}"></textarea>
                 <div class="invalid-feedback">
                     ABOUT_YOURSELF_ERROR
                 </div>
@@ -168,7 +175,7 @@
         </div>
 
         <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <input type="hidden" name="id" value="<security:authentication property="principal.id" />">
+        <input type="hidden" name="id" value="${user.id}">
         <div class="row justify-content-center">
             <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit">Save</button>
         </div>

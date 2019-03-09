@@ -30,7 +30,9 @@ public class UserController {
     }
 
     @GetMapping("/editProfile")
-    public String editProfile() {
+    public String editProfile(Model model, Principal principal) {
+        UserDTO user = userService.getUserDtoByUsername(principal.getName());
+        model.addAttribute("user", user);
         return "editProfile";
     }
 
