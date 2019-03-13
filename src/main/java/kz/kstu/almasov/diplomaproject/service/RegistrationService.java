@@ -1,6 +1,7 @@
 package kz.kstu.almasov.diplomaproject.service;
 
 import kz.kstu.almasov.diplomaproject.entity.User;
+import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
 import kz.kstu.almasov.diplomaproject.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,18 @@ public class RegistrationService {
     private MailService mailService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private UserValidator userValidator;
 
-    public boolean registrateUser(User user, Model model) {
-        if (!userValidator.validate(user)) {
+    public boolean registrateUser(UserRegistrationDTO userRegistrationDTO, Model model) {
+        if (!userValidator.validate(userRegistrationDTO)) {
             model.mergeAttributes(userValidator.getErrorMap());
-            model.addAttribute("user", user);
+            model.addAttribute("user", userRegistrationDTO);
             return false;
         }
+        User user = userService.getUserFromUserRegistrationDto(userRegistrationDTO);
         user.setActive(false);
         sendEmailConfirmation(user);
         userRepository.save(user);

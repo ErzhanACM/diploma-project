@@ -49,11 +49,8 @@ public class UserController {
         } else {
             if (userService.updateUser(user, model)) {
                 model.addAttribute("message", "Changes successfully saved!");
-            } else {
-                System.out.println("error here :(");
             }
         }
-        System.out.println(user);
         return "/editProfile";
     }
 

@@ -34,11 +34,11 @@
         <p>Here you can edit your profile. Remember to fill all required fields!</p>
     </div>
 
-    <div class="row justify-content-center mt-3">
+    <div class="row justify-content-center mt-1">
         <p class="hint">All required fields are marked with such symbol <span class="hint-span">*</span></p>
     </div>
 
-    <div class="row justify-content-center mb-4">
+    <div class="row justify-content-center my-3">
         <p class="successColor">${message}</p>
     </div>
 
@@ -176,7 +176,7 @@
 
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="hidden" name="id" value="${user.id}">
-        <input type="hidden" name="oldEmail" value="<security:authentication property="principal.email" />">
+        <input type="hidden" name="oldEmail" value="${user.oldEmail}">
         <div class="row justify-content-center">
             <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit">Save</button>
         </div>

@@ -5,7 +5,7 @@ import kz.kstu.almasov.diplomaproject.entity.User;
 import java.util.Map;
 import java.util.TreeMap;
 
-public abstract class AbstractValidator<T> implements Validator<T> {
+public abstract class AbstractValidator {
 
     private Map<String, String> errorMap;
 

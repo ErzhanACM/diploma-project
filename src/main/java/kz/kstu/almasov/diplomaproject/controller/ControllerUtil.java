@@ -1,5 +1,6 @@
 package kz.kstu.almasov.diplomaproject.controller;
 
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 

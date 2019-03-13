@@ -1,20 +1,24 @@
 package kz.kstu.almasov.diplomaproject.validation;
 
 import kz.kstu.almasov.diplomaproject.entity.User;
+import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
+import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotBlank;
+
 @Component
-public class UserValidator extends AbstractValidator<User> {
+public class UserValidator extends AbstractValidator {
 
     @Autowired
     private UserRepository userRepository;
 
-    @Override
-    public boolean validate(User user) {
+    public boolean validate(UserRegistrationDTO user) {
         boolean sentence = true;
+        getErrorMap().clear();
         if (!checkUsername(user.getUsername())) {
             getErrorMap().put("usernameError", "User with such username already exists!");
             sentence = false;
@@ -23,12 +27,17 @@ public class UserValidator extends AbstractValidator<User> {
             getErrorMap().put("emailError", "User with such email already exists!");
             sentence = false;
         }
+        if (!checkPasswords(user.getPassword(), user.getPassword2())) {
+            getErrorMap().put("passwordError", "Passwords are different!");
+            sentence = false;
+        }
         return sentence;
     }
 
-    public boolean validate(User user, String oldEmail) {
+    public boolean validate(UserDTO userDTO) {
         boolean sentence = true;
-        if (!checkEmail(user.getEmail(), oldEmail)) {
+        getErrorMap().clear();
+        if (!checkEmail(userDTO.getEmail(), userDTO.getOldEmail())) {
             getErrorMap().put("emailError", "User with such email already exists!");
             sentence = false;
         }
@@ -59,6 +68,14 @@ public class UserValidator extends AbstractValidator<User> {
             sentence = checkEmail(email);
         }
         return sentence;
+    }
+
+    private boolean checkPasswords(String password, String password2) {
+        if (Strings.isNotEmpty(password) && Strings.isNotEmpty(password2) && !password.equals(password2)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

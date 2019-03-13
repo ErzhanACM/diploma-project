@@ -2,6 +2,7 @@ package kz.kstu.almasov.diplomaproject.controller;
 
 import kz.kstu.almasov.diplomaproject.entity.Role;
 import kz.kstu.almasov.diplomaproject.entity.User;
+import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
 import kz.kstu.almasov.diplomaproject.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String registrate(
             @RequestParam("role") String role,
-            @Valid User user,
+            @Valid UserRegistrationDTO user,
             BindingResult bindingResult,
             Model model
     ) {
@@ -48,6 +49,7 @@ public class RegistrationController {
         } else {
             if (registrationService.registrateUser(user, model)) {
                 view = "information";
+            } else {
             }
             model.addAttribute("selectedRole", role);
         }
