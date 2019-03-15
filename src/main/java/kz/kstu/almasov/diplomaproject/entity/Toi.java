@@ -35,17 +35,4 @@ public class Toi {
         this.creator = creator;
     }
 
-    public String getCreatorUsername() {
-        return creator != null ? this.creator.getUsername() : "<none>";
-    }
-
-    @Override
-    public String toString() {
-        return "Toi{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", creator=" + creator +
-                '}';
-    }
 }

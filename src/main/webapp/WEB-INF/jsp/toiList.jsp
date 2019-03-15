@@ -43,7 +43,7 @@
                     <th scope="row">${toi.id}</th>
                     <td>${toi.name}</td>
                     <td>${toi.type}</td>
-                    <td><a href="/user/${toi.creator.id}">${toi.creatorUsername}</a></td>
+                    <td><a href="/user/${toi.creator.id}">${toi.creator.username}</a></td>
                 </tr>
             </c:forEach>
             </tbody>
