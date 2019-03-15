@@ -1,6 +1,6 @@
 package kz.kstu.almasov.diplomaproject.service;
 
-import kz.kstu.almasov.diplomaproject.entity.User;
+import kz.kstu.almasov.diplomaproject.entity.user.User;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
 import kz.kstu.almasov.diplomaproject.validation.UserValidator;

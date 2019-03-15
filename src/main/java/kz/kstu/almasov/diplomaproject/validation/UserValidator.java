@@ -1,14 +1,12 @@
 package kz.kstu.almasov.diplomaproject.validation;
 
-import kz.kstu.almasov.diplomaproject.entity.User;
+import kz.kstu.almasov.diplomaproject.entity.user.User;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.validation.constraints.NotBlank;
 
 @Component
 public class UserValidator extends AbstractValidator {

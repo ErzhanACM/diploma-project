@@ -1,6 +1,6 @@
 package kz.kstu.almasov.diplomaproject.entity.dto;
 
-import kz.kstu.almasov.diplomaproject.entity.User;
+import kz.kstu.almasov.diplomaproject.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

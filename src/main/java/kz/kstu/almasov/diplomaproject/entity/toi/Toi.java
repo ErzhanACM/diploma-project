@@ -1,9 +1,9 @@
-package kz.kstu.almasov.diplomaproject.entity;
+package kz.kstu.almasov.diplomaproject.entity.toi;
 
+import kz.kstu.almasov.diplomaproject.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

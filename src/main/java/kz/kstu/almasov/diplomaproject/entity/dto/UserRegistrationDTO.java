@@ -1,14 +1,11 @@
 package kz.kstu.almasov.diplomaproject.entity.dto;
 
-import kz.kstu.almasov.diplomaproject.entity.Role;
-import kz.kstu.almasov.diplomaproject.entity.User;
+import kz.kstu.almasov.diplomaproject.entity.user.Role;
+import kz.kstu.almasov.diplomaproject.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Set;

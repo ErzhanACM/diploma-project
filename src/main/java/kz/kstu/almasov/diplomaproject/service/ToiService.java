@@ -1,7 +1,7 @@
 package kz.kstu.almasov.diplomaproject.service;
 
-import kz.kstu.almasov.diplomaproject.entity.Toi;
-import kz.kstu.almasov.diplomaproject.entity.User;
+import kz.kstu.almasov.diplomaproject.entity.toi.Toi;
+import kz.kstu.almasov.diplomaproject.entity.user.User;
 import kz.kstu.almasov.diplomaproject.repository.ToiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,5 @@
 package kz.kstu.almasov.diplomaproject.validation;
 
-import kz.kstu.almasov.diplomaproject.entity.User;
-
 import java.util.Map;
 import java.util.TreeMap;
 

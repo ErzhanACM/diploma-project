@@ -1,6 +1,6 @@
 package kz.kstu.almasov.diplomaproject.controller;
 
-import kz.kstu.almasov.diplomaproject.entity.User;
+import kz.kstu.almasov.diplomaproject.entity.user.User;
 import kz.kstu.almasov.diplomaproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

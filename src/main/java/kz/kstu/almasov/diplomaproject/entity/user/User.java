@@ -1,4 +1,4 @@
-package kz.kstu.almasov.diplomaproject.entity;
+package kz.kstu.almasov.diplomaproject.entity.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Set;
-import java.util.TreeSet;
 
 @Entity
 @Table(name = "usr")
