@@ -17,18 +17,6 @@ public class ToiService {
         toiRepository.save(toi);
     }
 
-    public Iterable<Toi> getToiList(String filter) {
-        Iterable<Toi> toiList;
-
-        if (filter != null && !filter.isEmpty()) {
-            toiList = toiRepository.findByType(filter);
-        } else {
-            toiList = toiRepository.findAll();
-        }
-
-        return toiList;
-    }
-
     public Iterable<Toi> getToiList() {
         Iterable<Toi> toiList = toiRepository.findAll();
         return toiList;
