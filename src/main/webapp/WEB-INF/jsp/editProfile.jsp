@@ -82,11 +82,11 @@
 
             <div class="col-md-3 mb-3">
                 <label for="birthday">Birthday</label>
-                <input class="form-control" type="date"
+                <input class="form-control <c:if test="${not empty birthdayError}">is-invalid</c:if>" type="date"
                        id="birthday" name="birthday" placeholder=""
-                       value="" required>
+                       value="${user.birthday}" required>
                 <div class="invalid-feedback">
-                    BIRTHDAY_ERROR
+                        ${birthdayError}
                 </div>
             </div>
 
@@ -165,8 +165,7 @@
             <div class="col-md-8 mb-3">
                 <label for="aboutYourself">About yourself</label>
                 <textarea class="form-control" type="textarea" rows="8" minlength="10"
-                          id="aboutYourself" name="aboutYourself" placeholder="add some about yourself"
-                          value="${user.aboutMyself}"></textarea>
+                          id="aboutYourself" name="aboutMyself" placeholder="add some about yourself">${user.aboutMyself}</textarea>
                 <div class="invalid-feedback">
                     ABOUT_YOURSELF_ERROR
                 </div>
