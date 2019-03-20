@@ -1,4 +1,4 @@
-package kz.kstu.almasov.diplomaproject.entity;
+package kz.kstu.almasov.diplomaproject.entity.user;
 
 import org.springframework.security.core.GrantedAuthority;
 

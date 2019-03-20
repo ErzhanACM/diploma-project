@@ -52,7 +52,7 @@
                     </div>
                 </li>
 
-                <sec:authorize access="hasRole('ADMIN')">
+                <security:authorize access="hasAuthority('ADMIN')">
                     <li class="nav-item dropdown mx-1">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                            aria-haspopup="true"
@@ -61,7 +61,7 @@
                             <a class="dropdown-item" href="/user/userList">User List</a>
                         </div>
                     </li>
-                </sec:authorize>
+                </security:authorize>
 
             </security:authorize>
 

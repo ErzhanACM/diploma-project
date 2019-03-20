@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
+    <!-- for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>">
 </head>
 <body>
@@ -34,6 +37,11 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Type</th>
+                <th scope="col">Date</th>
+                <th scope="col">Whereabouts</th>
+                <th scope="col">Place</th>
+                <th scope="col">Number of guests</th>
+                <th scope="col">Description</th>
                 <th scope="col">Creator</th>
             </tr>
             </thead>
@@ -43,7 +51,12 @@
                     <th scope="row">${toi.id}</th>
                     <td>${toi.name}</td>
                     <td>${toi.type}</td>
-                    <td><a href="/user/${toi.creator.id}">${toi.creatorUsername}</a></td>
+                    <td>${toi.date}</td>
+                    <td>${toi.whereabouts}</td>
+                    <td>${toi.place}</td>
+                    <td>${toi.numberOfGuests}</td>
+                    <td>${toi.description}</td>
+                    <td><a href="/user/${toi.creator.id}">${toi.creator.username}</a></td>
                 </tr>
             </c:forEach>
             </tbody>

@@ -1,8 +1,9 @@
 package kz.kstu.almasov.diplomaproject.service;
 
-import kz.kstu.almasov.diplomaproject.entity.Role;
-import kz.kstu.almasov.diplomaproject.entity.User;
+import kz.kstu.almasov.diplomaproject.entity.user.Role;
+import kz.kstu.almasov.diplomaproject.entity.user.User;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
+import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
 import kz.kstu.almasov.diplomaproject.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -60,12 +58,12 @@ public class UserService implements UserDetailsService {
 
 
     public boolean updateUser(UserDTO userDTO, Model model) {
-        User user = getUserFromUserDto(userDTO);
-        if (!userValidator.validate(user, userDTO.getOldEmail())) {
+        if (!userValidator.validate(userDTO)) {
             model.mergeAttributes(userValidator.getErrorMap());
             model.addAttribute("user", userDTO);
             return false;
         }
+        User user = getUserFromUserDto(userDTO);
         userRepository.save(user);
         model.addAttribute("user", UserDTO.from(user));
         return true;
@@ -82,6 +80,15 @@ public class UserService implements UserDetailsService {
         user.setPhone(userDTO.getPhone());
         user.setSkype(userDTO.getSkype());
         user.setAboutMyself(userDTO.getAboutMyself());
+        return user;
+    }
+
+    protected User getUserFromUserRegistrationDto(UserRegistrationDTO userRegistrationDTO) {
+        User user = new User();
+        user.setEmail(userRegistrationDTO.getEmail());
+        user.setUsername(userRegistrationDTO.getUsername());
+        user.setPassword(userRegistrationDTO.getPassword());
+        user.setRoles(userRegistrationDTO.getRoles());
         return user;
     }
 

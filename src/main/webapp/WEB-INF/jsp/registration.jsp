@@ -94,11 +94,11 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="confirm_password">Confirm password:</label>
-                        <input class="form-control" type="password"
-                               id="confirm_password" name="confirm_password" placeholder="conirm password"
+                        <input class="form-control <c:if test="${not empty password2Error}">is-invalid</c:if>" type="password"
+                               id="confirm_password" name="password2" placeholder="retype password"
                                value="" required>
                         <div class="invalid-feedback">
-                                ${passwordError}
+                                ${password2Error}
                         </div>
                     </div>
                 </div>

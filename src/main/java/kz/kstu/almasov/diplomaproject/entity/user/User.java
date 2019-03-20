@@ -1,4 +1,4 @@
-package kz.kstu.almasov.diplomaproject.entity;
+package kz.kstu.almasov.diplomaproject.entity.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,11 +7,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
-import java.util.TreeSet;
 
 @Entity
 @Table(name = "usr")
@@ -43,6 +42,11 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     private String avatarFileName;
+
+
+    @Temporal(TemporalType.DATE)
+    @Past(message = "Birthday should be in the past!")
+    private Date birthday;
 
     private String firstName;
     private String secondName;

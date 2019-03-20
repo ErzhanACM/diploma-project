@@ -45,22 +45,11 @@
 
             <div class="col-md-3 mb-3">
                 <label for="toiType">Toi Type *</label>
-                <select class="form-control <c:if test="${not empty typeError}">is-invalid</c:if>" name="type"
+                <select class="form-control <c:if test="${not empty typeError}">is-invalid</c:if>" name="selectedType"
                         id="toiType" required>
-                    <c:if test="${not empty creatingToi}">
-                        <option value="${creatingToi.type}"
-                                selected>
-                            <c:choose>
-                                <c:when test="${empty creatingToi.type}">
-                                    undefined
-                                </c:when>
-                                <c:otherwise>
-                                    ${creatingToi.type}
-                                </c:otherwise>
-                            </c:choose>
-                        </option>
+                    <c:if test="${not empty selectedType}">
+                        <option value="${selectedType}" selected>${selectedType}</option>
                     </c:if>
-                    <option value="">undefined</option>
                     <option value="wedding">Wedding</option>
                     <option value="anniversary">Anniversary</option>
                     <option value="birthday">Birthday</option>
@@ -87,27 +76,21 @@
 
             <div class="col-md-3 mb-3">
                 <label for="toiDate">Date *</label>
-                <input class="form-control" type="date"
+                <input class="form-control <c:if test="${not empty dateError}">is-invalid</c:if>" type="date"
                        id="toiDate" name="date" placeholder=""
                        value="" required>
                 <div class="invalid-feedback">
-                    DATE_ERROR
-                </div>
-                <div class="valid-feedback">
-                    VALID
+                        ${dateError}
                 </div>
             </div>
 
             <div class="col-md-5 mb-3">
                 <label for="toiWhereabouts">Whereabouts *</label>
-                <input class="form-control" type="text"
+                <input class="form-control <c:if test="${not empty whereaboutsError}">is-invalid</c:if>" type="text"
                        id="toiWhereabouts" name="whereabouts" placeholder="enter whereabouts"
                        value="" required>
                 <div class="invalid-feedback">
-                    WHEREABOUTS_ERROR
-                </div>
-                <div class="valid-feedback">
-                    VALID
+                        ${whereaboutsError}
                 </div>
             </div>
 
@@ -118,14 +101,14 @@
                 <legend class="col-form-label col-md-2 pt-0">Place *</legend>
                 <div class="col-md-5">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="place" id="gridRadios1" value="restaurant"
-                               checked>
+                        <input class="form-check-input" type="radio" name="selectedPlace" id="gridRadios1"
+                               value="restaurant" checked>
                         <label class="form-check-label" for="gridRadios1">
                             Restaurant / coffee
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="place" id="gridRadios2" value="home">
+                        <input class="form-check-input" type="radio" name="selectedPlace" id="gridRadios2" value="home">
                         <label class="form-check-label" for="gridRadios2">
                             Home
                         </label>
@@ -133,7 +116,6 @@
                 </div>
             </div>
         </fieldset>
-
 
         <div class="divider"></div>
 
@@ -149,32 +131,11 @@
 
             <div class="col-md-3 mb-3">
                 <label for="toiNumberOfGuests">Number of guests</label>
-                <input class="form-control" type="text"
+                <input class="form-control <c:if test="${not empty numberOfGuestsError}">is-invalid</c:if>" type="text"
                        id="toiNumberOfGuests" name="numberOfGuests" placeholder="number of guests"
                        value="">
                 <div class="invalid-feedback">
-                    SOME_ERROR_4
-                </div>
-                <div class="valid-feedback">
-                    VALID
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <label for="someField5">Some Field 5</label>
-                <input class="form-control" type="text"
-                       id="someField5" name="somePropertyName5" placeholder="some placeholder"
-                       value="">
-                <div class="invalid-feedback">
-                    SOME_ERROR_5
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <label for="someField6">Some Field 6</label>
-                <input class="form-control" type="text"
-                       id="someField6" name="somePropertyName6" placeholder="some placeholder"
-                       value="">
-                <div class="invalid-feedback">
-                    SOME_ERROR_6
+                        ${numberOfGuestsError}
                 </div>
             </div>
 
@@ -184,11 +145,12 @@
 
             <div class="col-md-9 mb-3">
                 <label for="toiDescription">Description</label>
-                <textarea class="form-control" type="textarea" rows="5" minlength="10"
-                          id="toiDescription" name="description" placeholder="add some description about toi"
-                          value=""></textarea>
+                <textarea class="form-control <c:if test="${not empty descriptionError}">is-invalid</c:if>"
+                          type="textarea" rows="5" minlength="10" id="toiDescription" name="description"
+                          placeholder="add some description about toi"
+                          value="<c:if test="${not empty creatingToi}">${creatingToi.description}</c:if>"></textarea>
                 <div class="invalid-feedback">
-                    DESCRIPTION_ERROR
+                        ${descriptionError}
                 </div>
             </div>
 

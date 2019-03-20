@@ -1,4 +1,4 @@
-<%@ page language="java" session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -6,12 +6,15 @@
 <html lang="en">
 <head>
     <title>Spring Boot Test App</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/css/user_page_style.css"/>">
@@ -23,176 +26,180 @@
 <div class="container mt-3">
     <div class="container emp-profile">
 
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-img">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
 
-                        <img src="/img/unknown_avatar.jpg"
-                             alt=""/>
+                    <img src="/img/unknown_avatar.jpg"
+                         alt=""/>
 
-                        <div class="file btn btn-lg btn-primary">
-                            Change Photo
-                            <input type="file" name="file"/>
-                        </div>
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file"/>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="profile-head">
-                        <h5>
-                            ${user.secondName} ${user.firstName} ${user.patronymic}
-                        </h5>
-                        <h6>
-                            Creator of this App and Admin
-                        </h6>
-                        <p class="proile-rating">RANKING : <span>8/10</span></p>
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                   aria-controls="home" aria-selected="true">About</a>
-                            </li>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        ${user.username}
+                    </h5>
+                    <h6>
+                        ${user.secondName} ${user.firstName} ${user.patronymic}
+                    </h6>
+                    <p class="proile-rating">RANKING : <span>8/10</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab"
+                               aria-controls="contacts" aria-selected="false">Contacts</a>
+                        </li>
+                        <security:authorize access="hasAnyRole('TAMADA', 'RESTAURANT')">
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                   aria-controls="profile" aria-selected="false">Timeline</a>
+                                   aria-controls="profile" aria-selected="false">Terms of cooperation</a>
                             </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <form action="/user/editProfile" method="get">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                    </form>
+                        </security:authorize>
+                    </ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-work">
-                        <p>WORK LINK</p>
-                        <a href="">Website Link</a><br/>
-                        <a href="">Bootsnipp Profile</a><br/>
-                        <a href="">Bootply Profile</a>
-                        <p>SKILLS</p>
-                        <a href="">Web Designer</a><br/>
-                        <a href="">Web Developer</a><br/>
-                        <a href="">SQL</a><br/>
-                        <a href="">Java, Spring framework</a><br/>
-                        <a href="">HTML, CSS, JS</a><br/>
-                    </div>
+            <div class="col-md-2">
+                <form action="/user/editProfile" method="get">
+                    <input type="submit" class="btn custom-btn dark-btn" name="btnAddMore" value="Edit Profile"/>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>WORK LINK</p>
+                    <a href="">Website Link</a><br/>
+                    <a href="">Bootsnipp Profile</a><br/>
+                    <a href="">Bootply Profile</a>
+                    <p>SKILLS</p>
+                    <a href="">Web Designer</a><br/>
+                    <a href="">Web Developer</a><br/>
+                    <a href="">SQL</a><br/>
+                    <a href="">Java, Spring framework</a><br/>
+                    <a href="">HTML, CSS, JS</a><br/>
                 </div>
-                <div class="col-md-8">
-                    <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label>Id</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>${user.id}</p>
-                                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Username</label>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label>Username</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>${user.username}</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label>Name</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Erzhan Almasov</p>
-                                </div>
-                            </div>
-                            <c:if test="${not empty user.email}">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>${user.email}</p>
-                                    </div>
-                                </div>
-                            </c:if>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label>Phone</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>8 (778) 464 7073</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label>Profession</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Java developer</p>
-                                </div>
+                            <div class="col-md-9">
+                                <p>${user.username}</p>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label>Experience</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Junior</p>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Full name</label>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label>Hourly Rate</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>10$/hr</p>
-                                </div>
+                            <div class="col-md-9">
+                                <p>${user.secondName} ${user.firstName} ${user.patronymic}</p>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label>Total Projects</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>2</p>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Birthday</label>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label>English Level</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Intermediate</p>
-                                </div>
+                            <div class="col-md-9">
+                                <p>${user.birthday}</p>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 mt-5">
-                                    <label>Your Bio</label><br/>
-                                    <p>Hello everyone! I'm Erzhan. I'm known as the creator of this web-application.</p>
-                                    <p>A luttle bit about myself. I'm a student. Now I study in KSTU. My speciality is a
-                                        programmer. I want to became a good professional at the programming. I use the Java
-                                        programm language, which I used to create this application.About my Hobbies: I very
-                                        like footbal. I support AC Milan football club from Italy,
-                                        Milano. Also i like reading. My favourite book is a Game of Thrones. And as you can
-                                        guess i like to create websites.
-                                        A luttle bit about myself. I'm a student. Now I study in KSTU. My speciality is a
-                                        programmer. I want to became a good professional at the programming. I use the Java
-                                        programm language, which I used to create this application.About my Hobbies: I very
-                                        like footbal. I support AC Milan football club from Italy,
-                                        Milano. Also i like reading. My favourite book is a Game of Thrones. And as you can
-                                        guess i like to create websites.A luttle bit about myself. I'm a student. Now I
-                                        study in KSTU. My speciality is a
-                                        programmer. I want to became a good professional at the programming. I use the Java
-                                        programm language, which I used to create this application.About my Hobbies: I very
-                                        like footbal. I support AC Milan football club from Italy,
-                                        Milano. Also i like reading. My favourite book is a Game of Thrones. And as you can
-                                        guess i like to create websites.</p>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>City</label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>${user.city}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Address</label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>${user.address}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="my-4">Your Bio</label><br/>
+                                <p>${user.aboutMyself}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>E-mail</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>${user.email}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>${user.phone}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Skype</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>${user.skype}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Experience</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Junior</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Hourly Rate</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>10$/hr</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Total Projects</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>2</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>English Level</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Intermediate</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
     </div>
 </div>

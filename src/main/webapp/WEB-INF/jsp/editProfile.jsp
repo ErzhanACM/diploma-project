@@ -34,11 +34,11 @@
         <p>Here you can edit your profile. Remember to fill all required fields!</p>
     </div>
 
-    <div class="row justify-content-center mt-3">
+    <div class="row justify-content-center mt-1">
         <p class="hint">All required fields are marked with such symbol <span class="hint-span">*</span></p>
     </div>
 
-    <div class="row justify-content-center mb-4">
+    <div class="row justify-content-center my-3">
         <p class="successColor">${message}</p>
     </div>
 
@@ -82,11 +82,11 @@
 
             <div class="col-md-3 mb-3">
                 <label for="birthday">Birthday</label>
-                <input class="form-control" type="date"
+                <input class="form-control <c:if test="${not empty birthdayError}">is-invalid</c:if>" type="date"
                        id="birthday" name="birthday" placeholder=""
-                       value="" required>
+                       value="${user.birthday}" required>
                 <div class="invalid-feedback">
-                    BIRTHDAY_ERROR
+                        ${birthdayError}
                 </div>
             </div>
 
@@ -165,8 +165,7 @@
             <div class="col-md-8 mb-3">
                 <label for="aboutYourself">About yourself</label>
                 <textarea class="form-control" type="textarea" rows="8" minlength="10"
-                          id="aboutYourself" name="aboutYourself" placeholder="add some about yourself"
-                          value="${user.aboutMyself}"></textarea>
+                          id="aboutYourself" name="aboutMyself" placeholder="add some about yourself">${user.aboutMyself}</textarea>
                 <div class="invalid-feedback">
                     ABOUT_YOURSELF_ERROR
                 </div>
@@ -176,7 +175,7 @@
 
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="hidden" name="id" value="${user.id}">
-        <input type="hidden" name="oldEmail" value="<security:authentication property="principal.email" />">
+        <input type="hidden" name="oldEmail" value="${user.oldEmail}">
         <div class="row justify-content-center">
             <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit">Save</button>
         </div>
