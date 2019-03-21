@@ -61,7 +61,6 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean updateUser(UserDTO userDTO, Model model) {
-        System.out.println("before validation USER DTO\n_______________\n" + userDTO + "\n_______________\n");
         if (!userValidator.validate(userDTO)) {
             model.mergeAttributes(userValidator.getErrorMap());
             model.addAttribute("user", userDTO);
@@ -70,8 +69,6 @@ public class UserService implements UserDetailsService {
         User user = getUserFromUserDto(userDTO);
         userRepository.save(user);
         model.addAttribute("user", UserDTO.from(user));
-        System.out.println("JUST USER\n_______________\n" + user + "\n_______________\n");
-        System.out.println("_______________\n" + UserDTO.from(user) + "\n_______________\n");
         return true;
     }
 
@@ -102,9 +99,7 @@ public class UserService implements UserDetailsService {
 
     public UserDTO getUserDtoByUsername(String username) {
         User userFromDb = userRepository.findByUsername(username);
-        System.out.println("userFromDb\n_______________\n" + userFromDb + "\n_______________\n");
         UserDTO user = UserDTO.from(userFromDb);
-        System.out.println("NORMAL\n_______________\n" + user + "\n_______________\n");
         return user;
     }
 }

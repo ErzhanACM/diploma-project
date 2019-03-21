@@ -78,7 +78,7 @@
                 <label for="toiDate">Date *</label>
                 <input class="form-control <c:if test="${not empty dateError}">is-invalid</c:if>" type="date"
                        id="toiDate" name="date" placeholder=""
-                       value="<c:if test="${not empty creatingToi}">${creatingToi.date}</c:if>" required>
+                       value="<c:if test="${not empty creatingToi}">${selectedDate}</c:if>" required>
                 <div class="invalid-feedback">
                         ${dateError}
                 </div>

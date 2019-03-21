@@ -15,6 +15,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -37,7 +38,6 @@ public class ToiController {
     @GetMapping("/toiList")
     public String toiList(Model model) {
         Iterable<Toi> toiList = toiService.getToiList();
-        System.out.println("TOI_LIST\n____________\n" + toiList + "\n___________\n");
         model.addAttribute("toiList", toiList);
         return "toiList";
     }
@@ -50,15 +50,17 @@ public class ToiController {
             @AuthenticationPrincipal User user,
             @RequestParam String selectedType,
             @RequestParam String selectedPlace
-    ) {
-        System.out.println("TOI FROM JSP\n____________\n" + toi + "\n___________\n");
+    ) throws ParseException {
         String view;
         toi.setType(Type.valueOf(selectedType.toUpperCase()));
         toi.setPlace(Place.valueOf(selectedPlace.toUpperCase()));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = dateFormat.format(toi.getDate());
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtil.getErrors(bindingResult);
             model.addAttribute("selectedType", selectedType);
             model.addAttribute("selectedPlace", selectedPlace);
+            model.addAttribute("selectedDate", date);
             model.addAttribute("creatingToi", toi);
             model.mergeAttributes(errorsMap);
             view = "/createToi";
