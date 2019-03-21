@@ -35,6 +35,7 @@ public class UserController {
     @GetMapping("{user}")
     public String userPage(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
+        System.out.println("the most normal:\n" + user + "'n");
         return "userPage";
     }
 

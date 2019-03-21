@@ -15,6 +15,7 @@ public class ToiService {
     public void createToi(User user, Toi toi) {
         toi.setCreator(user);
         toiRepository.save(toi);
+        System.out.println("TOI SAVED TO DB\n____________\n" + toi + "\n___________\n");
     }
 
     public Iterable<Toi> getToiList() {

@@ -37,6 +37,7 @@ public class ToiController {
     @GetMapping("/toiList")
     public String toiList(Model model) {
         Iterable<Toi> toiList = toiService.getToiList();
+        System.out.println("TOI_LIST\n____________\n" + toiList + "\n___________\n");
         model.addAttribute("toiList", toiList);
         return "toiList";
     }
@@ -50,6 +51,7 @@ public class ToiController {
             @RequestParam String selectedType,
             @RequestParam String selectedPlace
     ) {
+        System.out.println("TOI FROM JSP\n____________\n" + toi + "\n___________\n");
         String view;
         toi.setType(Type.valueOf(selectedType.toUpperCase()));
         toi.setPlace(Place.valueOf(selectedPlace.toUpperCase()));

@@ -78,7 +78,7 @@
                 <label for="toiDate">Date *</label>
                 <input class="form-control <c:if test="${not empty dateError}">is-invalid</c:if>" type="date"
                        id="toiDate" name="date" placeholder=""
-                       value="" required>
+                       value="<c:if test="${not empty creatingToi}">${creatingToi.date}</c:if>" required>
                 <div class="invalid-feedback">
                         ${dateError}
                 </div>
@@ -88,7 +88,7 @@
                 <label for="toiWhereabouts">Whereabouts *</label>
                 <input class="form-control <c:if test="${not empty whereaboutsError}">is-invalid</c:if>" type="text"
                        id="toiWhereabouts" name="whereabouts" placeholder="enter whereabouts"
-                       value="" required>
+                       value="<c:if test="${not empty creatingToi}">${creatingToi.whereabouts}</c:if>" required>
                 <div class="invalid-feedback">
                         ${whereaboutsError}
                 </div>
@@ -133,7 +133,7 @@
                 <label for="toiNumberOfGuests">Number of guests</label>
                 <input class="form-control <c:if test="${not empty numberOfGuestsError}">is-invalid</c:if>" type="text"
                        id="toiNumberOfGuests" name="numberOfGuests" placeholder="number of guests"
-                       value="">
+                       value="<c:if test="${not empty creatingToi}">${creatingToi.numberOfGuests}</c:if>">
                 <div class="invalid-feedback">
                         ${numberOfGuestsError}
                 </div>
@@ -147,8 +147,7 @@
                 <label for="toiDescription">Description</label>
                 <textarea class="form-control <c:if test="${not empty descriptionError}">is-invalid</c:if>"
                           type="textarea" rows="5" minlength="10" id="toiDescription" name="description"
-                          placeholder="add some description about toi"
-                          value="<c:if test="${not empty creatingToi}">${creatingToi.description}</c:if>"></textarea>
+                          placeholder="add some description about toi"><c:if test="${not empty creatingToi}">${creatingToi.description}</c:if></textarea>
                 <div class="invalid-feedback">
                         ${descriptionError}
                 </div>

@@ -7,12 +7,16 @@ import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
 import kz.kstu.almasov.diplomaproject.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -56,8 +60,8 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-
     public boolean updateUser(UserDTO userDTO, Model model) {
+        System.out.println("before validation USER DTO\n_______________\n" + userDTO + "\n_______________\n");
         if (!userValidator.validate(userDTO)) {
             model.mergeAttributes(userValidator.getErrorMap());
             model.addAttribute("user", userDTO);
@@ -66,12 +70,15 @@ public class UserService implements UserDetailsService {
         User user = getUserFromUserDto(userDTO);
         userRepository.save(user);
         model.addAttribute("user", UserDTO.from(user));
+        System.out.println("JUST USER\n_______________\n" + user + "\n_______________\n");
+        System.out.println("_______________\n" + UserDTO.from(user) + "\n_______________\n");
         return true;
     }
 
     protected User getUserFromUserDto(UserDTO userDTO) {
         User user = userRepository.findById(userDTO.getId()).get();
         user.setEmail(userDTO.getEmail());
+        user.setBirthday(userDTO.getBirthday());
         user.setFirstName(userDTO.getFirstName());
         user.setSecondName(userDTO.getSecondName());
         user.setPatronymic(userDTO.getPatronymic());
@@ -95,7 +102,9 @@ public class UserService implements UserDetailsService {
 
     public UserDTO getUserDtoByUsername(String username) {
         User userFromDb = userRepository.findByUsername(username);
+        System.out.println("userFromDb\n_______________\n" + userFromDb + "\n_______________\n");
         UserDTO user = UserDTO.from(userFromDb);
+        System.out.println("NORMAL\n_______________\n" + user + "\n_______________\n");
         return user;
     }
 }
