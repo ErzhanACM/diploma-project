@@ -1,6 +1,7 @@
 <%@ page language="java" session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,12 +58,12 @@
                             <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab"
                                aria-controls="contacts" aria-selected="false">Contacts</a>
                         </li>
-                        <security:authorize access="hasAnyRole('TAMADA', 'RESTAURANT')">
+                        <c:if test="${isTamadaOrRestaurantAdmin}">
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                    aria-controls="profile" aria-selected="false">Terms of cooperation</a>
                             </li>
-                        </security:authorize>
+                        </c:if>
                     </ul>
                 </div>
             </div>
@@ -75,16 +76,21 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
-                    <p>WORK LINK</p>
-                    <a href="">Website Link</a><br/>
-                    <a href="">Bootsnipp Profile</a><br/>
-                    <a href="">Bootply Profile</a>
-                    <p>SKILLS</p>
-                    <a href="">Web Designer</a><br/>
-                    <a href="">Web Developer</a><br/>
-                    <a href="">SQL</a><br/>
-                    <a href="">Java, Spring framework</a><br/>
-                    <a href="">HTML, CSS, JS</a><br/>
+                    <c:if test="${myPage}">
+                        <p>WORK LINK</p>
+                        <a href="/user/editProfile">Edit Profile</a><br/>
+                        <a href="">Settings</a><br/>
+                        <a href="">Tois</a><br/>
+                        <a href="">Messages</a><br/>
+                        <a href="">Favorites</a><br/>
+                    </c:if>
+                    <c:if test="${!myPage}">
+                        <p>SKILLS</p>
+                        <a href="">Subscribe</a><br/>
+                        <a href="">Unsubscribe</a><br/>
+                        <a href="">Write message</a><br/>
+                        <a href="">Add to favorites</a><br/>
+                    </c:if>
                 </div>
             </div>
             <div class="col-md-8">
@@ -98,44 +104,56 @@
                                 <p>${user.username}</p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Full name</label>
+                        <c:if test="${(not empty user.secondName) or (not empty user.firstName) or (not empty user.patronymic)}">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Full name</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p><c:if test="${not empty user.secondName}">${user.secondName}</c:if> <c:if
+                                            test="${not empty user.firstName}">${user.firstName}</c:if> <c:if
+                                            test="${not empty user.patronymic}">${user.patronymic}</c:if></p>
+                                </div>
                             </div>
-                            <div class="col-md-9">
-                                <p>${user.secondName} ${user.firstName} ${user.patronymic}</p>
+                        </c:if>
+                        <c:if test="${not empty user.birthday}">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Birthday</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>${user.birthday}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Birthday</label>
+                        </c:if>
+                        <c:if test="${not empty user.city}">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>City</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>${user.city}</p>
+                                </div>
                             </div>
-                            <div class="col-md-9">
-                                <p>${user.birthday}</p>
+                        </c:if>
+                        <c:if test="${not empty user.address}">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Address</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>${user.address}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>City</label>
+                        </c:if>
+                        <c:if test="${not empty user.aboutMyself}">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="my-4">Your Bio</label><br/>
+                                    <p>${user.aboutMyself}</p>
+                                </div>
                             </div>
-                            <div class="col-md-9">
-                                <p>${user.city}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Address</label>
-                            </div>
-                            <div class="col-md-9">
-                                <p>${user.address}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="my-4">Your Bio</label><br/>
-                                <p>${user.aboutMyself}</p>
-                            </div>
-                        </div>
+                        </c:if>
                     </div>
                     <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
                         <div class="row">
@@ -146,22 +164,26 @@
                                 <p>${user.email}</p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Phone</label>
+                        <c:if test="${not empty user.phone}">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Phone</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>${user.phone}</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p>${user.phone}</p>
+                        </c:if>
+                        <c:if test="${not empty user.skype}">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Skype</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>${user.skype}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Skype</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>${user.skype}</p>
-                            </div>
-                        </div>
+                        </c:if>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">

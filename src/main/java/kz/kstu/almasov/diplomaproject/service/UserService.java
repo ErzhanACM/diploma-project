@@ -102,4 +102,8 @@ public class UserService implements UserDetailsService {
         UserDTO user = UserDTO.from(userFromDb);
         return user;
     }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }
