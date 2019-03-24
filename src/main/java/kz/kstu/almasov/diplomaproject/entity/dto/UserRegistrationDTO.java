@@ -15,17 +15,17 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserRegistrationDTO {
 
-    @NotBlank(message = "{user.username.empty.error}")
+    @NotBlank(message = "user.username.empty.error")
     private String username;
 
-    @NotBlank(message = "{user.password.empty.error}")
+    @NotBlank(message = "user.password.empty.error")
     private String password;
 
-    @NotBlank(message = "{user.password.confirmation.empty.error}")
+    @NotBlank(message = "user.password.confirmation.empty.error")
     private String password2;
 
-    @Email(message = "{user.email.correct.error}")
-    @NotBlank(message = "{user.email.empty.error}")
+    @Email(message = "user.email.correct.error")
+    @NotBlank(message = "user.email.empty.error")
     private String email;
 
     private Set<Role> roles;

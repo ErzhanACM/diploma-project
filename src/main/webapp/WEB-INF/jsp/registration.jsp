@@ -2,7 +2,7 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +53,7 @@
                                id="email" name="email" placeholder="enter your email"
                                value="<c:if test="${not empty user}">${user.email}</c:if>" required>
                         <div class="invalid-feedback">
-                                ${emailError}
+                            <spring:message code="${emailError}"/>
                         </div>
                     </div>
 
@@ -74,11 +74,12 @@
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="username">Userame:</label>
-                        <input class="form-control <c:if test="${not empty usernameError}">is-invalid</c:if>" type="text"
+                        <input class="form-control <c:if test="${not empty usernameError}">is-invalid</c:if>"
+                               type="text"
                                id="username" name="username" placeholder="enter your username"
                                value="<c:if test="${not empty user}">${user.username}</c:if>" required>
                         <div class="invalid-feedback">
-                                ${usernameError}
+                                <spring:message code="${usernameError}"/>
                         </div>
                     </div>
                 </div>
@@ -86,20 +87,22 @@
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="password">Password:</label>
-                        <input class="form-control <c:if test="${not empty passwordError}">is-invalid</c:if>" type="password"
+                        <input class="form-control <c:if test="${not empty passwordError}">is-invalid</c:if>"
+                               type="password"
                                id="password" name="password" placeholder="enter your password"
                                value="" required>
                         <div class="invalid-feedback">
-                                ${passwordError}
+                            <spring:message code="${passwordError}"/>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="confirm_password">Confirm password:</label>
-                        <input class="form-control <c:if test="${not empty password2Error}">is-invalid</c:if>" type="password"
+                        <input class="form-control <c:if test="${not empty password2Error}">is-invalid</c:if>"
+                               type="password"
                                id="confirm_password" name="password2" placeholder="retype password"
                                value="" required>
                         <div class="invalid-feedback">
-                                ${password2Error}
+                            <spring:message code="${password2Error}"/>
                         </div>
                     </div>
                 </div>
