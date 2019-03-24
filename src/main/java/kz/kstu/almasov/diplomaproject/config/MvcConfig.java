@@ -16,6 +16,8 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.util.Locale;
+
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
@@ -38,7 +40,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Bean("messageSource")
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource=new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:locale/messages");
+        messageSource.setBasename("/WEB-INF/locales/messages");
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setUseCodeAsDefaultMessage(true);
         return messageSource;
@@ -47,15 +49,12 @@ public class MvcConfig implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+        localeResolver.setDefaultLocale(new Locale("en"));
         return localeResolver;
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        ThemeChangeInterceptor themeChangeInterceptor = new ThemeChangeInterceptor();
-        themeChangeInterceptor.setParamName("theme");
-        registry.addInterceptor(themeChangeInterceptor);
-
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
         localeChangeInterceptor.setParamName("lang");
         registry.addInterceptor(localeChangeInterceptor);

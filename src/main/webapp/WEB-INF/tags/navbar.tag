@@ -1,5 +1,6 @@
 <%@ tag body-content="empty" pageEncoding="UTF-8" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <nav class="navbar navbar-expand-lg navbar-dark pl-4">
     <a class="navbar-brand mr-3" href="/">Spring Boot App</a>
@@ -68,6 +69,19 @@
         </ul>
 
         <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item dropdown mx-1">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                   aria-haspopup="true"
+                   aria-expanded="false">Language</a>
+                <div class="dropdown-menu dropdown-menu-dark">
+                    <a class="dropdown-item" href="?lang=en"><spring:message code="app.lang.english"/></a>
+                    <a class="dropdown-item" href="?lang=ru"><spring:message code="app.lang.russian"/></a>
+                    <a class="dropdown-item" href="?lang=kz"><spring:message code="app.lang.kazakh"/></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Registrate restaurant</a>
+                </div>
+            </li>
 
             <security:authorize access="isAuthenticated()">
 

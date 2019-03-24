@@ -2,6 +2,7 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +30,7 @@
     <div class="row">
 
         <div class="col-md-7">
-            <h2>Sign Up</h2>
+            <h2><spring:message code="title.sign.up"/></h2>
             <h4 class="my-4">When registrate follow the rules below</h4>
             <p><i class="fa fa-check mr-2"></i>Should select one of user types</p>
             <p><i class="fa fa-check mr-2"></i>LOGIN must be between 3 and 20 characters</p>
