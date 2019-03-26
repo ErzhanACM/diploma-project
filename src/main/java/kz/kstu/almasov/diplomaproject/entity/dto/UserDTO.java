@@ -19,14 +19,14 @@ public class UserDTO {
 
     private Long id;
 
-    @Email(message = "Email is not correct!")
-    @NotBlank(message = "Email can not be empty")
+    @Email(message = "user.email.correct.error")
+    @NotBlank(message = "user.email.empty.error")
     private String email;
 
     private String oldEmail;
 
     @Temporal(TemporalType.DATE)
-    @Past(message = "Birthday should be in the past!")
+    @Past(message = "user.birthday.time.error")
     private Date birthday;
 
     private String firstName;

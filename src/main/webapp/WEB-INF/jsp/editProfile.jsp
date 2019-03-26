@@ -3,10 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <html>
 <head>
-    <title>Spring Boot Test App</title>
+    <title>Diploma project</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 
@@ -27,19 +28,19 @@
 <div class="container px-4 pt-4">
 
     <div class="row justify-content-center mt-4">
-        <h4 class="page-title">Edit profile</h4>
+        <h4 class="page-title"><spring:message code="page.title.profile.editing"/></h4>
     </div>
 
     <div class="row justify-content-center mt-2">
-        <p>Here you can edit your profile. Remember to fill all required fields!</p>
+        <p><spring:message code="headline.profile.editing.rule"/></p>
     </div>
 
     <div class="row justify-content-center mt-1">
-        <p class="hint">All required fields are marked with such symbol <span class="hint-span">*</span></p>
+        <p class="hint"><spring:message code="headline.profile.editing.required.fields.are.marked"/> <span class="hint-span">*</span></p>
     </div>
 
     <div class="row justify-content-center my-3">
-        <p class="successColor">${message}</p>
+        <p class="successColor"><spring:message code="${message}"/></p>
     </div>
 
     <form:form method="post" action="/user/updateUser" class="needs-validation" novalidate="true">
@@ -47,9 +48,9 @@
         <div class="form-row">
 
             <div class="col-md-4 mb-3">
-                <label for="secondName">Second Name</label>
+                <label for="secondName"><spring:message code="label.second.name"/></label>
                 <input class="form-control" type="text"
-                       id="secondName" name="secondName" placeholder="Enter second name"
+                       id="secondName" name="secondName" placeholder="<spring:message code="placeholder.second.name"/>"
                        value="${user.secondName}">
                 <div class="invalid-feedback">
                     SECOND_NAME_ERROR
@@ -57,9 +58,9 @@
             </div>
 
             <div class="col-md-4 mb-3">
-                <label for="firstName">First Name</label>
+                <label for="firstName"><spring:message code="label.first.name"/></label>
                 <input class="form-control" type="text"
-                       id="firstName" name="firstName" placeholder="Enter first name"
+                       id="firstName" name="firstName" placeholder="<spring:message code="placeholder.first.name"/>"
                        value="${user.firstName}">
                 <div class="invalid-feedback">
                     FIRST_NAME_ERROR
@@ -67,9 +68,9 @@
             </div>
 
             <div class="col-md-4 mb-3">
-                <label for="patronymic">Patronymic</label>
+                <label for="patronymic"><spring:message code="label.patronymic"/></label>
                 <input class="form-control" type="text"
-                       id="patronymic" name="patronymic" placeholder="Enter patronymic"
+                       id="patronymic" name="patronymic" placeholder="<spring:message code="placeholder.patronymic"/>"
                        value="${user.patronymic}">
                 <div class="invalid-feedback">
                     PATRONYMIC_ERROR
@@ -81,27 +82,28 @@
         <div class="form-row">
 
             <div class="col-md-3 mb-3">
-                <label for="birthday">Birthday</label>
+                <label for="birthday"><spring:message code="label.birthday"/></label>
                 <input class="form-control <c:if test="${not empty birthdayError}">is-invalid</c:if>" type="date"
                        id="birthday" name="birthday" placeholder=""
                        value="${user.birthday}" required>
                 <div class="invalid-feedback">
-                        ${birthdayError}
+                    <spring:message code="${birthdayError}"/>
                 </div>
             </div>
 
             <div class="col-md-3 mb-3">
-                <label for="city">City/Town</label>
+                <label for="city"><spring:message code="label.city"/></label>
                 <select class="form-control" name="city"
                         id="city" required>
                     <c:if test="${not empty user.city}">
-                        <option value="${user.city}" selected>${user.city}</option>
+                        <option value="${user.city}" selected><spring:message code="${user.city}"/></option>
                     </c:if>
-                    <option value="">undefined</option>
-                    <option value="wedding">Темиртау</option>
-                    <option value="anniversary">Караганда</option>
-                    <option value="birthday">Астана</option>
-                    <option value="jubilee">Алматы</option>
+                    <option value=""><spring:message code="undefined"/></option>
+                    <option value="temirtau"><spring:message code="temirtau"/></option>
+                    <option value="karaganda"><spring:message code="karaganda"/></option>
+                    <option value="astana"><spring:message code="astana"/></option>
+                    <option value="almaty"><spring:message code="almaty"/></option>
+                    <option value="nursultan"><spring:message code="nursultan"/></option>
                 </select>
                 <div class="invalid-feedback">
                     CITY_ERROR
@@ -109,9 +111,9 @@
             </div>
 
             <div class="col-md-6 mb-3">
-                <label for="address">Address</label>
+                <label for="address"><spring:message code="label.address"/></label>
                 <input class="form-control" type="text"
-                       id="address" name="address" placeholder="enter address"
+                       id="address" name="address" placeholder="<spring:message code="placeholder.address"/>"
                        value="${user.address}" required>
                 <div class="invalid-feedback">
                     ADDRESS_ERROR
@@ -123,15 +125,15 @@
         <div class="divider"></div>
 
         <div class="row justify-content-center mb-1">
-            <p>Contact information</p>
+            <p><spring:message code="headline.profile.editing.contact.information"/></p>
         </div>
 
         <div class="form-row">
 
             <div class="col-md-4 mb-3">
-                <label for="phoneNumber">Phone</label>
+                <label for="phoneNumber"><spring:message code="label.phone"/></label>
                 <input class="form-control" type="tel"
-                       id="phoneNumber" name="phone" placeholder="Enter phone number"
+                       id="phoneNumber" name="phone" placeholder="<spring:message code="placeholder.phone"/>"
                        value="${user.phone}">
                 <div class="invalid-feedback">
                     PHONE_ERROR
@@ -139,9 +141,9 @@
             </div>
 
             <div class="col-md-4 mb-3">
-                <label for="skype">Skype</label>
+                <label for="skype"><spring:message code="label.skype"/></label>
                 <input class="form-control" type="text"
-                       id="skype" name="skype" placeholder="Enter skype"
+                       id="skype" name="skype" placeholder="<spring:message code="placeholder.skype"/>"
                        value="${user.skype}">
                 <div class="invalid-feedback">
                     SKYPE_ERROR
@@ -149,12 +151,12 @@
             </div>
 
             <div class="col-md-4 mb-3">
-                <label for="email">E-mail</label>
+                <label for="email"><spring:message code="label.email"/></label>
                 <input class="form-control <c:if test="${not empty emailError}">is-invalid</c:if>" type="email"
-                       id="email" name="email" placeholder="Enter email"
+                       id="email" name="email" placeholder="<spring:message code="placeholder.email"/>"
                        value="${user.email}">
                 <div class="invalid-feedback">
-                        ${emailError}
+                    <spring:message code="${emailError}"/>
                 </div>
             </div>
 
@@ -163,9 +165,9 @@
         <div class="form-row">
 
             <div class="col-md-8 mb-3">
-                <label for="aboutYourself">About yourself</label>
+                <label for="aboutYourself"><spring:message code="label.about.myself"/></label>
                 <textarea class="form-control" type="textarea" rows="8" minlength="10"
-                          id="aboutYourself" name="aboutMyself" placeholder="add some about yourself">${user.aboutMyself}</textarea>
+                          id="aboutYourself" name="aboutMyself" placeholder="<spring:message code="placeholder.about.myself"/>">${user.aboutMyself}</textarea>
                 <div class="invalid-feedback">
                     ABOUT_YOURSELF_ERROR
                 </div>
@@ -177,7 +179,7 @@
         <input type="hidden" name="id" value="${user.id}">
         <input type="hidden" name="oldEmail" value="${user.oldEmail}">
         <div class="row justify-content-center">
-            <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit">Save</button>
+            <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit"><spring:message code="button.save"/></button>
         </div>
     </form:form>
 

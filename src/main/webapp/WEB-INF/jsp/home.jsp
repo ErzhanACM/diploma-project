@@ -2,11 +2,12 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Spring Boot Test App</title>
+    <title>Diploma project</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,10 +32,10 @@
 <div class="container-fluid">
     <div class="greeting-div">
         <div class="row justify-content-center mx-auto">
-            <h1>Welcome to WEB_APP_NAME</h1>
+            <h1><spring:message code="welcome"/> WEB_APP_NAME</h1>
         </div>
         <div class="row justify-content-center mt-4 mx-auto">
-            <h3>Plan and organize your events with pleasure!</h3>
+            <h3><spring:message code="plan.and.organize.your.events.with.pleasure"/></h3>
         </div>
 
     </div>

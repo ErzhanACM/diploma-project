@@ -2,6 +2,7 @@
     --main-color-dark: #18556B;
     --main-color: #2E85A5;
     --main-color-light: #48A9CD;
+    --main-color-light-2x: #EAF6FB;
     --complementary-color: #CF2B5A;
     --success-color: #2EA54E;
 }
@@ -34,6 +35,14 @@ footer h5 {
 
 hr {
     border-color: var(--main-color);
+}
+
+.white-p {
+    color: #fff;
+}
+
+.centered-p {
+    text-align: center;
 }
 /*   ---------------------common__end---------------------   */
 
@@ -87,6 +96,40 @@ footer a:hover {
     color: #fff;
 }
 
+.card-header {
+    background-color: var(--main-color-dark);
+    border: none;
+}
+
+.card-body {
+    border: 1px solid var(--main-color);
+}
+
+.table .thead-dark th {
+    background-color: var(--main-color-dark);
+    border-color: var(--main-color);
+}
+
+.table td {
+    color: var(--main-color);
+}
+
+.table td a {
+    color: var(--main-color);
+}
+
+.table td a:hover {
+    color: var(--main-color-light);
+    text-decoration: none;
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid var(--main-color);
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: var(--main-color-light-2x);
+}
 /*   ---------------------bootstrap__overloading__end---------------------   */
 
 /*   ---------------------common__elements---------------------   */
@@ -107,6 +150,16 @@ footer a:hover {
 
 .light-btn:hover {
     color: var(--main-color-light);
+}
+
+.dark-btn {
+    background-color: var(--main-color-dark);
+    color: #fff;
+}
+
+.dark-btn:hover {
+    background-color: var(--main-color);
+    color: #fff;
 }
 
 .dark-btn {

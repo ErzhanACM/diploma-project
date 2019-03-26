@@ -22,8 +22,8 @@ public class Toi {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "Name of toi can not be empty!")
-    @Length(max = 100, message = "Name of toi is too long! (more than 100 symbols)")
+    @NotBlank(message = "toi.name.empty.error")
+    @Length(max = 100, message = "toi.name.length.error")
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -35,11 +35,11 @@ public class Toi {
 
     @Basic
     @Temporal(TemporalType.DATE)
-    @Future(message = "Date value should be in the future!")
-    @NotNull(message = "Date value can not be empty!")
+    @Future(message = "toi.date.time.error")
+    @NotNull(message = "toi.date.empty.error")
     private Date date;
 
-    @NotBlank(message = "Whereabouts can not be empty!")
+    @NotBlank(message = "toi.whereabouts.empty.error")
     private String whereabouts;
 
     @Enumerated(EnumType.STRING)

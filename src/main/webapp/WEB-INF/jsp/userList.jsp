@@ -24,7 +24,7 @@
 <div class="container mt-5">
     <h3>List of Users:</h3>
 
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-bordered table-hover">
         <thead class="thead-dark">
         <tr>
             <th scope="col">Username</th>
