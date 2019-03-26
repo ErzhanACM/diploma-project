@@ -5,8 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -15,11 +19,15 @@ public class UserDTO {
 
     private Long id;
 
-    @Email(message = "Email is not correct!")
-    @NotBlank(message = "Email can not be empty")
+    @Email(message = "user.email.correct.error")
+    @NotBlank(message = "user.email.empty.error")
     private String email;
 
     private String oldEmail;
+
+    @Temporal(TemporalType.DATE)
+    @Past(message = "user.birthday.time.error")
+    private Date birthday;
 
     private String firstName;
     private String secondName;
@@ -33,8 +41,9 @@ public class UserDTO {
     private String aboutMyself;
 
     public static UserDTO from(User user) {
-        return new UserDTO(user.getId(), user.getEmail(), user.getEmail(), user.getFirstName(), user.getSecondName(),
-                user.getPatronymic(), user.getCity(), user.getAddress(), user.getPhone(), user.getSkype(), user.getAboutMyself());
+        return new UserDTO(user.getId(), user.getEmail(), user.getEmail(), user.getBirthday(), user.getFirstName(),
+                user.getSecondName(), user.getPatronymic(), user.getCity(), user.getAddress(), user.getPhone(),
+                user.getSkype(), user.getAboutMyself());
     }
 
 }

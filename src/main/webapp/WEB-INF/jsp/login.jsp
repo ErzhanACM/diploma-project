@@ -2,11 +2,12 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Spring Boot Test App</title>
+    <title>Diploma project</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 
@@ -29,25 +30,25 @@
     <div class="row">
 
         <div class="col-md-7">
-            <h2>Sign In</h2>
-            <h4 class="my-4">When sign in follow the rules below</h4>
-            <p><i class="fa fa-check mr-2"></i>LOGIN must be between 3 and 20 characters</p>
-            <p><i class="fa fa-check mr-2"></i>LOGIN must begin with a latin character</p>
-            <p><i class="fa fa-check mr-2"></i>LOGIN must contain only Latin characters, numbers, "_" and "-"</p>
-            <p><i class="fa fa-check mr-2"></i>PASSWORD must be between 6 and 20 characters</p>
-            <p><i class="fa fa-check mr-2"></i>PASSWORD must contain only Latin characters and numbers</p>
+            <h2><spring:message code="title.sign.in"/></h2>
+            <h4 class="my-4"><spring:message code="login.rules"/></h4>
+            <p><i class="fa fa-check mr-2"></i><spring:message code="login.rules.username.length"/></p>
+            <p><i class="fa fa-check mr-2"></i><spring:message code="login.rules.username.first.character"/></p>
+            <p><i class="fa fa-check mr-2"></i><spring:message code="login.rules.username.content"/></p>
+            <p><i class="fa fa-check mr-2"></i><spring:message code="login.rules.password.length"/></p>
+            <p><i class="fa fa-check mr-2"></i><spring:message code="login.rules.password.content"/></p>
         </div>
 
         <div class="col-md-5">
-            <h4 class="mb-4 alarm">${message}</h4>
+            <h4 class="mb-4 alarm"><spring:message code="${message}"/></h4>
 
             <form:form method="post" action="/login" class="needs-validation" novalidate="true">
 
                 <div class="form-row">
                     <div class="col-md-12 mb-3">
-                        <label for="username">Userame:</label>
+                        <label for="username"><spring:message code="label.username"/>:</label>
                         <input class="form-control" type="text"
-                               id="username" name="username" placeholder="enter your username"
+                               id="username" name="username" placeholder="<spring:message code="placeholder.username"/>"
                                value="" required>
                         <div class="invalid-feedback">
                             USERNAME_ERROR
@@ -57,9 +58,9 @@
 
                 <div class="form-row">
                     <div class="col-md-12 mb-3">
-                        <label for="password">Password:</label>
+                        <label for="password"><spring:message code="label.password"/>:</label>
                         <input class="form-control" type="password"
-                               id="password" name="password" placeholder="enter your password"
+                               id="password" name="password" placeholder="<spring:message code="placeholder.password"/>"
                                value="" required>
                         <div class="invalid-feedback">
                             PASSWORD_ERROR
@@ -68,7 +69,7 @@
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                 <div class="row justify-content-center">
-                    <button type="submit" class="btn btn-dark custom-btn dark-btn mt-3">Sign In</button>
+                    <button type="submit" class="btn btn-dark custom-btn dark-btn mt-3"><spring:message code="button.sign.in"/></button>
                 </div>
             </form:form>
         </div>
@@ -77,10 +78,10 @@
 
     <div class="row justify-content-center mt-4">
         <div>
-            <h3>Don't you have an account?</h3>
-            <h4>If for some reason you still don't have an account you can register!</h4>
+            <h3><spring:message code="headline.do.not.have.account"/></h3>
+            <h4><spring:message code="headline.if.do.not.have.account.register"/></h4>
             <div class="row justify-content-center">
-                <a href="/registration" class="btn btn-dark custom-btn dark-btn mt-4">Sign up!</a>
+                <a href="/registration" class="btn btn-dark custom-btn dark-btn mt-4"><spring:message code="button.sign.up"/>!</a>
             </div>
         </div>
     </div>

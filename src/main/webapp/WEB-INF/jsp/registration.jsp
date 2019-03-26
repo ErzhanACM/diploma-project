@@ -2,11 +2,12 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Spring Boot Test App</title>
+    <title>Diploma project</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 
@@ -29,82 +30,85 @@
     <div class="row">
 
         <div class="col-md-7">
-            <h2>Sign Up</h2>
-            <h4 class="my-4">When registrate follow the rules below</h4>
-            <p><i class="fa fa-check mr-2"></i>Should select one of user types</p>
-            <p><i class="fa fa-check mr-2"></i>LOGIN must be between 3 and 20 characters</p>
-            <p><i class="fa fa-check mr-2"></i>LOGIN must begin with a latin character</p>
-            <p><i class="fa fa-check mr-2"></i>LOGIN must contain only Latin characters, numbers, "_" and "-"</p>
-            <p><i class="fa fa-check mr-2"></i>PASSWORD must be between 6 and 20 characters</p>
-            <p><i class="fa fa-check mr-2"></i>PASSWORD must contain only Latin characters and numbers</p>
-            <p><i class="fa fa-check mr-2"></i>PASSWORDS must be equal</p>
+            <h2><spring:message code="title.sign.up"/></h2>
+            <h4 class="my-4"><spring:message code="registration.rules"/></h4>
+            <p><i class="fa fa-check mr-2"></i><spring:message code="registration.rules.role.select"/></p>
+            <p><i class="fa fa-check mr-2"></i><spring:message code="login.rules.username.length"/></p>
+            <p><i class="fa fa-check mr-2"></i><spring:message code="login.rules.username.first.character"/></p>
+            <p><i class="fa fa-check mr-2"></i><spring:message code="login.rules.username.content"/></p>
+            <p><i class="fa fa-check mr-2"></i><spring:message code="login.rules.password.length"/></p>
+            <p><i class="fa fa-check mr-2"></i><spring:message code="login.rules.password.content"/></p>
+            <p><i class="fa fa-check mr-2"></i><spring:message code="registration.rules.passwords.equal"/></p>
         </div>
 
         <div class="col-md-5">
-            <h5 class="mb-4 alarm">${message}</h5>
+            <h5 class="mb-4 alarm"><spring:message code="${message}"/></h5>
 
             <form:form method="post" action="/registration" class="needs-validation" novalidate="true">
 
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
-                        <label for="email">Email:</label>
+                        <label for="email"><spring:message code="label.email"/>:</label>
                         <input class="form-control <c:if test="${not empty emailError}">is-invalid</c:if>" type="email"
-                               id="email" name="email" placeholder="enter your email"
+                               id="email" name="email" placeholder="<spring:message code="placeholder.email"/>"
                                value="<c:if test="${not empty user}">${user.email}</c:if>" required>
                         <div class="invalid-feedback">
-                                ${emailError}
+                            <spring:message code="${emailError}"/>
                         </div>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="role">Role:</label>
+                        <label for="role"><spring:message code="label.role"/>:</label>
                         <select class="form-control" name="role"
                                 id="role" required>
                             <c:if test="${not empty selectedRole}">
-                                <option value="${selectedRole}" selected>${selectedRole}</option>
+                                <option value="${selectedRole}" selected><spring:message code="${selectedRole}"/></option>
                             </c:if>
-                            <option value="user">User</option>
-                            <option value="tamada">Tamada</option>
-                            <option value="restaurant">Restaurants admin</option>
+                            <option value="user"><spring:message code="user"/></option>
+                            <option value="tamada"><spring:message code="tamada"/></option>
+                            <option value="restaurant"><spring:message code="restaurant"/></option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
-                        <label for="username">Userame:</label>
-                        <input class="form-control <c:if test="${not empty usernameError}">is-invalid</c:if>" type="text"
-                               id="username" name="username" placeholder="enter your username"
+                        <label for="username"><spring:message code="label.username"/>:</label>
+                        <input class="form-control <c:if test="${not empty usernameError}">is-invalid</c:if>"
+                               type="text"
+                               id="username" name="username" placeholder="<spring:message code="placeholder.username"/>"
                                value="<c:if test="${not empty user}">${user.username}</c:if>" required>
                         <div class="invalid-feedback">
-                                ${usernameError}
+                                <spring:message code="${usernameError}"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
-                        <label for="password">Password:</label>
-                        <input class="form-control <c:if test="${not empty passwordError}">is-invalid</c:if>" type="password"
-                               id="password" name="password" placeholder="enter your password"
+                        <label for="password"><spring:message code="label.password"/>:</label>
+                        <input class="form-control <c:if test="${not empty passwordError}">is-invalid</c:if>"
+                               type="password"
+                               id="password" name="password" placeholder="<spring:message code="placeholder.password"/>"
                                value="" required>
                         <div class="invalid-feedback">
-                                ${passwordError}
+                            <spring:message code="${passwordError}"/>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="confirm_password">Confirm password:</label>
-                        <input class="form-control <c:if test="${not empty password2Error}">is-invalid</c:if>" type="password"
-                               id="confirm_password" name="password2" placeholder="retype password"
+                        <label for="confirm_password"><spring:message code="label.confirm.password"/>:</label>
+                        <input class="form-control <c:if test="${not empty password2Error}">is-invalid</c:if>"
+                               type="password"
+                               id="confirm_password" name="password2" placeholder="<spring:message code="placeholder.confirm.password"/>"
                                value="" required>
                         <div class="invalid-feedback">
-                                ${password2Error}
+                            <spring:message code="${password2Error}"/>
                         </div>
                     </div>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                 <div class="row justify-content-center">
-                    <button type="submit" class="btn btn-dark custom-btn dark-btn mt-3">Sign In</button>
+                    <button type="submit" class="btn btn-dark custom-btn dark-btn mt-3"><spring:message code="button.sign.up"/></button>
                 </div>
             </form:form>
         </div>
@@ -113,10 +117,10 @@
 
     <div class="row justify-content-center mt-4">
         <div>
-            <h3>Don't you have an account?</h3>
-            <h4>If for some reason you still don't have an account you can register!</h4>
+            <h3><spring:message code="headline.do.you.have.account"/></h3>
+            <h4><spring:message code="headline.if.have.account.sign.in"/></h4>
             <div class="row justify-content-center">
-                <a href="/registration" class="btn btn-dark custom-btn dark-btn mt-4">Sign up!</a>
+                <a href="/registration" class="btn btn-dark custom-btn dark-btn mt-4"><spring:message code="button.sign.in"/>!</a>
             </div>
         </div>
     </div>

@@ -7,12 +7,16 @@ import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
 import kz.kstu.almasov.diplomaproject.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -56,7 +60,6 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-
     public boolean updateUser(UserDTO userDTO, Model model) {
         if (!userValidator.validate(userDTO)) {
             model.mergeAttributes(userValidator.getErrorMap());
@@ -72,6 +75,7 @@ public class UserService implements UserDetailsService {
     protected User getUserFromUserDto(UserDTO userDTO) {
         User user = userRepository.findById(userDTO.getId()).get();
         user.setEmail(userDTO.getEmail());
+        user.setBirthday(userDTO.getBirthday());
         user.setFirstName(userDTO.getFirstName());
         user.setSecondName(userDTO.getSecondName());
         user.setPatronymic(userDTO.getPatronymic());
@@ -97,5 +101,9 @@ public class UserService implements UserDetailsService {
         User userFromDb = userRepository.findByUsername(username);
         UserDTO user = UserDTO.from(userFromDb);
         return user;
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }

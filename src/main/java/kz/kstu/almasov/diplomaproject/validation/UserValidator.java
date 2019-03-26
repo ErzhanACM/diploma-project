@@ -18,15 +18,15 @@ public class UserValidator extends AbstractValidator {
         boolean sentence = true;
         getErrorMap().clear();
         if (!checkUsername(user.getUsername())) {
-            getErrorMap().put("usernameError", "User with such username already exists!");
+            getErrorMap().put("usernameError", "user.username.already.exists.error");
             sentence = false;
         }
         if (!checkEmail(user.getEmail())) {
-            getErrorMap().put("emailError", "User with such email already exists!");
+            getErrorMap().put("emailError", "user.email.already.exists.error");
             sentence = false;
         }
         if (!checkPasswords(user.getPassword(), user.getPassword2())) {
-            getErrorMap().put("passwordError", "Passwords are different!");
+            getErrorMap().put("passwordError", "user.password.confirmation.different.error");
             sentence = false;
         }
         return sentence;
@@ -36,7 +36,7 @@ public class UserValidator extends AbstractValidator {
         boolean sentence = true;
         getErrorMap().clear();
         if (!checkEmail(userDTO.getEmail(), userDTO.getOldEmail())) {
-            getErrorMap().put("emailError", "User with such email already exists!");
+            getErrorMap().put("emailError", "user.email.already.exists.error");
             sentence = false;
         }
         return sentence;

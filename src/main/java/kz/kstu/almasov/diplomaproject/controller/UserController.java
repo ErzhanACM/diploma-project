@@ -1,5 +1,6 @@
 package kz.kstu.almasov.diplomaproject.controller;
 
+import kz.kstu.almasov.diplomaproject.entity.user.Role;
 import kz.kstu.almasov.diplomaproject.entity.user.User;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.service.UserService;
@@ -33,7 +34,14 @@ public class UserController {
     }
 
     @GetMapping("{user}")
-    public String userPage(@PathVariable User user, Model model) {
+    public String userPage(@PathVariable User user, Model model, Principal principal) {
+        User authorizedUser = userService.getUserByUsername(principal.getName());
+        boolean myPage = authorizedUser.getId().equals(user.getId());
+
+        boolean isTamadaOrRestaurantAdmin = user.getRoles().contains(Role.TAMADA) || user.getRoles().contains(Role.RESTAURANT);
+
+        model.addAttribute("myPage", myPage);
+        model.addAttribute("isTamadaOrRestaurantAdmin", isTamadaOrRestaurantAdmin);
         model.addAttribute("user", user);
         return "userPage";
     }
