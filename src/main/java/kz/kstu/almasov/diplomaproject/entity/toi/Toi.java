@@ -39,8 +39,7 @@ public class Toi {
     @NotNull(message = "toi.date.empty.error")
     private Date date;
 
-    @NotBlank(message = "toi.whereabouts.empty.error")
-    private String whereabouts;
+    private String city;
 
     @Enumerated(EnumType.STRING)
     private Place place;

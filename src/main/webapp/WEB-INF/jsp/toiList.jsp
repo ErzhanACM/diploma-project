@@ -27,24 +27,23 @@
 
 <div class="container mt-5">
     <div class="row justify-content-center mt-4">
-        <h4 class="page-title">Поиск Тоя</h4>
+        <h4 class="page-title"><spring:message code="page.title.toi.searching"/></h4>
     </div>
 
     <div class="card mt-3">
         <div class="card-header" id="headingOne">
             <div class="row justify-content-center my-2">
-                <p class="white-p centered-p">Вы можете найти той быстрее указав конкретные параметры чтобы сузить
-                    область поиска, а также настроить сортировку</p>
+                <p class="white-p centered-p"><spring:message code="headline.toi.searching.parameters.and.sorting"/></p>
             </div>
             <h5 class="mb-2">
                 <button class="btn custon-btn light-btn" type="button" data-toggle="collapse"
-                        data-target="#option_search" aria-expanded="false" aria-controls="option_search">Открыть
-                    параметры для поиска и сортировки
+                        data-target="#option_search" aria-expanded="false" aria-controls="option_search">
+                    <spring:message code="button.open.parameters.for.search.and.sort"/>
                 </button>
             </h5>
         </div>
 
-        <div class="collapse multi-collapse" aria-labelledby="headingOne" id="option_search">
+        <div class="collapse multi-collapse <c:if test="${not empty searchedToi}">show</c:if>" aria-labelledby="headingOne" id="option_search">
             <div class="card-body">
 
                 <form:form method="get" action="/toi/searchToi" class="needs-validation" novalidate="true">
@@ -63,10 +62,10 @@
                         <div class="col-md-3">
                             <label for="toiType"><spring:message code="label.toi.type"/> *</label>
                             <select class="form-control <c:if test="${not empty typeError}">is-invalid</c:if>"
-                                    name="selectedType" id="toiType">
-                                <c:if test="${not empty selectedType}">
-                                    <option value="${selectedType}" selected><spring:message
-                                            code="${selectedType}"/></option>
+                                    name="type" id="toiType">
+                                <c:if test="${not empty searchedToi.type}">
+                                    <option value="${searchedToi.type}" selected><spring:message
+                                            code="${searchedToi.type}"/></option>
                                 </c:if>
                                 <option value=""><spring:message code="undefined"/></option>
                                 <option value="wedding"><spring:message code="wedding"/></option>
@@ -100,16 +99,25 @@
 
                     <div class="row mt-3">
                         <div class="col-md-2">
-                            <label for="toiWhereabouts"><spring:message code="label.toi.whereabouts"/> *</label>
-                            <input class="form-control <c:if test="${not empty whereaboutsError}">is-invalid</c:if>"
-                                   type="text" id="toiWhereabouts" name="whereabouts"
-                                   placeholder="<spring:message code="placeholder.toi.whereabouts"/>"
-                                   value="<c:if test="${not empty searchedToi}">${searchedToi.whereabouts}</c:if>">
+                            <label for="toiCity"><spring:message code="label.toi.city"/> *</label>
+                            <select class="form-control <c:if test="${not empty cityError}">is-invalid</c:if>"
+                                    name="city" id="toiCity">
+                                <c:if test="${not empty searchedToi.city}">
+                                    <option value="${searchedToi.city}" selected><spring:message
+                                            code="${searchedToi.city}"/></option>
+                                </c:if>
+                                <option value=""><spring:message code="undefined"/></option>
+                                <option value="temirtau"><spring:message code="temirtau"/></option>
+                                <option value="karaganda"><spring:message code="karaganda"/></option>
+                                <option value="astana"><spring:message code="astana"/></option>
+                                <option value="almaty"><spring:message code="almaty"/></option>
+                                <option value="nursultan"><spring:message code="nursultan"/></option>
+                            </select>
                             <div class="invalid-feedback">
-                                <spring:message code="${whereaboutsError}"/>
+                                <spring:message code="${cityError}"/>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <label for="toiNumberOfGuests"><spring:message code="label.toi.number.of.giests"/></label>
                             <input class="form-control <c:if test="${not empty numberOfGuestsError}">is-invalid</c:if>"
                                    type="text"
@@ -125,15 +133,22 @@
                                 <div class="row ml-1">
                                     <label><spring:message code="label.toi.place"/></label>
                                     <div class="row ml-1 mt-2">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="selectedPlace"
-                                                   id="gridRadios1" value="restaurant" checked>
-                                            <label class="form-check-label" for="gridRadios1">
-                                                <spring:message code="restaurant"/> / <spring:message code="coffee"/>
+                                        <div class="form-check  ml-1">
+                                            <input class="form-check-input" type="radio" name="place"
+                                                   id="gridRadios0" value="" checked>
+                                            <label class="form-check-label" for="gridRadios0">
+                                                <spring:message code="undefined"/>
                                             </label>
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="selectedPlace"
+                                        <div class="form-check  ml-1">
+                                            <input class="form-check-input" type="radio" name="place"
+                                                   id="gridRadios1" value="restaurant">
+                                            <label class="form-check-label" for="gridRadios1">
+                                                <spring:message code="restaurant"/>
+                                            </label>
+                                        </div>
+                                        <div class="form-check  ml-1">
+                                            <input class="form-check-input" type="radio" name="place"
                                                    id="gridRadios2" value="home">
                                             <label class="form-check-label" for="gridRadios2">
                                                 <spring:message code="place.home"/>
@@ -143,14 +158,17 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="col-md-3">
-                            <label for="toiName"><spring:message code="label.sort.by"/></label>
-                            <select class="form-control">
-                                <option>Название</option>
-                                <option>Тип</option>
-                                <option>Дата</option>
-                                <option>Город</option>
-                                <option>Место проведения</option>
+                        <div class="col-md-2">
+                            <label for="sortOptions"><spring:message code="label.sort.by"/></label>
+                            <select class="form-control" name="sort" id="sortOptions">
+                                <c:if test="${not empty sort}">
+                                    <option value="${sort}"><spring:message code="${sort}"/></option>
+                                </c:if>
+                                <option value="name"><spring:message code="name"/></option>
+                                <option value="type"><spring:message code="type"/></option>
+                                <option value="date"><spring:message code="date"/></option>
+                                <option value="city"><spring:message code="city"/></option>
+                                <option value="place"><spring:message code="place"/></option>
                             </select>
                         </div>
                         <div class="col-md-2 pt-4">
@@ -167,40 +185,52 @@
 
     <c:if test="${empty toiList}">
         <div class="my-5">
-            <h5>Your search returned no matches</h5>
+            <h5><spring:message code="your.search.returner.no.mathces"/></h5>
         </div>
     </c:if>
 
-    <div class="mt-3" id="table-div">
-        <table class="table table-bordered table-hover">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Date</th>
-                <th scope="col">Whereabouts</th>
-                <th scope="col">Place</th>
-                <th scope="col">Number of guests</th>
-                <th scope="col">Creator</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${toiList}" var="toi">
-                <tr onclick="document.location = '${toi.id}';">
-                    <td scope="row">${toi.id}</td>
-                    <td>${toi.name}</td>
-                    <td>${toi.type}</td>
-                    <td>${toi.date}</td>
-                    <td>${toi.whereabouts}</td>
-                    <td>${toi.place}</td>
-                    <td>${toi.numberOfGuests}</td>
-                    <td><a href="/user/${toi.creator.id}">${toi.creator.username}</a></td>
+    <c:if test="${not empty toiList}">
+
+        <div class="row justify-content-center mt-4">
+            <h5 class="page-title"><spring:message code="tois.found"/></h5>
+        </div>
+
+        <tag:pagination url="${url}" page="${page}" body="${body}" parameters="${withParameters}"/>
+
+        <div class="mt-3" id="table-div">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"><spring:message code="label.toi.name"/></th>
+                    <th scope="col"><spring:message code="label.toi.type"/></th>
+                    <th scope="col"><spring:message code="label.toi.date"/></th>
+                    <th scope="col"><spring:message code="label.toi.city"/></th>
+                    <th scope="col"><spring:message code="label.toi.place"/></th>
+                    <th scope="col"><spring:message code="label.toi.number.of.giests"/></th>
+                    <th scope="col"><spring:message code="label.toi.creator"/></th>
                 </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                <c:forEach items="${toiList}" var="toi">
+                    <tr onclick="document.location = '${toi.id}';">
+                        <td scope="row">${toi.id}</td>
+                        <td>${toi.name}</td>
+                        <td><spring:message code="${toi.type.name().toLowerCase()}"/></td>
+                        <td>${toi.date}</td>
+                        <td><spring:message code="${toi.city}"/></td>
+                        <td><spring:message code="${toi.place}"/></td>
+                        <td>${toi.numberOfGuests}</td>
+                        <td><a href="/user/${toi.creator.id}">${toi.creator.username}</a></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+
+        <tag:pagination url="${url}" page="${page}" body="${body}" parameters="${withParameters}"/>
+
+    </c:if>
 
 </div>
 

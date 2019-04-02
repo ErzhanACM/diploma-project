@@ -130,6 +130,23 @@ footer a:hover {
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: var(--main-color-light-2x);
 }
+
+li.page-link.disabled {
+    color: green;
+}
+
+a.page-link {
+    color: var(--main-color);
+}
+
+a.page-link:hover {
+    background-color: var(--main-color-light-2x);
+}
+
+.page-item.active .page-link {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
 /*   ---------------------bootstrap__overloading__end---------------------   */
 
 /*   ---------------------common__elements---------------------   */
