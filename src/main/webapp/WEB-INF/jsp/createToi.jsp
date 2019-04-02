@@ -118,7 +118,7 @@
         <div class="form-row">
 
             <div class="col-md-3 mb-3">
-                <label for="toiNumberOfGuests"><spring:message code="label.toi.number.of.giests"/></label>
+                <label for="toiNumberOfGuests"><spring:message code="label.toi.number.of.guests"/></label>
                 <input class="form-control <c:if test="${not empty numberOfGuestsError}">is-invalid</c:if>" type="text"
                        id="toiNumberOfGuests" name="numberOfGuests"
                        placeholder="<spring:message code="placeholder.toi.number.of.giests"/>"

@@ -118,7 +118,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="toiNumberOfGuests"><spring:message code="label.toi.number.of.giests"/></label>
+                            <label for="toiNumberOfGuests"><spring:message code="label.toi.number.of.guests"/></label>
                             <input class="form-control <c:if test="${not empty numberOfGuestsError}">is-invalid</c:if>"
                                    type="text"
                                    id="toiNumberOfGuests" name="numberOfGuests"
@@ -195,7 +195,7 @@
             <h5 class="page-title"><spring:message code="tois.found"/></h5>
         </div>
 
-        <tag:pagination url="${url}" page="${page}" body="${body}" parameters="${withParameters}"/>
+        <tag:pagination url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
 
         <div class="mt-3" id="table-div">
             <table class="table table-bordered table-hover">
@@ -207,7 +207,7 @@
                     <th scope="col"><spring:message code="label.toi.date"/></th>
                     <th scope="col"><spring:message code="label.toi.city"/></th>
                     <th scope="col"><spring:message code="label.toi.place"/></th>
-                    <th scope="col"><spring:message code="label.toi.number.of.giests"/></th>
+                    <th scope="col"><spring:message code="label.toi.number.of.guests"/></th>
                     <th scope="col"><spring:message code="label.toi.creator"/></th>
                 </tr>
                 </thead>
@@ -228,7 +228,7 @@
             </table>
         </div>
 
-        <tag:pagination url="${url}" page="${page}" body="${body}" parameters="${withParameters}"/>
+        <tag:pagination url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
 
     </c:if>
 

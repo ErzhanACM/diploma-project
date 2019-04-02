@@ -4,6 +4,7 @@
     --main-color-light: #48A9CD;
     --main-color-light-2x: #EAF6FB;
     --complementary-color: #CF2B5A;
+    --complementary-color-light: #E54F7A;
     --success-color: #2EA54E;
 }
 
@@ -147,6 +148,9 @@ a.page-link:hover {
     background-color: var(--main-color);
     border-color: var(--main-color);
 }
+
+
+
 /*   ---------------------bootstrap__overloading__end---------------------   */
 
 /*   ---------------------common__elements---------------------   */
@@ -179,13 +183,13 @@ a.page-link:hover {
     color: #fff;
 }
 
-.dark-btn {
-    background-color: var(--main-color-dark);
+.red-btn {
+    background-color: var(--complementary-color);
     color: #fff;
 }
 
-.dark-btn:hover {
-    background-color: var(--main-color);
+.red-btn:hover {
+    background-color: var(--complementary-color-light);
     color: #fff;
 }
 
@@ -203,6 +207,36 @@ p {
     font-weight: 500;
     font-size: 1.1rem;
     color: var(--main-color);
+}
+
+a {
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.navbar a {
+    font-weight: normal;
+    font-size: 1rem;
+}
+
+.dark-link {
+    color: var(--main-color-dark);
+}
+
+.dark-link:hover {
+    color: var(--main-color);
+}
+
+.red-link {
+    color: var(--complementary-color);
+}
+
+.red-link:hover {
+    color: var(--complementary-color-light);
 }
 
 .errorColor {

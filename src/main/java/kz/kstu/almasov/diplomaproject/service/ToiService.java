@@ -50,8 +50,6 @@ public class ToiService {
             place = Place.valueOf(toi.getPlace().toUpperCase());
         }
 
-        System.out.println("\n________________\nNUMBER OF GUESTS:\n" + toi.getNumberOfGuests() + "\n________________\n");
-
         Page<Toi> page = toiRepository.findByParameters(name, type, toi.getDate1(), toi.getDate2(), toi.getCity(), toi.getNumberOfGuests(), place, pageable);
         return page;
     }

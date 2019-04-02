@@ -4,6 +4,7 @@ import kz.kstu.almasov.diplomaproject.entity.dto.SearchToiDTO;
 import kz.kstu.almasov.diplomaproject.entity.toi.Place;
 import kz.kstu.almasov.diplomaproject.entity.toi.Toi;
 import kz.kstu.almasov.diplomaproject.entity.toi.Type;
+import kz.kstu.almasov.diplomaproject.entity.user.Role;
 import kz.kstu.almasov.diplomaproject.entity.user.User;
 import kz.kstu.almasov.diplomaproject.service.ToiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,6 +56,7 @@ public class ToiController {
         model.addAttribute("toiList", page.getContent());
         model.addAttribute("url", "/toi/toiList");
         model.addAttribute("body", bodyForPagination);
+        model.addAttribute("querySymbol", "?");
         return "toiList";
     }
 
@@ -107,7 +110,7 @@ public class ToiController {
         String url = getUrl(toi, date1, date2, sort);
 
         model.addAttribute("url", url);
-        model.addAttribute("withParameters", true);
+        model.addAttribute("querySymbol", "&");
         model.addAttribute("page", page);
         model.addAttribute("toiList", page.getContent());
         model.addAttribute("searchedToi", toi);
@@ -132,7 +135,6 @@ public class ToiController {
         String url = "/toi/searchToi?name=" + name + "&type=" + toi.getType() + "&date1=" + date1 + "&date2=" + date2
                 + "&city=" + toi.getCity() + "&numberOfGuests=" + numberOfGuests + "&place=" + toi.getPlace()
                 + "&sort=" + sort;
-        System.out.println("\n________________\nURL:\n" + url + "\n________________\n");
         return url;
     }
 
@@ -158,7 +160,6 @@ public class ToiController {
             }
             body.addAll(bodyAfter);
             body.addAll(tail);
-            System.out.println(body);
         }
         return body;
     }
@@ -206,5 +207,12 @@ public class ToiController {
         }
         return tail;
     }
+
+    @GetMapping("{toi}")
+    public String toiPage(@PathVariable Toi toi, Model model) {
+        model.addAttribute("toi", toi);
+        return "toiPage";
+    }
+
 
 }
