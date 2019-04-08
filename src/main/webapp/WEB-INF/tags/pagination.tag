@@ -10,7 +10,7 @@
 <div>
     <ul class="pagination">
         <li class="page-item disabled">
-            <a class="page-link" href="#">Страницы</a>
+            <a class="page-link" href="#"><spring:message code="pagination.pages"/></a>
         </li>
         <c:forEach items="${body}" var="p">
             <c:choose>

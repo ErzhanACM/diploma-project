@@ -44,6 +44,24 @@ public class ToiController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
+    @GetMapping("/toiList/{user}")
+    public String toiListOfUser(
+            Model model,
+            @PathVariable User user,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable
+    ) {
+        Page<Toi> page = toiService.getToiListOfUser(pageable, user.getId());
+        List<Integer> bodyForPagination = getBody(page);
+
+        model.addAttribute("user", user);
+        model.addAttribute("page", page);
+        model.addAttribute("toiList", page.getContent());
+        model.addAttribute("url", "/toi/toiList/" + user.getId());
+        model.addAttribute("body", bodyForPagination);
+        model.addAttribute("querySymbol", "?");
+        return "toiList";
+    }
+
     @GetMapping("/toiList")
     public String toiList(
             Model model,

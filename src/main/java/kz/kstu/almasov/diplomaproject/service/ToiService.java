@@ -58,4 +58,8 @@ public class ToiService {
         return new Sort(Sort.Direction.ASC, sortOption);
     }
 
+    public Page<Toi> getToiListOfUser(Pageable pageable, Long userId) {
+        Page<Toi> toiList = toiRepository.findByCreator(userId, pageable);
+        return toiList;
+    }
 }

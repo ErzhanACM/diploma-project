@@ -183,54 +183,7 @@
         </div>
     </div>
 
-    <c:if test="${empty toiList}">
-        <div class="my-5">
-            <h5><spring:message code="your.search.returner.no.mathces"/></h5>
-        </div>
-    </c:if>
-
-    <c:if test="${not empty toiList}">
-
-        <div class="row justify-content-center mt-4">
-            <h5 class="page-title"><spring:message code="tois.found"/></h5>
-        </div>
-
-        <tag:pagination url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
-
-        <div class="mt-3" id="table-div">
-            <table class="table table-bordered table-hover">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col"><spring:message code="label.toi.name"/></th>
-                    <th scope="col"><spring:message code="label.toi.type"/></th>
-                    <th scope="col"><spring:message code="label.toi.date"/></th>
-                    <th scope="col"><spring:message code="label.toi.city"/></th>
-                    <th scope="col"><spring:message code="label.toi.place"/></th>
-                    <th scope="col"><spring:message code="label.toi.number.of.guests"/></th>
-                    <th scope="col"><spring:message code="label.toi.creator"/></th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${toiList}" var="toi">
-                    <tr onclick="document.location = '${toi.id}';">
-                        <td scope="row">${toi.id}</td>
-                        <td>${toi.name}</td>
-                        <td><spring:message code="${toi.type.name().toLowerCase()}"/></td>
-                        <td>${toi.date}</td>
-                        <td><spring:message code="${toi.city}"/></td>
-                        <td><spring:message code="${toi.place}"/></td>
-                        <td>${toi.numberOfGuests}</td>
-                        <td><a href="/user/${toi.creator.id}">${toi.creator.username}</a></td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </div>
-
-        <tag:pagination url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
-
-    </c:if>
+    <tag:table_of_tois toiList="${toiList}" user="${user}" url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
 
 </div>
 
