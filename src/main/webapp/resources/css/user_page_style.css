@@ -3,7 +3,9 @@
     --main-color-dark-opacity: #18556Bb8;
     --main-color: #2E85A5;
     --main-color-light: #48A9CD;
+    --main-color-light-2x: #EAF6FB;
     --complementary-color: #CF2B5A;
+    --complementary-color-light: #E54F7A;
     --success-color: #2EA54E;
 }
 
@@ -71,7 +73,7 @@
     margin-top: -15%;
 }
 .profile-work p{
-    font-size: 12px;
+    font-size: 1rem;
     color: var(--complementary-color);
     font-weight: 600;
     margin-top: 10%;

@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            <div class="col-md-5 mb-3">
+            <div class="col-md-4 mb-3">
                 <label for="toiName"><spring:message code="label.toi.name"/> *</label>
                 <input class="form-control <c:if test="${not empty nameError}">is-invalid</c:if>" type="text"
                        id="toiName" name="name" placeholder="<spring:message code="placeholder.toi.name"/>"
@@ -71,10 +71,6 @@
                     <spring:message code="${nameError}"/>
                 </div>
             </div>
-
-        </div>
-
-        <div class="form-row">
 
             <div class="col-md-3 mb-3">
                 <label for="toiDate"><spring:message code="label.toi.date"/> *</label>
@@ -86,23 +82,12 @@
                 </div>
             </div>
 
-            <div class="col-md-5 mb-3">
-                <label for="toiWhereabouts"><spring:message code="label.toi.whereabouts"/> *</label>
-                <input class="form-control <c:if test="${not empty whereaboutsError}">is-invalid</c:if>" type="text"
-                       id="toiWhereabouts" name="whereabouts"
-                       placeholder="<spring:message code="placeholder.toi.whereabouts"/>"
-                       value="<c:if test="${not empty creatingToi}">${creatingToi.whereabouts}</c:if>" required>
-                <div class="invalid-feedback">
-                    <spring:message code="${whereaboutsError}"/>
-                </div>
-            </div>
-
         </div>
 
         <fieldset class="form-group">
             <div class="row">
-                <legend class="col-form-label col-md-2 pt-0"><spring:message code="label.toi.place"/> *</legend>
-                <div class="col-md-5">
+                <legend class="col-form-label col-md-1 pt-0"><spring:message code="label.toi.place"/> *</legend>
+                <div class="col-md-3">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="selectedPlace" id="gridRadios1"
                                value="restaurant" checked>
@@ -133,7 +118,7 @@
         <div class="form-row">
 
             <div class="col-md-3 mb-3">
-                <label for="toiNumberOfGuests"><spring:message code="label.toi.number.of.giests"/></label>
+                <label for="toiNumberOfGuests"><spring:message code="label.toi.number.of.guests"/></label>
                 <input class="form-control <c:if test="${not empty numberOfGuestsError}">is-invalid</c:if>" type="text"
                        id="toiNumberOfGuests" name="numberOfGuests"
                        placeholder="<spring:message code="placeholder.toi.number.of.giests"/>"
@@ -142,11 +127,32 @@
                     <spring:message code="${numberOfGuestsError}"/>
                 </div>
             </div>
+
+            <div class="col-md-3 mb-3">
+                <label for="toiCity"><spring:message code="label.toi.city"/></label>
+                <select class="form-control" name="city"
+                        id="toiCity">
+                    <c:if test="${not empty creatingToi.city}">
+                        <option value="${creatingToi.city}" selected><spring:message
+                                code="${creatingToi.city}"/></option>
+                    </c:if>
+                    <option value=""><spring:message code="undefined"/></option>
+                    <option value="temirtau"><spring:message code="temirtau"/></option>
+                    <option value="karaganda"><spring:message code="karaganda"/></option>
+                    <option value="astana"><spring:message code="astana"/></option>
+                    <option value="almaty"><spring:message code="almaty"/></option>
+                    <option value="nursultan"><spring:message code="nursultan"/></option>
+                </select>
+                <div class="invalid-feedback">
+                    <spring:message code="${cityError}"/>
+                </div>
+            </div>
+
         </div>
 
         <div class="form-row">
 
-            <div class="col-md-9 mb-3">
+            <div class="col-md-8 mb-3">
                 <label for="toiDescription"><spring:message code="label.toi.description"/></label>
                 <textarea class="form-control <c:if test="${not empty descriptionError}">is-invalid</c:if>"
                           type="textarea" rows="5" minlength="10" id="toiDescription" name="description"
@@ -161,7 +167,8 @@
 
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <div class="row justify-content-center">
-            <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit"><spring:message code="button.create.toi"/></button>
+            <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit"><spring:message
+                    code="button.create.toi"/></button>
         </div>
     </form:form>
 

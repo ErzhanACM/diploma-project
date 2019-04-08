@@ -2,7 +2,7 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,12 +57,14 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab"
-                               aria-controls="contacts" aria-selected="false"><spring:message code="nav.item.contacts"/></a>
+                               aria-controls="contacts" aria-selected="false"><spring:message
+                                    code="nav.item.contacts"/></a>
                         </li>
                         <c:if test="${isTamadaOrRestaurantAdmin}">
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                   aria-controls="profile" aria-selected="false"><spring:message code="nav.item.terms.of.cooperation"/></a>
+                                   aria-controls="profile" aria-selected="false"><spring:message
+                                        code="nav.item.terms.of.cooperation"/></a>
                             </li>
                         </c:if>
                     </ul>
@@ -70,23 +72,25 @@
             </div>
             <div class="col-md-2">
                 <form action="/user/editProfile" method="get">
-                    <input type="submit" class="btn custom-btn dark-btn" name="btnAddMore" value="<spring:message code="button.edit.profile"/>"/>
+                    <input type="submit" class="btn custom-btn dark-btn" name="btnAddMore"
+                           value="<spring:message code="button.edit.profile"/>"/>
                 </form>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
+                    <p><spring:message code="user.page.common"/></p>
+                    <a href="/toi/toiList/${user.id}"><spring:message code="user.page.option.tois"/></a><br/>
                     <c:if test="${myPage}">
-                        <p>WORK LINK</p>
+                        <p><spring:message code="user.page.for.user"/></p>
                         <a href="/user/editProfile"><spring:message code="user.page.option.edit.profile"/></a><br/>
                         <a href=""><spring:message code="user.page.option.settings"/></a><br/>
-                        <a href=""><spring:message code="user.page.option.tois"/></a><br/>
                         <a href=""><spring:message code="user.page.option.messages"/></a><br/>
                         <a href=""><spring:message code="user.page.option.favorites"/></a><br/>
                     </c:if>
                     <c:if test="${!myPage}">
-                        <p>SKILLS</p>
+                        <p><spring:message code="user.page.for.guest"/></p>
                         <a href=""><spring:message code="user.page.action.write.message"/></a><br/>
                         <a href=""><spring:message code="user.page.action.add.to.favorites"/></a><br/>
                     </c:if>
