@@ -26,164 +26,173 @@
 <tag:navbar/>
 
 <div class="container mt-5">
-    <div class="row justify-content-center mt-4">
-        <h4 class="page-title"><spring:message code="page.title.toi.searching"/></h4>
-    </div>
 
-    <div class="card mt-3">
-        <div class="card-header" id="headingOne">
-            <div class="row justify-content-center my-2">
-                <p class="white-p centered-p"><spring:message code="headline.toi.searching.parameters.and.sorting"/></p>
-            </div>
-            <h5 class="mb-2">
-                <button class="btn custon-btn light-btn" type="button" data-toggle="collapse"
-                        data-target="#option_search" aria-expanded="false" aria-controls="option_search">
-                    <spring:message code="button.open.parameters.for.search.and.sort"/>
-                </button>
-            </h5>
+    <c:if test="${empty user}">
+
+        <div class="row justify-content-center mt-4">
+            <h4 class="page-title"><spring:message code="page.title.toi.searching"/></h4>
         </div>
 
-        <div class="collapse multi-collapse <c:if test="${not empty searchedToi}">show</c:if>" aria-labelledby="headingOne" id="option_search">
-            <div class="card-body">
+        <div class="card mt-3">
+            <div class="card-header" id="headingOne">
+                <div class="row justify-content-center my-2">
+                    <p class="white-p centered-p"><spring:message
+                            code="headline.toi.searching.parameters.and.sorting"/></p>
+                </div>
+                <h5 class="mb-2">
+                    <button class="btn custon-btn light-btn" type="button" data-toggle="collapse"
+                            data-target="#option_search" aria-expanded="false" aria-controls="option_search">
+                        <spring:message code="button.open.parameters.for.search.and.sort"/>
+                    </button>
+                </h5>
+            </div>
 
-                <form:form method="get" action="/toi/searchToi" class="needs-validation" novalidate="true">
+            <div class="collapse multi-collapse <c:if test="${not empty searchedToi}">show</c:if>"
+                 aria-labelledby="headingOne" id="option_search">
+                <div class="card-body">
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="toiName"><spring:message code="label.toi.name"/> *</label>
-                            <input class="form-control  <c:if test="${not empty nameError}">is-invalid</c:if>"
-                                   type="text" id="toiName" name="name"
-                                   placeholder="<spring:message code="placeholder.toi.name"/>"
-                                   value="<c:if test="${not empty searchedToi}">${searchedToi.name}</c:if>">
-                            <div class="invalid-feedback">
-                                <spring:message code="${nameError}"/>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="toiType"><spring:message code="label.toi.type"/> *</label>
-                            <select class="form-control <c:if test="${not empty typeError}">is-invalid</c:if>"
-                                    name="type" id="toiType">
-                                <c:if test="${not empty searchedToi.type}">
-                                    <option value="${searchedToi.type}" selected><spring:message
-                                            code="${searchedToi.type}"/></option>
-                                </c:if>
-                                <option value=""><spring:message code="undefined"/></option>
-                                <option value="wedding"><spring:message code="wedding"/></option>
-                                <option value="anniversary"><spring:message code="anniversary"/></option>
-                                <option value="birthday"><spring:message code="birthday"/></option>
-                                <option value="jubilee"><spring:message code="jubilee"/></option>
-                            </select>
-                            <div class="invalid-feedback">
-                                <spring:message code="${typeError}"/>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="toiDate1"><spring:message code="label.toi.date"/> *</label>
-                            <input class="form-control <c:if test="${not empty dateError}">is-invalid</c:if>"
-                                   type="date" id="toiDate1" name="date1"
-                                   value="<c:if test="${not empty searchedToi}">${selectedDate1}</c:if>">
-                            <div class="invalid-feedback">
-                                <spring:message code="${dateError}"/>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="toiDate2"><spring:message code="label.toi.date"/> *</label>
-                            <input class="form-control <c:if test="${not empty dateError}">is-invalid</c:if>"
-                                   type="date" id="toiDate2" name="date2"
-                                   value="<c:if test="${not empty searchedToi}">${selectedDate2}</c:if>">
-                            <div class="invalid-feedback">
-                                <spring:message code="${dateError}"/>
-                            </div>
-                        </div>
-                    </div>
+                    <form:form method="get" action="/toi/searchToi" class="needs-validation" novalidate="true">
 
-                    <div class="row mt-3">
-                        <div class="col-md-2">
-                            <label for="toiCity"><spring:message code="label.toi.city"/> *</label>
-                            <select class="form-control <c:if test="${not empty cityError}">is-invalid</c:if>"
-                                    name="city" id="toiCity">
-                                <c:if test="${not empty searchedToi.city}">
-                                    <option value="${searchedToi.city}" selected><spring:message
-                                            code="${searchedToi.city}"/></option>
-                                </c:if>
-                                <option value=""><spring:message code="undefined"/></option>
-                                <option value="temirtau"><spring:message code="temirtau"/></option>
-                                <option value="karaganda"><spring:message code="karaganda"/></option>
-                                <option value="astana"><spring:message code="astana"/></option>
-                                <option value="almaty"><spring:message code="almaty"/></option>
-                                <option value="nursultan"><spring:message code="nursultan"/></option>
-                            </select>
-                            <div class="invalid-feedback">
-                                <spring:message code="${cityError}"/>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="toiName"><spring:message code="label.toi.name"/> *</label>
+                                <input class="form-control  <c:if test="${not empty nameError}">is-invalid</c:if>"
+                                       type="text" id="toiName" name="name"
+                                       placeholder="<spring:message code="placeholder.toi.name"/>"
+                                       value="<c:if test="${not empty searchedToi}">${searchedToi.name}</c:if>">
+                                <div class="invalid-feedback">
+                                    <spring:message code="${nameError}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="toiType"><spring:message code="label.toi.type"/> *</label>
+                                <select class="form-control <c:if test="${not empty typeError}">is-invalid</c:if>"
+                                        name="type" id="toiType">
+                                    <c:if test="${not empty searchedToi.type}">
+                                        <option value="${searchedToi.type}" selected><spring:message
+                                                code="${searchedToi.type}"/></option>
+                                    </c:if>
+                                    <option value=""><spring:message code="undefined"/></option>
+                                    <option value="wedding"><spring:message code="wedding"/></option>
+                                    <option value="anniversary"><spring:message code="anniversary"/></option>
+                                    <option value="birthday"><spring:message code="birthday"/></option>
+                                    <option value="jubilee"><spring:message code="jubilee"/></option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    <spring:message code="${typeError}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="toiDate1"><spring:message code="label.toi.date"/> *</label>
+                                <input class="form-control <c:if test="${not empty dateError}">is-invalid</c:if>"
+                                       type="date" id="toiDate1" name="date1"
+                                       value="<c:if test="${not empty searchedToi}">${selectedDate1}</c:if>">
+                                <div class="invalid-feedback">
+                                    <spring:message code="${dateError}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="toiDate2"><spring:message code="label.toi.date"/> *</label>
+                                <input class="form-control <c:if test="${not empty dateError}">is-invalid</c:if>"
+                                       type="date" id="toiDate2" name="date2"
+                                       value="<c:if test="${not empty searchedToi}">${selectedDate2}</c:if>">
+                                <div class="invalid-feedback">
+                                    <spring:message code="${dateError}"/>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <label for="toiNumberOfGuests"><spring:message code="label.toi.number.of.guests"/></label>
-                            <input class="form-control <c:if test="${not empty numberOfGuestsError}">is-invalid</c:if>"
-                                   type="text"
-                                   id="toiNumberOfGuests" name="numberOfGuests"
-                                   placeholder="<spring:message code="placeholder.toi.number.of.giests"/>"
-                                   value="<c:if test="${not empty searchedToi}">${searchedToi.numberOfGuests}</c:if>">
-                            <div class="invalid-feedback">
-                                <spring:message code="${numberOfGuestsError}"/>
+
+                        <div class="row mt-3">
+                            <div class="col-md-2">
+                                <label for="toiCity"><spring:message code="label.toi.city"/> *</label>
+                                <select class="form-control <c:if test="${not empty cityError}">is-invalid</c:if>"
+                                        name="city" id="toiCity">
+                                    <c:if test="${not empty searchedToi.city}">
+                                        <option value="${searchedToi.city}" selected><spring:message
+                                                code="${searchedToi.city}"/></option>
+                                    </c:if>
+                                    <option value=""><spring:message code="undefined"/></option>
+                                    <option value="temirtau"><spring:message code="temirtau"/></option>
+                                    <option value="karaganda"><spring:message code="karaganda"/></option>
+                                    <option value="astana"><spring:message code="astana"/></option>
+                                    <option value="almaty"><spring:message code="almaty"/></option>
+                                    <option value="nursultan"><spring:message code="nursultan"/></option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    <spring:message code="${cityError}"/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <fieldset class="form-group">
-                                <div class="row ml-1">
-                                    <label><spring:message code="label.toi.place"/></label>
-                                    <div class="row ml-1 mt-2">
-                                        <div class="form-check  ml-1">
-                                            <input class="form-check-input" type="radio" name="place"
-                                                   id="gridRadios0" value="" checked>
-                                            <label class="form-check-label" for="gridRadios0">
-                                                <spring:message code="undefined"/>
-                                            </label>
-                                        </div>
-                                        <div class="form-check  ml-1">
-                                            <input class="form-check-input" type="radio" name="place"
-                                                   id="gridRadios1" value="restaurant">
-                                            <label class="form-check-label" for="gridRadios1">
-                                                <spring:message code="restaurant"/>
-                                            </label>
-                                        </div>
-                                        <div class="form-check  ml-1">
-                                            <input class="form-check-input" type="radio" name="place"
-                                                   id="gridRadios2" value="home">
-                                            <label class="form-check-label" for="gridRadios2">
-                                                <spring:message code="place.home"/>
-                                            </label>
+                            <div class="col-md-3">
+                                <label for="toiNumberOfGuests"><spring:message
+                                        code="label.toi.number.of.guests"/></label>
+                                <input class="form-control <c:if test="${not empty numberOfGuestsError}">is-invalid</c:if>"
+                                       type="text"
+                                       id="toiNumberOfGuests" name="numberOfGuests"
+                                       placeholder="<spring:message code="placeholder.toi.number.of.giests"/>"
+                                       value="<c:if test="${not empty searchedToi}">${searchedToi.numberOfGuests}</c:if>">
+                                <div class="invalid-feedback">
+                                    <spring:message code="${numberOfGuestsError}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <fieldset class="form-group">
+                                    <div class="row ml-1">
+                                        <label><spring:message code="label.toi.place"/></label>
+                                        <div class="row ml-1 mt-2">
+                                            <div class="form-check  ml-1">
+                                                <input class="form-check-input" type="radio" name="place"
+                                                       id="gridRadios0" value="" checked>
+                                                <label class="form-check-label" for="gridRadios0">
+                                                    <spring:message code="undefined"/>
+                                                </label>
+                                            </div>
+                                            <div class="form-check  ml-1">
+                                                <input class="form-check-input" type="radio" name="place"
+                                                       id="gridRadios1" value="restaurant">
+                                                <label class="form-check-label" for="gridRadios1">
+                                                    <spring:message code="restaurant"/>
+                                                </label>
+                                            </div>
+                                            <div class="form-check  ml-1">
+                                                <input class="form-check-input" type="radio" name="place"
+                                                       id="gridRadios2" value="home">
+                                                <label class="form-check-label" for="gridRadios2">
+                                                    <spring:message code="place.home"/>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="sortOptions"><spring:message code="label.sort.by"/></label>
+                                <select class="form-control" name="sort" id="sortOptions">
+                                    <c:if test="${not empty sort}">
+                                        <option value="${sort}"><spring:message code="${sort}"/></option>
+                                    </c:if>
+                                    <option value="name"><spring:message code="name"/></option>
+                                    <option value="type"><spring:message code="type"/></option>
+                                    <option value="date"><spring:message code="date"/></option>
+                                    <option value="city"><spring:message code="city"/></option>
+                                    <option value="place"><spring:message code="place"/></option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 pt-4">
+                                <div class="row justify-content-center">
+                                    <button type="submit" class="btn custom-btn dark-btn px-4 py-2">Поиск</button>
                                 </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="sortOptions"><spring:message code="label.sort.by"/></label>
-                            <select class="form-control" name="sort" id="sortOptions">
-                                <c:if test="${not empty sort}">
-                                    <option value="${sort}"><spring:message code="${sort}"/></option>
-                                </c:if>
-                                <option value="name"><spring:message code="name"/></option>
-                                <option value="type"><spring:message code="type"/></option>
-                                <option value="date"><spring:message code="date"/></option>
-                                <option value="city"><spring:message code="city"/></option>
-                                <option value="place"><spring:message code="place"/></option>
-                            </select>
-                        </div>
-                        <div class="col-md-2 pt-4">
-                            <div class="row justify-content-center">
-                                <button type="submit" class="btn custom-btn dark-btn px-4 py-2">Поиск</button>
                             </div>
                         </div>
-                    </div>
-                </form:form>
+                    </form:form>
 
+                </div>
             </div>
         </div>
-    </div>
 
-    <tag:table_of_tois toiList="${toiList}" user="${user}" url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
+    </c:if>
+
+    <tag:table_of_tois toiList="${toiList}" user="${user}" url="${url}" page="${page}" body="${body}"
+                       querySymbol="${querySymbol}"/>
 
 </div>
 
