@@ -24,7 +24,8 @@
                 <h5 class="page-title"><spring:message code="tois.found"/></h5>
             </c:when>
             <c:otherwise>
-                <h5 class="page-title"><spring:message code="tois.of.user"/></h5><a href="/user/${user.id}" class="red-link ml-2">${user.username}</a>
+                <h5 class="page-title"><spring:message code="tois.of.user"/></h5><a href="/user/${user.id}"
+                                                                                    class="red-link ml-2">${user.username}</a>
             </c:otherwise>
         </c:choose>
     </div>
@@ -43,7 +44,9 @@
                 <th scope="col"><spring:message code="label.toi.city"/></th>
                 <th scope="col"><spring:message code="label.toi.place"/></th>
                 <th scope="col"><spring:message code="label.toi.number.of.guests"/></th>
-                <th scope="col"><spring:message code="label.toi.creator"/></th>
+                <c:if test="${empty user}">
+                    <th scope="col"><spring:message code="label.toi.creator"/></th>
+                </c:if>
             </tr>
             </thead>
             <tbody>
@@ -56,7 +59,9 @@
                     <td><spring:message code="${toi.city}"/></td>
                     <td><spring:message code="${toi.place}"/></td>
                     <td>${toi.numberOfGuests}</td>
-                    <td><a href="/user/${toi.creator.id}">${toi.creator.username}</a></td>
+                    <c:if test="${empty user}">
+                        <td><a href="/user/${toi.creator.id}">${toi.creator.username}</a></td>
+                    </c:if>
                 </tr>
             </c:forEach>
             </tbody>

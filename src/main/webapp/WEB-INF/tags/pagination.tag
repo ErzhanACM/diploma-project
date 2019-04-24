@@ -26,7 +26,28 @@
                 </c:when>
                 <c:otherwise>
                     <li class="page-item">
-                        <a class="page-link" href="${url}${querySymbol}page=${(p-1)}">${p}</a>
+                        <a class="page-link" href="${url}${querySymbol}page=${(p-1)}&size=${page.getSize()}">${p}</a>
+                    </li>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+    </ul>
+
+    <ul class="pagination">
+        <li class="page-item disabled">
+            <a class="page-link" href="#"><spring:message code="pagination.size"/></a>
+        </li>
+        <c:set var="sizes" value="${[5,10,25,50]}"/>
+        <c:forEach items="${sizes}" var="s">
+            <c:choose>
+                <c:when test="${s == page.getSize()}">
+                    <li class="page-item active">
+                        <a class="page-link" href="#">${s}</a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="page-item">
+                        <a class="page-link" href="${url}${querySymbol}page=${page.getNumber()}&size=${s}">${s}</a>
                     </li>
                 </c:otherwise>
             </c:choose>

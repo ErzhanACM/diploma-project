@@ -85,7 +85,11 @@ hr {
 }
 
 .footer-copyright {
-    color: var(--main-color);
+    color: var(--main-color-light);
+}
+
+.footer-copyright a {
+    color: var(--main-color-light-2x);
 }
 
 footer a {
@@ -346,6 +350,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .alarm {
     color: var(--complementary-color);
+}
+
+.unread td {
+    font-weight: bold;
 }
 
 /*   ---------------------other__end---------------------   */

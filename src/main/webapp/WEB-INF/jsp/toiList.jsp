@@ -170,11 +170,11 @@
                                     <c:if test="${not empty sort}">
                                         <option value="${sort}"><spring:message code="${sort}"/></option>
                                     </c:if>
-                                    <option value="name"><spring:message code="name"/></option>
-                                    <option value="type"><spring:message code="type"/></option>
-                                    <option value="date"><spring:message code="date"/></option>
-                                    <option value="city"><spring:message code="city"/></option>
-                                    <option value="place"><spring:message code="place"/></option>
+                                    <option value="name"><spring:message code="by.name"/></option>
+                                    <option value="type"><spring:message code="by.type"/></option>
+                                    <option value="date"><spring:message code="by.date"/></option>
+                                    <option value="city"><spring:message code="by.city"/></option>
+                                    <option value="place"><spring:message code="by.place"/></option>
                                 </select>
                             </div>
                             <div class="col-md-2 pt-4">

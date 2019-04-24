@@ -23,7 +23,7 @@
                         <a class="dropdown-item" href="/toi/createToi"><spring:message code="navbar.item.toi.create"/></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/toi/toiList"><spring:message code="navbar.item.toi.list"/></a>
-                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.toi.my.tois"/> </a>
+                        <a class="dropdown-item" href="/toi/toiList/<security:authentication property="principal.id"/>"><spring:message code="navbar.item.toi.my.tois"/> </a>
                     </div>
                 </li>
 
@@ -33,8 +33,9 @@
                        aria-expanded="false"><spring:message code="navbar.item.restaurant"/></a>
                     <div class="dropdown-menu dropdown-menu-dark">
                         <a class="dropdown-item" href="#"><spring:message code="navbar.item.restaurant.list"/></a>
-                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.restaurant.list"/></a>
+                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.favorites.restaurant.list"/></a>
                         <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.my.restaurants"/></a>
                         <a class="dropdown-item" href="#"><spring:message code="navbar.item.restaurant.registrate"/></a>
                     </div>
                 </li>
@@ -45,11 +46,32 @@
                        aria-expanded="false"><spring:message code="navbar.item.tamada"/></a>
                     <div class="dropdown-menu dropdown-menu-dark">
                         <a class="dropdown-item" href="#"><spring:message code="navbar.item.tamada.list"/></a>
-                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.tamada.list"/><span
-                                class="nav-item-span new">new !</span></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.tamada.list"/> <span
+                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.favorites.tamada.list"/> <span
                                 class="nav-item-span update">update !</span></a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown mx-1">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false"><spring:message code="navbar.item.guest.list"/></a>
+                    <div class="dropdown-menu dropdown-menu-dark">
+                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.create.guest.list"/></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.my.guest.lists"/></a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown mx-1">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false"><spring:message code="navbar.item.additional.information"/></a>
+                    <div class="dropdown-menu dropdown-menu-dark">
+                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.guide"/></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.articles"/></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.about.us"/></a>
                     </div>
                 </li>
 
@@ -60,6 +82,7 @@
                            aria-expanded="false"><spring:message code="navbar.item.admin"/></a>
                         <div class="dropdown-menu dropdown-menu-dark">
                             <a class="dropdown-item" href="/user/userList"><spring:message code="navbar.item.admin.user.list"/></a>
+                            <a class="dropdown-item" href="#"><spring:message code="navbar.item.admin.add.article"/></a>
                         </div>
                     </li>
                 </security:authorize>

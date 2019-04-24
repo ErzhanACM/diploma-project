@@ -49,7 +49,9 @@
                     <h6>
                         ${user.secondName} ${user.firstName} ${user.patronymic}
                     </h6>
-                    <p class="proile-rating"><spring:message code="ranging"/>: <span>8/10</span></p>
+                    <c:if test="${isTamada}">
+                        <p class="proile-rating"><spring:message code="ranging"/>: <span>8/10</span></p>
+                    </c:if>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
@@ -60,7 +62,7 @@
                                aria-controls="contacts" aria-selected="false"><spring:message
                                     code="nav.item.contacts"/></a>
                         </li>
-                        <c:if test="${isTamadaOrRestaurantAdmin}">
+                        <c:if test="${isTamada or isRestaurantAdmin}">
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                    aria-controls="profile" aria-selected="false"><spring:message
@@ -70,27 +72,43 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-2">
-                <form action="/user/editProfile" method="get">
-                    <input type="submit" class="btn custom-btn dark-btn" name="btnAddMore"
-                           value="<spring:message code="button.edit.profile"/>"/>
-                </form>
-            </div>
+            <c:if test="${myPage}">
+                <div class="col-md-2">
+                    <form action="/user/editProfile" method="get">
+                        <input type="submit" class="btn custom-btn dark-btn" name="btnAddMore"
+                               value="<spring:message code="button.edit.profile"/>"/>
+                    </form>
+                </div>
+            </c:if>
+            <c:if test="${(!isAuthorizedUserTamadaOrRestaurantAdmin) and (isTamada or isRestaurantAdmin)}">
+                <div class="col-md-2">
+                    <form action="/message/offerCooperation" method="get">
+                        <input type="submit" class="btn custom-btn dark-btn red-btn" name="btnAddMore"
+                               value="Offer cooperation"/>
+                    </form>
+                </div>
+            </c:if>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
-                    <p><spring:message code="user.page.common"/></p>
-                    <a href="/toi/toiList/${user.id}"><spring:message code="user.page.option.tois"/></a><br/>
                     <c:if test="${myPage}">
                         <p><spring:message code="user.page.for.user"/></p>
+                        <a href="/toi/toiList/<security:authentication property="principal.id"/>"><spring:message
+                                code="user.page.option.my.tois"/></a><br/>
                         <a href="/user/editProfile"><spring:message code="user.page.option.edit.profile"/></a><br/>
                         <a href=""><spring:message code="user.page.option.settings"/></a><br/>
                         <a href=""><spring:message code="user.page.option.messages"/></a><br/>
-                        <a href=""><spring:message code="user.page.option.favorites"/></a><br/>
+                        <a href=""><spring:message code="user.page.option.favorite.restaurants"/></a><br/>
+                        <a href=""><spring:message code="user.page.option.favorite.tamadas"/></a><br/>
+                        <a href=""><spring:message code="user.page.option.favorite.tois"/></a><br/>
                     </c:if>
                     <c:if test="${!myPage}">
                         <p><spring:message code="user.page.for.guest"/></p>
+                        <c:if test="${(!isAuthorizedUserTamadaOrRestaurantAdmin) and (isTamada or isRestaurantAdmin)}">
+                            <a href="/toi/toiList/${user.id}">Offer cooperation</a><br/>
+                        </c:if>
+                        <a href="/toi/toiList/${user.id}"><spring:message code="user.page.option.tois"/></a><br/>
                         <a href=""><spring:message code="user.page.action.write.message"/></a><br/>
                         <a href=""><spring:message code="user.page.action.add.to.favorites"/></a><br/>
                     </c:if>
@@ -189,38 +207,52 @@
                         </c:if>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Experience</label>
+                        <c:if test="${isTamada}">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Price for services</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>200000 тг</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p>Junior</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Languages (2)</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>kazakh, russian</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Hourly Rate</label>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Experience (years)</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>3</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p>10$/hr</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Description</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Меня зовут Цицерон! Я специалист в проведении свадеб! Все клиенты остаются
+                                        довольны!</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Total Projects</label>
+                        </c:if>
+                        <c:if test="${isRestaurantAdmin}">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Description</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Я Администратор сети ресторанов в Казахстане! Лучшие рестораны для проведения
+                                        торжеств!</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p>2</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>English Level</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Intermediate</p>
-                            </div>
-                        </div>
+                        </c:if>
                     </div>
                 </div>
             </div>

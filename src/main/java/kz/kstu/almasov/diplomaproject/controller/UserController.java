@@ -37,11 +37,14 @@ public class UserController {
     public String userPage(@PathVariable User user, Model model, Principal principal) {
         User authorizedUser = userService.getUserByUsername(principal.getName());
         boolean myPage = authorizedUser.getId().equals(user.getId());
-
-        boolean isTamadaOrRestaurantAdmin = user.getRoles().contains(Role.TAMADA) || user.getRoles().contains(Role.RESTAURANT);
+        boolean isAuthorizedUserTamadaOrRestaurantAdmin = authorizedUser.getRoles().contains(Role.TAMADA) || authorizedUser.getRoles().contains(Role.RESTAURANT);
+        boolean isTamada = user.getRoles().contains(Role.TAMADA);
+        boolean isRestaurantAdmin = user.getRoles().contains(Role.RESTAURANT);
 
         model.addAttribute("myPage", myPage);
-        model.addAttribute("isTamadaOrRestaurantAdmin", isTamadaOrRestaurantAdmin);
+        model.addAttribute("isAuthorizedUserTamadaOrRestaurantAdmin", isAuthorizedUserTamadaOrRestaurantAdmin);
+        model.addAttribute("isTamada", isTamada);
+        model.addAttribute("isRestaurantAdmin", isRestaurantAdmin);
         model.addAttribute("user", user);
         return "userPage";
     }
