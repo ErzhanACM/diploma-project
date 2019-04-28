@@ -11,6 +11,7 @@ import kz.kstu.almasov.diplomaproject.repository.TamadaRepository;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
 import kz.kstu.almasov.diplomaproject.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,14 +20,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     @Autowired
     private UserRepository userRepository;
@@ -136,5 +143,18 @@ public class UserService implements UserDetailsService {
 
     public RestaurantAdmin getRestaurantAdmin(User user) {
         return restaurantAdminRepository.findByUser(user);
+    }
+
+    public void updateAvatar(User user, MultipartFile file) throws IOException {
+        File uploadDir = new File(uploadPath);
+        if(!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+        String uuidFile = UUID.randomUUID().toString();
+        String resultFileName = uuidFile + "." + file.getOriginalFilename();
+
+        file.transferTo(new File(uploadPath + "/" + resultFileName));
+        user.setAvatarFileName(resultFileName);
+        userRepository.save(user);
     }
 }

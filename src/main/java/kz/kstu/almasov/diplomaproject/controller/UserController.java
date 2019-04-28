@@ -5,14 +5,19 @@ import kz.kstu.almasov.diplomaproject.entity.user.*;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -132,6 +137,29 @@ public class UserController {
                 view = "redirect:/user/" + restaurantAdmin.getUser().getId();
             }
         }
+        return view;
+    }
+
+    @GetMapping("/updateAvatar")
+    public String updateAvatarPage() {
+        return "addImg";
+    }
+
+    @PostMapping("/updateAvatar")
+    public String updateAvatar(
+            @AuthenticationPrincipal User user,
+            @RequestParam("file") MultipartFile file,
+            Model model
+    ) throws IOException {
+        String view = "/updateAvatar";
+        if (file != null) {
+            userService.updateAvatar(user, file);
+            model.addAttribute("user", user);
+            view = "redirect:/user/" + user.getId();
+        } else {
+            model.addAttribute("message", "file.error.correct");
+        }
+
         return view;
     }
 

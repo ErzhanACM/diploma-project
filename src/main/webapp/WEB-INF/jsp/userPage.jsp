@@ -2,6 +2,7 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <!DOCTYPE html>
@@ -31,13 +32,20 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-
+                    <c:if test="${empty user.avatarFileName}">
                     <img src="/img/unknown_avatar.jpg"
                          alt=""/>
+                    </c:if>
+                    <c:if test="${not empty user.avatarFileName}">
+                        <img src="/img/${user.avatarFileName}"
+                             alt=""/>
+                    </c:if>
                     <c:if test="${myPage}">
                         <div class="file btn btn-lg btn-primary">
                             <spring:message code="button.change.photo"/>
-                            <input type="file" name="file"/>
+                            <form:form method="get" action="/user/updateAvatar">
+                                <input type="submit"/>
+                            </form:form>
                         </div>
                     </c:if>
                 </div>

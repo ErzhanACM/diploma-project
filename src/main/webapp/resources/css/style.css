@@ -106,10 +106,6 @@ footer a:hover {
     border: none;
 }
 
-.card-body {
-    border: 1px solid var(--main-color);
-}
-
 .table .thead-dark th {
     background-color: var(--main-color-dark);
     border-color: var(--main-color);
