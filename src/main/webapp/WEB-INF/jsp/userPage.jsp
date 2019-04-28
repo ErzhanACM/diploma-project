@@ -34,11 +34,12 @@
 
                     <img src="/img/unknown_avatar.jpg"
                          alt=""/>
-
-                    <div class="file btn btn-lg btn-primary">
-                        <spring:message code="button.change.photo"/>
-                        <input type="file" name="file"/>
-                    </div>
+                    <c:if test="${myPage}">
+                        <div class="file btn btn-lg btn-primary">
+                            <spring:message code="button.change.photo"/>
+                            <input type="file" name="file"/>
+                        </div>
+                    </c:if>
                 </div>
             </div>
             <div class="col-md-6">
@@ -49,8 +50,8 @@
                     <h6>
                         ${user.secondName} ${user.firstName} ${user.patronymic}
                     </h6>
-                    <c:if test="${isTamada}">
-                        <p class="proile-rating"><spring:message code="ranging"/>: <span>8/10</span></p>
+                    <c:if test="${not empty tamada}">
+                        <p class="proile-rating"><spring:message code="rating"/>: <span>${tamada.rating}/10</span></p>
                     </c:if>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -62,7 +63,7 @@
                                aria-controls="contacts" aria-selected="false"><spring:message
                                     code="nav.item.contacts"/></a>
                         </li>
-                        <c:if test="${isTamada or isRestaurantAdmin}">
+                        <c:if test="${(not empty tamada) or (not empty restaurantAdmin)}">
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                    aria-controls="profile" aria-selected="false"><spring:message
@@ -80,7 +81,7 @@
                     </form>
                 </div>
             </c:if>
-            <c:if test="${(!isAuthorizedUserTamadaOrRestaurantAdmin) and (isTamada or isRestaurantAdmin)}">
+            <c:if test="${(!isAuthorizedUserTamadaOrRestaurantAdmin) and ((not empty tamada) or (not empty restaurantAdmin))}">
                 <div class="col-md-2">
                     <form action="/message/offerCooperation" method="get">
                         <input type="submit" class="btn custom-btn dark-btn red-btn" name="btnAddMore"
@@ -105,7 +106,7 @@
                     </c:if>
                     <c:if test="${!myPage}">
                         <p><spring:message code="user.page.for.guest"/></p>
-                        <c:if test="${(!isAuthorizedUserTamadaOrRestaurantAdmin) and (isTamada or isRestaurantAdmin)}">
+                        <c:if test="${(!isAuthorizedUserTamadaOrRestaurantAdmin) and ((not empty tamada) or (not empty restaurantAdmin))}">
                             <a href="/toi/toiList/${user.id}">Offer cooperation</a><br/>
                         </c:if>
                         <a href="/toi/toiList/${user.id}"><spring:message code="user.page.option.tois"/></a><br/>
@@ -207,49 +208,62 @@
                         </c:if>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <c:if test="${isTamada}">
+                        <c:if test="${not empty tamada}">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label>Price for services</label>
+                                    <label><spring:message code="label.price.for.services"/></label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>200000 тг</p>
+                                    <p>${tamada.servicesPrice} <spring:message code="tenge"/></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label>Languages (2)</label>
+                                    <label><spring:message code="label.languages"/>
+                                        (${tamada.numberOfLanguages})</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>kazakh, russian</p>
+                                    <p>
+                                        <c:forEach items="${tamada.languages}" var="language">
+                                            <spring:message code="${language}"/>
+                                        </c:forEach>
+                                    </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label>Experience (years)</label>
+                                    <label><spring:message code="label.experience"/> (<spring:message
+                                            code="label.years"/>)</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>3</p>
+                                    <p>${tamada.experience}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label>Description</label>
+                                    <label><spring:message code="label.work.description"/></label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Меня зовут Цицерон! Я специалист в проведении свадеб! Все клиенты остаются
-                                        довольны!</p>
+                                    <p>${tamada.workDescription}</p>
                                 </div>
                             </div>
                         </c:if>
-                        <c:if test="${isRestaurantAdmin}">
+                        <c:if test="${not empty restaurantAdmin}">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label>Description</label>
+                                    <label><spring:message code="label.experience"/> (<spring:message
+                                            code="label.years"/>)</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Я Администратор сети ресторанов в Казахстане! Лучшие рестораны для проведения
-                                        торжеств!</p>
+                                    <p>${restaurantAdmin.experience}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label><spring:message code="label.work.description"/></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>${restaurantAdmin.workDescription}</p>
                                 </div>
                             </div>
                         </c:if>

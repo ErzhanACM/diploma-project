@@ -98,9 +98,9 @@
                    aria-haspopup="true"
                    aria-expanded="false"><spring:message code="language"/></a>
                 <div class="dropdown-menu dropdown-menu-dark">
-                    <a class="dropdown-item" href="?lang=en"><spring:message code="app.lang.english"/></a>
-                    <a class="dropdown-item" href="?lang=ru"><spring:message code="app.lang.russian"/></a>
-                    <a class="dropdown-item" href="?lang=kz"><spring:message code="app.lang.kazakh"/></a>
+                    <a class="dropdown-item" href="?lang=en"><spring:message code="english"/></a>
+                    <a class="dropdown-item" href="?lang=ru"><spring:message code="russian"/></a>
+                    <a class="dropdown-item" href="?lang=kz"><spring:message code="kazakh"/></a>
                 </div>
             </li>
 

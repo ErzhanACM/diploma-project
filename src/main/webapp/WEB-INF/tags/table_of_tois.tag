@@ -12,7 +12,17 @@
 
 <c:if test="${empty toiList}">
     <div class="my-5">
-        <h5><spring:message code="your.search.returner.no.mathces"/></h5>
+        <c:choose>
+            <c:when test="${empty user}">
+                <h5><spring:message code="your.search.returner.no.mathces"/></h5>
+            </c:when>
+            <c:otherwise>
+                <div class="row justify-content-center">
+                    <a href="/user/${user.id}" class="link-center red-link ml-2">${user.username}</a>
+                </div>
+                <h5 class="page-title"><spring:message code="user.has.organized.none.toi.yet"/></h5>
+            </c:otherwise>
+        </c:choose>
     </div>
 </c:if>
 

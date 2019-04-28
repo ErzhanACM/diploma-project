@@ -36,7 +36,8 @@
     </div>
 
     <div class="row justify-content-center mt-1">
-        <p class="hint"><spring:message code="headline.profile.editing.required.fields.are.marked"/> <span class="hint-span">*</span></p>
+        <p class="hint"><spring:message code="headline.profile.editing.required.fields.are.marked"/> <span
+                class="hint-span">*</span></p>
     </div>
 
     <div class="row justify-content-center my-3">
@@ -167,7 +168,8 @@
             <div class="col-md-8 mb-3">
                 <label for="aboutYourself"><spring:message code="label.about.myself"/></label>
                 <textarea class="form-control" type="textarea" rows="8" minlength="10"
-                          id="aboutYourself" name="aboutMyself" placeholder="<spring:message code="placeholder.about.myself"/>">${user.aboutMyself}</textarea>
+                          id="aboutYourself" name="aboutMyself"
+                          placeholder="<spring:message code="placeholder.about.myself"/>">${user.aboutMyself}</textarea>
                 <div class="invalid-feedback">
                     ABOUT_YOURSELF_ERROR
                 </div>
@@ -179,9 +181,124 @@
         <input type="hidden" name="id" value="${user.id}">
         <input type="hidden" name="oldEmail" value="${user.oldEmail}">
         <div class="row justify-content-center">
-            <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit"><spring:message code="button.save"/></button>
+            <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit"><spring:message
+                    code="button.save"/></button>
         </div>
     </form:form>
+
+    <c:if test="${not empty tamada}">
+
+        <div class="divider"></div>
+
+        <div class="row justify-content-center mb-1">
+            <p><spring:message code="headline.profile.editing.terms.of.cooperation"/></p>
+        </div>
+
+        <form:form method="post" action="/user/updateTamada" class="needs-validation" novalidate="true">
+
+            <tag:languages_for_tamada tamada_languages="${tamada.languages}"/>
+
+            <div class="form-row">
+
+                <div class="col-md-4 mb-3">
+                    <label for="servicesPrice"><spring:message code="label.price.for.services"/></label>
+                    <input class="form-control" type="text"
+                           id="servicesPrice" name="servicesPrice"
+                           placeholder="<spring:message code="placeholder.price.for.services"/>"
+                           value="${tamada.servicesPrice}">
+                    <div class="invalid-feedback">
+                        SERVICES_PRICE_ERROR
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="tamadaExperience"><spring:message code="label.experience"/></label>
+                    <input class="form-control <c:if test="${not empty experienceError}">is-invalid</c:if>" type="text"
+                           id="tamadaExperience" name="experience"
+                           placeholder="<spring:message code="placeholder.experience"/>"
+                           value="${tamada.experience}">
+                    <div class="invalid-feedback">
+                        <spring:message code="${experienceError}"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="col-md-8 mb-3">
+                    <label for="tamadaWorkDescription"><spring:message code="label.work.description"/></label>
+                    <textarea class="form-control" type="textarea" rows="8" minlength="10"
+                              id="tamadaWorkDescription" name="workDescription"
+                              placeholder="<spring:message code="placeholder.work.description"/>">${tamada.workDescription}</textarea>
+                    <div class="invalid-feedback">
+                        WORK_DECSRIPTION_ERROR
+                    </div>
+                </div>
+
+            </div>
+
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <input type="hidden" name="id" value="${tamada.id}">
+            <input type="hidden" name="user" value="${user.id}">
+            <div class="row justify-content-center">
+                <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit"><spring:message
+                        code="button.save"/></button>
+            </div>
+        </form:form>
+
+    </c:if>
+
+    <c:if test="${not empty restaurantAdmin}">
+
+        <div class="divider"></div>
+
+        <div class="row justify-content-center mb-1">
+            <p><spring:message code="headline.profile.editing.terms.of.cooperation"/></p>
+        </div>
+
+        <form:form method="post" action="/user/updateRestaurantAdmin" class="needs-validation" novalidate="true">
+
+            <div class="form-row">
+
+                <div class="col-md-4 mb-3">
+                    <label for="restaurantAdminExperience"><spring:message code="label.experience"/></label>
+                    <input class="form-control <c:if test="${not empty experienceError}">is-invalid</c:if>" type="text"
+                           id="restaurantAdminExperience" name="experience"
+                           placeholder="<spring:message code="placeholder.experience"/>"
+                           value="${restaurantAdmin.experience}">
+                    <div class="invalid-feedback">
+                        <spring:message code="${experienceError}"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="col-md-8 mb-3">
+                    <label for="restaurantAdminWorkDescription"><spring:message code="label.work.description"/></label>
+                    <textarea class="form-control" type="textarea" rows="8" minlength="10"
+                              id="restaurantAdminWorkDescription" name="workDescription"
+                              placeholder="<spring:message code="placeholder.work.description"/>">${restaurantAdmin.workDescription}</textarea>
+                    <div class="invalid-feedback">
+                        WORK_DECSRIPTION_ERROR
+                    </div>
+                </div>
+
+            </div>
+
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <input type="hidden" name="id" value="${restaurantAdmin.id}">
+            <input type="hidden" name="user" value="${user.id}">
+            <div class="row justify-content-center">
+                <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit"><spring:message
+                        code="button.save"/></button>
+            </div>
+        </form:form>
+
+    </c:if>
+
 
 </div>
 

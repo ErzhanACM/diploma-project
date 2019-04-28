@@ -1,5 +1,7 @@
 package kz.kstu.almasov.diplomaproject.validation;
 
+import kz.kstu.almasov.diplomaproject.entity.user.RestaurantAdmin;
+import kz.kstu.almasov.diplomaproject.entity.user.Tamada;
 import kz.kstu.almasov.diplomaproject.entity.user.User;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
@@ -76,4 +78,11 @@ public class UserValidator extends AbstractValidator {
         }
     }
 
+    public boolean validate(Tamada tamada) {
+        return true;
+    }
+
+    public boolean validate(RestaurantAdmin restaurantAdmin) {
+        return true;
+    }
 }

@@ -47,7 +47,6 @@ public class RegistrationController {
         } else {
             if (registrationService.registrateUser(user, model)) {
                 view = "information";
-            } else {
             }
             model.addAttribute("selectedRole", role);
         }

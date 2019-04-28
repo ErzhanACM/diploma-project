@@ -1,9 +1,13 @@
 package kz.kstu.almasov.diplomaproject.service;
 
+import kz.kstu.almasov.diplomaproject.entity.user.RestaurantAdmin;
 import kz.kstu.almasov.diplomaproject.entity.user.Role;
+import kz.kstu.almasov.diplomaproject.entity.user.Tamada;
 import kz.kstu.almasov.diplomaproject.entity.user.User;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
+import kz.kstu.almasov.diplomaproject.repository.RestaurantAdminRepository;
+import kz.kstu.almasov.diplomaproject.repository.TamadaRepository;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
 import kz.kstu.almasov.diplomaproject.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,6 +30,12 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TamadaRepository tamadaRepository;
+
+    @Autowired
+    private RestaurantAdminRepository restaurantAdminRepository;
 
     @Autowired
     private UserValidator userValidator;
@@ -68,7 +79,26 @@ public class UserService implements UserDetailsService {
         }
         User user = getUserFromUserDto(userDTO);
         userRepository.save(user);
-        model.addAttribute("user", UserDTO.from(user));
+        return true;
+    }
+
+    public boolean updateTamada(Tamada tamada, Model model) {
+        if (!userValidator.validate(tamada)) {
+            model.mergeAttributes(userValidator.getErrorMap());
+            model.addAttribute("tamada", tamada);
+            return false;
+        }
+        tamadaRepository.save(tamada);
+        return true;
+    }
+
+    public boolean updateRestaurantAdmin(RestaurantAdmin restaurantAdmin, Model model) {
+        if (!userValidator.validate(restaurantAdmin)) {
+            model.mergeAttributes(userValidator.getErrorMap());
+            model.addAttribute("restaurantAdmin", restaurantAdmin);
+            return false;
+        }
+        restaurantAdminRepository.save(restaurantAdmin);
         return true;
     }
 
@@ -96,14 +126,15 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-
-    public UserDTO getUserDtoByUsername(String username) {
-        User userFromDb = userRepository.findByUsername(username);
-        UserDTO user = UserDTO.from(userFromDb);
-        return user;
-    }
-
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public Tamada getTamada(User user) {
+        return tamadaRepository.findByUser(user);
+    }
+
+    public RestaurantAdmin getRestaurantAdmin(User user) {
+        return restaurantAdminRepository.findByUser(user);
     }
 }
