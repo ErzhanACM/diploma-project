@@ -33,6 +33,7 @@
                        aria-expanded="false"><spring:message code="navbar.item.restaurant"/></a>
                     <div class="dropdown-menu dropdown-menu-dark">
                         <a class="dropdown-item" href="#"><spring:message code="navbar.item.restaurant.list"/></a>
+                        <a class="dropdown-item" href="/restaurant/restaurantAdminList"><spring:message code="navbar.item.restaurant.admin.list"/></a>
                         <a class="dropdown-item" href="#"><spring:message code="navbar.item.favorites.restaurant.list"/></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#"><spring:message code="navbar.item.my.restaurants"/></a>
@@ -45,7 +46,7 @@
                        aria-haspopup="true"
                        aria-expanded="false"><spring:message code="navbar.item.tamada"/></a>
                     <div class="dropdown-menu dropdown-menu-dark">
-                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.tamada.list"/></a>
+                        <a class="dropdown-item" href="/tamada/tamadaList"><spring:message code="navbar.item.tamada.list"/></a>
                         <a class="dropdown-item" href="#"><spring:message code="navbar.item.favorites.tamada.list"/> <span
                                 class="nav-item-span update">update !</span></a>
                     </div>

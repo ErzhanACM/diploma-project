@@ -356,4 +356,34 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 
+.modal-header {
+    border-bottom: 1px solid var(--main-color-light);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--main-color-light);
+}
+
+.card img {
+    width: 80%;
+    margin: auto;
+}
+
+.card-custom {
+    border:  1px solid var(--main-color);
+    width: 20rem;
+}
+
+.card-header-white {
+    color: #fff;
+}
+
+.disabled-red {
+    background-color: #CB6F89;
+}
+
+.disabled-red:hover {
+    background-color: #CB6F89;
+}
+
 /*   ---------------------other__end---------------------   */

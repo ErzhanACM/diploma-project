@@ -3,13 +3,8 @@ package kz.kstu.almasov.diplomaproject.entity.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Pattern;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -27,15 +22,16 @@ public class Tamada {
     @JoinColumn(name="user_id")
     private User user;
 
+    @Transient
     private Double rating;
+
     private Integer servicesPrice;
 
     @ElementCollection
     @CollectionTable(name="tamada_language", joinColumns=@JoinColumn(name="tamada_id"))
     private List<String> languages;
 
-    @Pattern(regexp = "\\d*", message = "experience.correct.error")
-    private String experience;
+    private Integer experience;
 
     private String workDescription;
 }

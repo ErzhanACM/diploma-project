@@ -194,7 +194,7 @@
             <p><spring:message code="headline.profile.editing.terms.of.cooperation"/></p>
         </div>
 
-        <form:form method="post" action="/user/updateTamada" class="needs-validation" novalidate="true">
+        <form:form method="post" action="/tamada/updateTamada" class="needs-validation" novalidate="true">
 
             <tag:languages_for_tamada tamada_languages="${tamada.languages}"/>
 
@@ -240,6 +240,7 @@
 
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <input type="hidden" name="id" value="${tamada.id}">
+            <input type="hidden" name="rating" value="${tamada.rating}">
             <input type="hidden" name="user" value="${user.id}">
             <div class="row justify-content-center">
                 <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit"><spring:message
@@ -257,7 +258,7 @@
             <p><spring:message code="headline.profile.editing.terms.of.cooperation"/></p>
         </div>
 
-        <form:form method="post" action="/user/updateRestaurantAdmin" class="needs-validation" novalidate="true">
+        <form:form method="post" action="/restaurant/updateRestaurantAdmin" class="needs-validation" novalidate="true">
 
             <div class="form-row">
 

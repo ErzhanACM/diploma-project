@@ -84,6 +84,15 @@
     font-weight: 600;
     font-size: 14px;
 }
+.profile-work button{
+    text-decoration: none;
+    color: var(--main-color);
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    background-color: #fff;
+    padding: 0px;
+}
 .profile-work ul{
     list-style: none;
 }

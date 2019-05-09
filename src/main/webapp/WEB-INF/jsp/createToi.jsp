@@ -37,7 +37,7 @@
     </div>
 
     <div class="row justify-content-center mb-4">
-        <p class="hint"><spring:message code="headline.toi.creating.required.fields.are.marked"/> <span
+        <p class="hint"><spring:message code="headline.required.fields.are.marked"/> <span
                 class="hint-span">*</span></p>
     </div>
 

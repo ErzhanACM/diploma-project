@@ -3,6 +3,8 @@ package kz.kstu.almasov.diplomaproject.controller;
 import kz.kstu.almasov.diplomaproject.entity.dto.TamadaDTO;
 import kz.kstu.almasov.diplomaproject.entity.user.*;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
+import kz.kstu.almasov.diplomaproject.service.RestaurantService;
+import kz.kstu.almasov.diplomaproject.service.TamadaService;
 import kz.kstu.almasov.diplomaproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +32,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TamadaService tamadaService;
+
+    @Autowired
+    private RestaurantService restaurantService;
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -41,13 +49,11 @@ public class UserController {
     @GetMapping("{user}")
     public String userPage(@PathVariable User user, Model model, Principal principal) {
         User authorizedUser = userService.getUserByUsername(principal.getName());
-        Tamada tamada = userService.getTamada(user);
-        RestaurantAdmin restaurantAdmin = userService.getRestaurantAdmin(user);
+        Tamada tamada = tamadaService.getTamada(user);
+        RestaurantAdmin restaurantAdmin = restaurantService.getRestaurantAdmin(user);
         boolean myPage = authorizedUser.getId().equals(user.getId());
-        boolean isAuthorizedUserTamadaOrRestaurantAdmin = authorizedUser.getRoles().contains(Role.TAMADA) || authorizedUser.getRoles().contains(Role.RESTAURANT);
 
         model.addAttribute("myPage", myPage);
-        model.addAttribute("isAuthorizedUserTamadaOrRestaurantAdmin", isAuthorizedUserTamadaOrRestaurantAdmin);
         model.addAttribute("user", user);
         if (restaurantAdmin != null) {
             model.addAttribute("restaurantAdmin", restaurantAdmin);
@@ -62,8 +68,8 @@ public class UserController {
     public String editProfile(Model model, Principal principal) {
         User userFromDb = userService.getUserByUsername(principal.getName());
         UserDTO user = UserDTO.from(userFromDb);
-        Tamada tamada = userService.getTamada(userFromDb);
-        RestaurantAdmin restaurantAdmin = userService.getRestaurantAdmin(userFromDb);
+        Tamada tamada = tamadaService.getTamada(userFromDb);
+        RestaurantAdmin restaurantAdmin = restaurantService.getRestaurantAdmin(userFromDb);
         model.addAttribute("user", user);
         if (restaurantAdmin != null) {
             model.addAttribute("restaurantAdmin", restaurantAdmin);
@@ -88,53 +94,6 @@ public class UserController {
         } else {
             if (userService.updateUser(user, model)) {
                 view = "redirect:/user/" + user.getId();
-            }
-        }
-        return view;
-    }
-
-    @PostMapping("/updateTamada")
-    public String updateTamada(
-            @RequestParam Map<String, String> form,
-            @Valid Tamada tamada,
-            BindingResult bindingResult,
-            Model model
-    ) {
-        String view = "/editProfile";
-        Set<String> languages = Arrays.stream(Language.values()).map(Language::name).collect(Collectors.toSet());
-        tamada.setLanguages(new ArrayList<>());
-        for (String key : form.keySet()) {
-            if (languages.contains(key.toUpperCase())) {
-                tamada.getLanguages().add(key);
-            }
-        }
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errorsMap = ControllerUtil.getErrors(bindingResult);
-            model.mergeAttributes(errorsMap);
-            model.addAttribute("tamada", tamada);
-        } else {
-            if (userService.updateTamada(tamada, model)) {
-                view = "redirect:/user/" + tamada.getUser().getId();
-            }
-        }
-        model.addAttribute("user", UserDTO.from(tamada.getUser()));
-        return view;
-    }
-
-    @PostMapping("/updateRestaurantAdmin")
-    public String updateRestaurantAdmin(
-            @Valid RestaurantAdmin restaurantAdmin,
-            BindingResult bindingResult,
-            Model model
-    ) {
-        String view = "/editProfile";
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errorsMap = ControllerUtil.getErrors(bindingResult);
-            model.mergeAttributes(errorsMap);
-            model.addAttribute("restaurantAdmin", restaurantAdmin);
-        } else {
-            if (userService.updateRestaurantAdmin(restaurantAdmin, model)) {
-                view = "redirect:/user/" + restaurantAdmin.getUser().getId();
             }
         }
         return view;

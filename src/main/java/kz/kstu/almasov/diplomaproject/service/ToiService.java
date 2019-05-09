@@ -29,12 +29,12 @@ public class ToiService {
         toiRepository.save(toi);
     }
 
-    public Page<Toi> getToiList(Pageable pageable) {
+    public Page<Toi> getToiPage(Pageable pageable) {
         Page<Toi> toiList = toiRepository.findAll(pageable);
         return toiList;
     }
 
-    public Page<Toi> getToiList(SearchToiDTO toi, Pageable pageable) {
+    public Page<Toi> getToiPage(SearchToiDTO toi, Pageable pageable) {
         String name = "%" + toi.getName() + "%";
         Type type = null;
         if (Strings.isNotEmpty(toi.getType())) {

@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -56,6 +57,10 @@ public class User implements UserDetails {
     private String phone;
     private String skype;
     private String aboutMyself;
+
+    @ElementCollection
+    @CollectionTable(name="user_tamada_favourite", joinColumns=@JoinColumn(name="user_id"))
+    private List<Tamada> favouriteTamadas;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

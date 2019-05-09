@@ -33,8 +33,8 @@
             <div class="col-md-4">
                 <div class="profile-img">
                     <c:if test="${empty user.avatarFileName}">
-                    <img src="/img/unknown_avatar.jpg"
-                         alt=""/>
+                        <img src="/img/unknown_avatar.jpg"
+                             alt=""/>
                     </c:if>
                     <c:if test="${not empty user.avatarFileName}">
                         <img src="/img/${user.avatarFileName}"
@@ -81,22 +81,20 @@
                     </ul>
                 </div>
             </div>
-            <c:if test="${myPage}">
-                <div class="col-md-2">
+
+            <div class="col-md-2">
+                <c:if test="${myPage}">
                     <form action="/user/editProfile" method="get">
-                        <input type="submit" class="btn custom-btn dark-btn" name="btnAddMore"
+                        <input type="submit" class="btn custom-btn dark-btn mb-3" name="btnAddMore"
                                value="<spring:message code="button.edit.profile"/>"/>
                     </form>
-                </div>
-            </c:if>
-            <c:if test="${(!isAuthorizedUserTamadaOrRestaurantAdmin) and ((not empty tamada) or (not empty restaurantAdmin))}">
-                <div class="col-md-2">
-                    <form action="/message/offerCooperation" method="get">
-                        <input type="submit" class="btn custom-btn dark-btn red-btn" name="btnAddMore"
-                               value="Offer cooperation"/>
-                    </form>
-                </div>
-            </c:if>
+
+                </c:if>
+
+                <c:if test="${!myPage and (not empty tamada)}">
+                    <button class="btn custom-btn dark-btn red-btn mb-3">write review</button>
+                </c:if>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -114,8 +112,17 @@
                     </c:if>
                     <c:if test="${!myPage}">
                         <p><spring:message code="user.page.for.guest"/></p>
-                        <c:if test="${(!isAuthorizedUserTamadaOrRestaurantAdmin) and ((not empty tamada) or (not empty restaurantAdmin))}">
-                            <a href="/toi/toiList/${user.id}">Offer cooperation</a><br/>
+                        <c:if test="${((not empty tamada) or (not empty restaurantAdmin))}">
+                            <a href=""><spring:message code="user.page.action.offer.cooperation"/></a><br/>
+                        </c:if>
+                        <c:if test="${not empty tamada}">
+                            <form:form  method="get" action="/tamada/addReview">
+                                <button type="submit" class=""><spring:message
+                                        code="user.page.action.add.review"/></button><br/>
+                                <input type="hidden" name="tamada" value="${tamada.id}">
+                                <input type="hidden" name="user"
+                                       value="<security:authentication property="principal.id" />">
+                            </form:form>
                         </c:if>
                         <a href="/toi/toiList/${user.id}"><spring:message code="user.page.option.tois"/></a><br/>
                         <a href=""><spring:message code="user.page.action.write.message"/></a><br/>
@@ -279,6 +286,7 @@
                 </div>
             </div>
         </div>
+
 
     </div>
 </div>

@@ -179,7 +179,7 @@
                             </div>
                             <div class="col-md-2 pt-4">
                                 <div class="row justify-content-center">
-                                    <button type="submit" class="btn custom-btn dark-btn px-4 py-2">Поиск</button>
+                                    <button type="submit" class="btn custom-btn dark-btn px-4 py-2"><spring:message code="button.search"/></button>
                                 </div>
                             </div>
                         </div>

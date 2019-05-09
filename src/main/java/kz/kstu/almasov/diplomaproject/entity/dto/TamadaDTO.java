@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Data
@@ -15,20 +16,26 @@ import java.util.List;
 public class TamadaDTO {
 
     private Long id;
-
     private User user;
 
-    private Double rating;
-    private Integer servicesPrice;
+    @Pattern(regexp = "\\d*", message = "rating.correct.error")
+    private String rating;
+
+    @Pattern(regexp = "\\d*", message = "services.price.correct.error")
+    private String servicesPrice;
 
     private List<String> languages;
     private Integer numberOfLanguages;
+
+    @Pattern(regexp = "\\d*", message = "experience.correct.error")
     private String experience;
+
     private String workDescription;
 
     public static TamadaDTO from(Tamada tamada) {
-        return new TamadaDTO(tamada.getId(), tamada.getUser(), tamada.getRating(), tamada.getServicesPrice(),
-                tamada.getLanguages(), tamada.getLanguages().size(), tamada.getExperience(), tamada.getWorkDescription());
+        return new TamadaDTO(tamada.getId(), tamada.getUser(), tamada.getRating().toString(),
+                tamada.getServicesPrice().toString(), tamada.getLanguages(), tamada.getLanguages().size(),
+                tamada.getExperience().toString(), tamada.getWorkDescription());
     }
 
 }
