@@ -116,17 +116,22 @@
                             <a href=""><spring:message code="user.page.action.offer.cooperation"/></a><br/>
                         </c:if>
                         <c:if test="${not empty tamada}">
-                            <form:form  method="get" action="/tamada/addReview">
+                            <form:form method="get" action="/tamada/addReview">
                                 <button type="submit" class=""><spring:message
-                                        code="user.page.action.add.review"/></button><br/>
+                                        code="user.page.action.add.review"/></button>
+                                <br/>
                                 <input type="hidden" name="tamada" value="${tamada.id}">
                                 <input type="hidden" name="user"
-                                       value="<security:authentication property="principal.id" />">
+                                       value="<security:authentication property="principal.id"/>">
                             </form:form>
                         </c:if>
-                        <a href="/toi/toiList/${user.id}"><spring:message code="user.page.option.tois"/></a><br/>
                         <a href=""><spring:message code="user.page.action.write.message"/></a><br/>
                         <a href=""><spring:message code="user.page.action.add.to.favorites"/></a><br/>
+                    </c:if>
+                    <a href="/toi/toiList/${user.id}"><spring:message code="user.page.option.tois"/></a><br/>
+                    <c:if test="${not empty tamada}">
+                        <a href="/tamada/reviewList/${tamada.id}"><spring:message
+                                code="user.page.option.reviews"/></a><br/>
                     </c:if>
                 </div>
             </div>

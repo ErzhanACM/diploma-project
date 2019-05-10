@@ -1,5 +1,6 @@
 package kz.kstu.almasov.diplomaproject.util;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Scope("prototype")
 public class PaginationManager<T> {
 
     public List<Integer> getBody(Page<T> page) {

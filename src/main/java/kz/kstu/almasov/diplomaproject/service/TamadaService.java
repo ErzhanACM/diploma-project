@@ -6,6 +6,7 @@ import kz.kstu.almasov.diplomaproject.entity.user.Language;
 import kz.kstu.almasov.diplomaproject.entity.user.Tamada;
 import kz.kstu.almasov.diplomaproject.entity.user.User;
 import kz.kstu.almasov.diplomaproject.repository.TamadaRepository;
+import kz.kstu.almasov.diplomaproject.repository.TamadaReviewPageRepository;
 import kz.kstu.almasov.diplomaproject.repository.TamadaReviewRepository;
 import kz.kstu.almasov.diplomaproject.validation.UserValidator;
 import org.apache.logging.log4j.util.Strings;
@@ -29,6 +30,9 @@ public class TamadaService {
 
     @Autowired
     private TamadaReviewRepository tamadaReviewRepository;
+
+    @Autowired
+    private TamadaReviewPageRepository tamadaReviewPageRepository;
 
     @Autowired
     private UserValidator userValidator;
@@ -151,5 +155,13 @@ public class TamadaService {
 
     public void saveReview(TamadaReview tamadaReview) {
         tamadaReviewRepository.save(tamadaReview);
+    }
+
+    public Page<TamadaReview> getTamadaReviewPage(Tamada tamada, Pageable pageable) {
+        return tamadaReviewPageRepository.findByTamadaId(tamada, pageable);
+    }
+
+    public void deleteTamadaReview(TamadaReview review) {
+        tamadaReviewRepository.deleteReview(review.getId());
     }
 }

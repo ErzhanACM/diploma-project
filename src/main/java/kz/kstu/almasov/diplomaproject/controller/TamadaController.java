@@ -3,28 +3,23 @@ package kz.kstu.almasov.diplomaproject.controller;
 import kz.kstu.almasov.diplomaproject.entity.dto.TamadaDTO;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.entity.review.TamadaReview;
-import kz.kstu.almasov.diplomaproject.entity.user.Language;
 import kz.kstu.almasov.diplomaproject.entity.user.Tamada;
 import kz.kstu.almasov.diplomaproject.entity.user.User;
 import kz.kstu.almasov.diplomaproject.service.TamadaService;
-import kz.kstu.almasov.diplomaproject.service.UserService;
 import kz.kstu.almasov.diplomaproject.util.PaginationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/tamada")
@@ -34,7 +29,10 @@ public class TamadaController {
     private TamadaService tamadaService;
 
     @Autowired
-    private PaginationManager<Tamada> paginationManager;
+    private PaginationManager<Tamada> tamadaPaginationManager;
+
+    @Autowired
+    private PaginationManager<TamadaReview> tamadaReviewPaginationManager;
 
     @PostMapping("/updateTamada")
     public String updateTamada(
@@ -63,7 +61,7 @@ public class TamadaController {
             Model model
     ) {
         Page<Tamada> page = tamadaService.getTamadaPage(pageable);
-        List<Integer> bodyForPagination = paginationManager.getBody(page);
+        List<Integer> bodyForPagination = tamadaPaginationManager.getBody(page);
 
         model.addAttribute("page", page);
         model.addAttribute("tamadaList", page.getContent());
@@ -88,7 +86,7 @@ public class TamadaController {
             model.addAttribute("searchedTamada", tamada);
         } else {
             Page<Tamada> page = tamadaService.getTamadaPage(tamada, pageable, form);
-            List<Integer> bodyForPagination = paginationManager.getBody(page);
+            List<Integer> bodyForPagination = tamadaPaginationManager.getBody(page);
             String url = getUrl(tamada, sort);
 
             model.addAttribute("searchedTamada", tamada);
@@ -136,5 +134,67 @@ public class TamadaController {
         String url = "/tamada/searchTamada?rating=" + tamada.getRating() + "&experience=" + tamada.getExperience() + "&sort=" + sort;
         return url;
     }
+
+    @GetMapping("/reviewList/{tamada}")
+    public String reviewList(
+            @PathVariable Tamada tamada,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable,
+            @AuthenticationPrincipal User user,
+            Model model
+    ) {
+        Page<TamadaReview> page = tamadaService.getTamadaReviewPage(tamada, pageable);
+        List<Integer> bodyForPagination = tamadaReviewPaginationManager.getBody(page);
+
+        model.addAttribute("page", page);
+        model.addAttribute("reviews", page.getContent());
+        model.addAttribute("url", "/tamada/reviewList/"  + tamada.getId());
+        model.addAttribute("body", bodyForPagination);
+        model.addAttribute("querySymbol", "?");
+        model.addAttribute("tamada", tamada);
+        model.addAttribute("authenticatedUserId", user.getId());
+
+        return "tamadaReviewList";
+    }
+
+    @PostMapping("/deleteReview")
+    public String deleteReview(
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable,
+            @AuthenticationPrincipal User user,
+            @RequestParam TamadaReview reviewId,
+            Model model
+    ) {
+        tamadaService.deleteTamadaReview(reviewId);
+        return reviewList(reviewId.getTamadaId(), pageable, user, model);
+    }
+
+    @GetMapping("/editReview")
+    public String editReviewPage(
+            @RequestParam TamadaReview reviewId,
+            Model model
+    ) {
+        model.addAttribute("review", reviewId);
+        return "editReview";
+    }
+
+    @PostMapping("/updateReview")
+    public String updateReview(
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable,
+            @AuthenticationPrincipal User user,
+            @Valid TamadaReview review,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        String view = "editReview";
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errorsMap = ControllerUtil.getErrors(bindingResult);
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("review", review);
+        } else {
+            tamadaService.saveReview(review);
+            view = "redirect:/tamada/reviewList/" + review.getTamadaId().getId();
+        }
+        return view;
+    }
+
 
 }

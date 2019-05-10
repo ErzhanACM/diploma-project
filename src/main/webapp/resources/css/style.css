@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Marmelad|Comfortaa|Exo+2|PT+Sans+Caption|Play|Roboto+Mono|Ubuntu|Yanone+Kaffeesatz');
+
+* {
+    font-family: 'Exo 2';
+}
+
 :root {
     --main-color-dark: #18556B;
     --main-color: #2E85A5;
@@ -104,6 +110,7 @@ footer a:hover {
 .card-header {
     background-color: var(--main-color-dark);
     border: none;
+    text-align: center;
 }
 
 .table .thead-dark th {
@@ -376,6 +383,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .card-header-white {
     color: #fff;
+}
+
+.card-header-white:hover {
+    color: #fff;
+}
+
+.card-footer {
+    background-color: var(--main-color-dark);
 }
 
 .disabled-red {
