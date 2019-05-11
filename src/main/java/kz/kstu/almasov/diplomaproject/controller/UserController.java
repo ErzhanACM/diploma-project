@@ -1,14 +1,22 @@
 package kz.kstu.almasov.diplomaproject.controller;
 
 import kz.kstu.almasov.diplomaproject.entity.dto.TamadaDTO;
+import kz.kstu.almasov.diplomaproject.entity.toi.Toi;
 import kz.kstu.almasov.diplomaproject.entity.user.*;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.service.RestaurantService;
 import kz.kstu.almasov.diplomaproject.service.TamadaService;
+import kz.kstu.almasov.diplomaproject.service.ToiService;
 import kz.kstu.almasov.diplomaproject.service.UserService;
+import kz.kstu.almasov.diplomaproject.util.PaginationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +46,9 @@ public class UserController {
     @Autowired
     private RestaurantService restaurantService;
 
+    @Autowired
+    private PaginationManager<Toi> paginationManager;
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -47,7 +58,11 @@ public class UserController {
     }
 
     @GetMapping("{user}")
-    public String userPage(@PathVariable User user, Model model, Principal principal) {
+    public String userPage(
+            @PathVariable User user,
+            Model model,
+            Principal principal
+    ) {
         User authorizedUser = userService.getUserByUsername(principal.getName());
         Tamada tamada = tamadaService.getTamada(user);
         RestaurantAdmin restaurantAdmin = restaurantService.getRestaurantAdmin(user);
@@ -65,7 +80,10 @@ public class UserController {
     }
 
     @GetMapping("/editProfile")
-    public String editProfile(Model model, Principal principal) {
+    public String editProfile(
+            Model model,
+            Principal principal
+    ) {
         User userFromDb = userService.getUserByUsername(principal.getName());
         UserDTO user = UserDTO.from(userFromDb);
         Tamada tamada = tamadaService.getTamada(userFromDb);
@@ -120,6 +138,26 @@ public class UserController {
         }
 
         return view;
+    }
+
+    @PostMapping("/addToiToFavorites/{toi}")
+    public String addToiToFavorites(
+            @PathVariable Toi toi,
+            @AuthenticationPrincipal User user,
+            Model model
+    ) {
+        userService.addToiToFavorites(user, toi);
+        return "redirect:/toi/" + toi.getId();
+    }
+
+    @PostMapping("/deleteToiFromFavorites/{toi}")
+    public String deleteToiFromFavorites(
+            @PathVariable Toi toi,
+            @AuthenticationPrincipal User user,
+            Model model
+    ) {
+        userService.deleteToiFromFavorites(user, toi);
+        return "redirect:/toi/" + toi.getId();
     }
 
 }

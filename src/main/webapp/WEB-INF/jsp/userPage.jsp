@@ -2,8 +2,8 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="form"  uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -101,20 +101,19 @@
                 <div class="profile-work">
                     <c:if test="${myPage}">
                         <p><spring:message code="user.page.for.user"/></p>
-                        <a href="/toi/toiList/<security:authentication property="principal.id"/>"><spring:message
-                                code="user.page.option.my.tois"/></a><br/>
                         <a href="/user/editProfile"><spring:message code="user.page.option.edit.profile"/></a><br/>
-                        <a href=""><spring:message code="user.page.option.settings"/></a><br/>
                         <a href=""><spring:message code="user.page.option.messages"/></a><br/>
                         <a href=""><spring:message code="user.page.option.favorite.restaurants"/></a><br/>
-                        <a href=""><spring:message code="user.page.option.favorite.tamadas"/></a><br/>
-                        <a href=""><spring:message code="user.page.option.favorite.tois"/></a><br/>
+                        <a href="/user/favorite/tamadas"><spring:message code="user.page.option.favorite.tamadas"/></a><br/>
+                        <a href="/toi/favoriteToisOfUser"><spring:message code="user.page.option.favorite.tois"/></a><br/>
                     </c:if>
                     <c:if test="${!myPage}">
                         <p><spring:message code="user.page.for.guest"/></p>
                         <c:if test="${((not empty tamada) or (not empty restaurantAdmin))}">
                             <a href=""><spring:message code="user.page.action.offer.cooperation"/></a><br/>
                         </c:if>
+                        <a href=""><spring:message code="user.page.action.write.message"/></a><br/>
+                        <a href=""><spring:message code="action.add.to.favorites"/></a><br/>
                         <c:if test="${not empty tamada}">
                             <form:form method="get" action="/tamada/addReview">
                                 <button type="submit" class=""><spring:message
@@ -125,14 +124,17 @@
                                        value="<security:authentication property="principal.id"/>">
                             </form:form>
                         </c:if>
-                        <a href=""><spring:message code="user.page.action.write.message"/></a><br/>
-                        <a href=""><spring:message code="user.page.action.add.to.favorites"/></a><br/>
                     </c:if>
-                    <a href="/toi/toiList/${user.id}"><spring:message code="user.page.option.tois"/></a><br/>
                     <c:if test="${not empty tamada}">
                         <a href="/tamada/reviewList/${tamada.id}"><spring:message
                                 code="user.page.option.reviews"/></a><br/>
                     </c:if>
+                    <form:form method="get" action="/toi/toiListOfUser">
+                        <button type="submit" class=""><spring:message
+                                code="user.page.option.tois"/></button>
+                        <br/>
+                        <input type="hidden" name="user" value="${user.id}">
+                    </form:form>
                 </div>
             </div>
             <div class="col-md-8">

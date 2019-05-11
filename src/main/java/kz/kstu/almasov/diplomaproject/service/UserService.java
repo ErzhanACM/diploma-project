@@ -4,6 +4,7 @@ import kz.kstu.almasov.diplomaproject.entity.dto.TamadaDTO;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
 import kz.kstu.almasov.diplomaproject.entity.review.TamadaReview;
+import kz.kstu.almasov.diplomaproject.entity.toi.Toi;
 import kz.kstu.almasov.diplomaproject.entity.user.*;
 import kz.kstu.almasov.diplomaproject.repository.RestaurantAdminRepository;
 import kz.kstu.almasov.diplomaproject.repository.TamadaRepository;
@@ -14,6 +15,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -116,6 +118,16 @@ public class UserService implements UserDetailsService {
 
         file.transferTo(new File(uploadPath + "/" + resultFileName));
         user.setAvatarFileName(resultFileName);
+        userRepository.save(user);
+    }
+
+    public void addToiToFavorites(User user, Toi toi) {
+        user.getFavouriteTois().add(toi);
+        userRepository.save(user);
+    }
+
+    public void deleteToiFromFavorites(User user, Toi toi) {
+        user.getFavouriteTois().remove(toi);
         userRepository.save(user);
     }
 }

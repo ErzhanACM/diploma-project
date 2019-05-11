@@ -32,6 +32,9 @@ public class Tamada {
     private List<String> languages;
 
     private Integer experience;
-
     private String workDescription;
+
+    @ElementCollection
+    @CollectionTable(name="tamada_image_file", joinColumns=@JoinColumn(name="tamada_id"))
+    private List<String> imageFileNames;
 }

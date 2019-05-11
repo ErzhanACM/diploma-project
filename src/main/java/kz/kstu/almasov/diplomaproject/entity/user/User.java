@@ -1,8 +1,12 @@
 package kz.kstu.almasov.diplomaproject.entity.user;
 
+import kz.kstu.almasov.diplomaproject.entity.restaurant.Restaurant;
+import kz.kstu.almasov.diplomaproject.entity.toi.Toi;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -44,7 +48,6 @@ public class User implements UserDetails {
 
     private String avatarFileName;
 
-
     @Temporal(TemporalType.DATE)
     @Past(message = "user.birthday.time.error")
     private Date birthday;
@@ -58,9 +61,20 @@ public class User implements UserDetails {
     private String skype;
     private String aboutMyself;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @CollectionTable(name="user_restaurant_favourite", joinColumns=@JoinColumn(name="user_id"))
+    private List<Restaurant> favouriteRestaurants;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @CollectionTable(name="user_tamada_favourite", joinColumns=@JoinColumn(name="user_id"))
     private List<Tamada> favouriteTamadas;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @CollectionTable(name="user_toi_favourite", joinColumns=@JoinColumn(name="user_id"))
+    private List<Toi> favouriteTois;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -40,7 +40,7 @@
                     </c:if>
                     <c:if test="${!favouriteTamadas.contains(tamada)}">
                         <button type="submit" class="btn custom-btn red-btn ml-2">
-                            <spring:message code="user.page.action.add.to.favorites"/>
+                            <spring:message code="action.add.to.favorites"/>
                         </button>
                     </c:if>
                 </form:form>

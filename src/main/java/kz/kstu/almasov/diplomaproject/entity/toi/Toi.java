@@ -11,6 +11,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -49,5 +50,16 @@ public class Toi {
     @Length(max = 255, message = "description is too long! (more than 100 symbols)")
     private String description;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Toi)) return false;
+        Toi toi = (Toi) o;
+        return Objects.equals(id, toi.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id);
+    }
 }

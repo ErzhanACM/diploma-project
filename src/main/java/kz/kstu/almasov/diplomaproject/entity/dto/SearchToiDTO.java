@@ -1,5 +1,6 @@
 package kz.kstu.almasov.diplomaproject.entity.dto;
 
+import kz.kstu.almasov.diplomaproject.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,8 @@ public class SearchToiDTO {
 
     private String name;
     private String type;
+
+    private User creator;
 
     @Temporal(TemporalType.DATE)
     private Date date1;

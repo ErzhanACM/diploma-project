@@ -37,54 +37,64 @@
         <a href="/user/${tamada.user.id}" class="link-center red-link ml-2">${tamada.user.username}</a>
     </div>
 
-    <div class="row">
+    <c:if test="${empty reviews}">
+        <h5 class="page-title"><spring:message code="there.is.no.review"/></h5>
+    </c:if>
 
-        <div class="container">
+    <c:if test="${not empty reviews}">
 
-            <h2 class="font-weight-light text-center text-lg-left mt-4 mb-0">Reviews</h2>
+        <div class="row">
 
-            <hr class="mt-2 mb-4">
+            <div class="container">
 
-            <tag:pagination url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
+                <h2 class="font-weight-light text-center text-lg-left mt-4 mb-0">Reviews</h2>
 
-            <div class="row text-center text-lg-left">
+                <hr class="mt-2 mb-4">
 
-                <c:forEach items="${reviews}" var="review">
-                    <div class="col-md-4 mb-3">
-                        <div class="card">
-                            <a href="/user/${review.userId.id}" class="card-header card-header-white">${review.userId.username}</a>
-                            <div class="card-body">
-                                <h5 class="card-title">mark: ${review.rating}/10</h5>
-                                <h5 class="card-title">${review.headline}</h5>
-                                <p class="card-text">${review.text}</p>
-                            </div>
-                            <c:if test="${review.userId.id == authenticatedUserId}">
-                                <div class="card-footer">
-                                    <div class="row justify-content-center">
-                                        <form:form method="get" action="/tamada/editReview">
-                                            <input type="hidden" name="reviewId" value="${review.id}">
-                                            <button type="submit" class="btn custmom-btn light-btn">edit</button>
-                                        </form:form>
+                <tag:pagination url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
 
-                                        <form:form method="post" action="/tamada/deleteReview">
-                                            <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                            <input type="hidden" name="reviewId" value="${review.id}">
-                                            <button type="submit" class="btn custmom-btn red-btn ml-5">delete</button>
-                                        </form:form>
-                                    </div>
+                <div class="row text-center text-lg-left">
+
+                    <c:forEach items="${reviews}" var="review">
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <a href="/user/${review.userId.id}"
+                                   class="card-header card-header-white">${review.userId.username}</a>
+                                <div class="card-body">
+                                    <h5 class="card-title">mark: ${review.rating}/10</h5>
+                                    <h5 class="card-title">${review.headline}</h5>
+                                    <p class="card-text">${review.text}</p>
                                 </div>
-                            </c:if>
+                                <c:if test="${review.userId.id == authenticatedUserId}">
+                                    <div class="card-footer">
+                                        <div class="row justify-content-center">
+                                            <form:form method="get" action="/tamada/editReview">
+                                                <input type="hidden" name="reviewId" value="${review.id}">
+                                                <button type="submit" class="btn custmom-btn light-btn">edit</button>
+                                            </form:form>
+
+                                            <form:form method="post" action="/tamada/deleteReview">
+                                                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                <input type="hidden" name="reviewId" value="${review.id}">
+                                                <button type="submit" class="btn custmom-btn red-btn ml-5">delete
+                                                </button>
+                                            </form:form>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </div>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+
+                </div>
+
+                <tag:pagination url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
 
             </div>
-
-            <tag:pagination url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
-
+            <!-- /.container -->
         </div>
-        <!-- /.container -->
-    </div>
+
+    </c:if>
 
 </div>
 

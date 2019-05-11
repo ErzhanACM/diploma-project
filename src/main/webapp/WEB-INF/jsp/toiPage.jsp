@@ -2,7 +2,8 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="form"  uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -152,11 +153,25 @@
             <div class="profile-work">
                 <p><spring:message code="for.organizer"/></p>
                 <a href="#"><spring:message code="button.edit.toi"/></a><br/>
-                <a href="#">Bootsnipp Profile</a><br/>
-                <a href="#">Bootply Profile</a>
+                <a href="#">Search restaurant for this toi</a><br/>
+                <a href="#">Search tamada for this toi</a>
+                <a href="#">Add guest list for this toi</a>
                 <p><spring:message code="for.performer"/></p>
-                <a href="#">Web Designer</a><br/>
-                <a href="#">Web Developer</a><br/>
+                <a href="#"><spring:message code="button.edit.toi"/></a><br/>
+                <c:if test="${isFavorite}">
+                <form:form method="post" action="/user/deleteToiFromFavorites/${toi.id}">
+                    <button type="submit" class=""><spring:message
+                            code="action.delete.from.favorites"/></button>
+                    <br/>
+                </form:form>
+                </c:if>
+                <c:if test="${!isFavorite}">
+                    <form:form method="post" action="/user/addToiToFavorites/${toi.id}">
+                        <button type="submit" class=""><spring:message
+                                code="action.add.to.favorites"/></button>
+                        <br/>
+                    </form:form>
+                </c:if>
                 <a href="#">SQL</a><br/>
                 <a href="#">Java, Spring framework</a><br/>
                 <a href="#">HTML, CSS, JS</a><br/>
