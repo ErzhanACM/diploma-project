@@ -1,8 +1,8 @@
 <%@ page language="java" session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -187,15 +187,16 @@
                         </div>
                     </div>
                     <input type="hidden" name="favorite" value="${favorite}">
-                    <input type="hidden" name="creator" value="<c:if test="${not empty creator}">${creator.id}</c:if>">
+                    <input type="hidden" name="creator"
+                           value="<c:if test="${not empty creator}">${creator.id}</c:if>">
                 </form:form>
 
             </div>
         </div>
     </div>
 
-    <tag:table_of_tois toiList="${toiList}" user="${user}" creator="${creator}" url="${url}" page="${page}" body="${body}"
-                       querySymbol="${querySymbol}"/>
+    <tag:table_of_tois toiList="${toiList}" user="${user}" creator="${creator}" url="${url}" page="${page}"
+                       body="${body}" querySymbol="${querySymbol}"/>
 
 </div>
 

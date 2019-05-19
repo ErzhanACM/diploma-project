@@ -12,10 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "usr")
@@ -61,20 +58,32 @@ public class User implements UserDetails {
     private String skype;
     private String aboutMyself;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_toi_favourite",
+            joinColumns = { @JoinColumn(name = "toi_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
     @Fetch(value = FetchMode.SUBSELECT)
-    @CollectionTable(name="user_restaurant_favourite", joinColumns=@JoinColumn(name="user_id"))
-    private List<Restaurant> favouriteRestaurants;
+    private List<Toi> favouriteTois = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_restaurant_favourite",
+            joinColumns = { @JoinColumn(name = "restaurant_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
     @Fetch(value = FetchMode.SUBSELECT)
-    @CollectionTable(name="user_tamada_favourite", joinColumns=@JoinColumn(name="user_id"))
-    private List<Tamada> favouriteTamadas;
+    private List<Restaurant> favouriteRestaurants = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_tamada_favourite",
+            joinColumns = { @JoinColumn(name = "tamada_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
     @Fetch(value = FetchMode.SUBSELECT)
-    @CollectionTable(name="user_toi_favourite", joinColumns=@JoinColumn(name="user_id"))
-    private List<Toi> favouriteTois;
+    private List<Tamada> favouriteTamadas = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

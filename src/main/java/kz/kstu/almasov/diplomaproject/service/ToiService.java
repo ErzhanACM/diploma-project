@@ -47,7 +47,9 @@ public class ToiService {
 
     public Page<Toi> getFavoriteToisOfUser(User user, Pageable pageable) {
         List<Toi> tois = user.getFavouriteTois();
-        Page<Toi> page = new PageImpl<>(tois, pageable, tois.size());
+        int start = (int) pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > tois.size() ? tois.size() : (start + pageable.getPageSize());
+        Page<Toi> page = new PageImpl<Toi>(tois.subList(start, end), pageable, tois.size());
         return page;
     }
 

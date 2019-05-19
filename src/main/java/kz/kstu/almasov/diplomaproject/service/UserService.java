@@ -122,12 +122,27 @@ public class UserService implements UserDetailsService {
     }
 
     public void addToiToFavorites(User user, Toi toi) {
-        user.getFavouriteTois().add(toi);
+        List<Toi> favoriteTois = new ArrayList<>();
+        favoriteTois.addAll(user.getFavouriteTois());
+        favoriteTois.add(toi);
+        user.getFavouriteTois().clear();
+        userRepository.save(user);
+        user.setFavouriteTois(favoriteTois);
         userRepository.save(user);
     }
 
     public void deleteToiFromFavorites(User user, Toi toi) {
         user.getFavouriteTois().remove(toi);
+        userRepository.save(user);
+    }
+
+    public void addTamadaToFavorites(User user, Tamada tamada) {
+        user.getFavouriteTamadas().add(tamada);
+        userRepository.save(user);
+    }
+
+    public void deleteTamadaFromFavorites(User user, Tamada tamada) {
+        user.getFavouriteTamadas().remove(tamada);
         userRepository.save(user);
     }
 }

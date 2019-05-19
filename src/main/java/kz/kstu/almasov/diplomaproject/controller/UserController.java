@@ -59,6 +59,7 @@ public class UserController {
 
     @GetMapping("{user}")
     public String userPage(
+            @AuthenticationPrincipal User authenticatedUser,
             @PathVariable User user,
             Model model,
             Principal principal
@@ -75,6 +76,8 @@ public class UserController {
         }
         if (tamada != null) {
             model.addAttribute("tamada", TamadaDTO.from(tamada));
+            boolean isFavorite = tamadaService.isFavorite(tamada, authenticatedUser);
+            model.addAttribute("isFavorite", isFavorite);
         }
         return "userPage";
     }
@@ -158,6 +161,26 @@ public class UserController {
     ) {
         userService.deleteToiFromFavorites(user, toi);
         return "redirect:/toi/" + toi.getId();
+    }
+
+    @PostMapping("/addTamadaToFavorites/{tamada}")
+    public String addTamadaToFavorites(
+            @PathVariable Tamada tamada,
+            @AuthenticationPrincipal User user,
+            Model model
+    ) {
+        userService.addTamadaToFavorites(user, tamada);
+        return "redirect:/user/" + tamada.getUser().getId();
+    }
+
+    @PostMapping("/deleteTamadaFromFavorites/{tamada}")
+    public String deleteTamadaFromFavorites(
+            @PathVariable Tamada tamada,
+            @AuthenticationPrincipal User user,
+            Model model
+    ) {
+        userService.deleteTamadaFromFavorites(user, tamada);
+        return "redirect:/user/" + tamada.getUser().getId();
     }
 
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form"  uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -75,7 +76,7 @@
                                     <label><i class="fa fa-calendar"></i> <spring:message code="label.toi.date"/></label>
                                 </div>
                                 <div class="col-md-9">
-                                    <p>${toi.date}</p>
+                                    <p><fmt:formatDate value="${toi.date}" type="date" dateStyle = "long"/></p>
                                 </div>
                             </div>
 

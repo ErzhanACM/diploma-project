@@ -53,7 +53,7 @@ public class Toi {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Toi)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Toi toi = (Toi) o;
         return Objects.equals(id, toi.id);
     }

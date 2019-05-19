@@ -164,4 +164,14 @@ public class TamadaService {
     public void deleteTamadaReview(TamadaReview review) {
         tamadaReviewRepository.deleteReview(review.getId());
     }
+
+    public boolean isFavorite(Tamada tamada, User user) {
+        return user.getFavouriteTamadas().contains(tamada);
+    }
+
+    public Page<Tamada> getFavoriteTamadaPage(User user, Pageable pageable) {
+        List<Tamada> tamadas = user.getFavouriteTamadas();
+        Page<Tamada> page = new PageImpl<>(tamadas, pageable, tamadas.size());
+        return page;
+    }
 }

@@ -196,5 +196,21 @@ public class TamadaController {
         return view;
     }
 
+    @GetMapping("/favorite/tamadas")
+    public String getFavoriteTamadaPage(
+            @AuthenticationPrincipal User user,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable,
+            Model model
+    ) {
+        Page<Tamada> page = tamadaService.getFavoriteTamadaPage(user, pageable);
+        List<Integer> bodyForPagination = tamadaPaginationManager.getBody(page);
+
+        model.addAttribute("page", page);
+        model.addAttribute("tamadaList", page.getContent());
+        model.addAttribute("url", "/tamada/tamadaList");
+        model.addAttribute("body", bodyForPagination);
+        model.addAttribute("querySymbol", "?");
+        return "tamadaList";
+    }
 
 }

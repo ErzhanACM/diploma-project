@@ -9,6 +9,7 @@
 <%@ attribute name="querySymbol" required="true" %>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <c:if test="${empty toiList}">
@@ -43,7 +44,7 @@
         </c:if>
         <c:if test="${not empty user}">
             <h5 class="page-title"><spring:message code="favorite.tois.of.user"/></h5><a href="/user/${user.id}"
-                                                                                class="red-link ml-2">${user.username}</a>
+                                                                                         class="red-link ml-2">${user.username}</a>
         </c:if>
     </div>
 
@@ -71,7 +72,7 @@
                     <td scope="row">${toi.id}</td>
                     <td>${toi.name}</td>
                     <td><spring:message code="${toi.type.name().toLowerCase()}"/></td>
-                    <td>${toi.date}</td>
+                    <td><fmt:formatDate value="${toi.date}" type="date" dateStyle = "long"/></td>
                     <td><spring:message code="${toi.city}"/></td>
                     <td><spring:message code="${toi.place}"/></td>
                     <td>${toi.numberOfGuests}</td>

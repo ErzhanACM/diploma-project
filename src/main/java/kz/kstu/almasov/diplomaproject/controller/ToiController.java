@@ -73,9 +73,9 @@ public class ToiController {
         model.addAttribute("creator", user);
         model.addAttribute("page", page);
         model.addAttribute("toiList", page.getContent());
-        model.addAttribute("url", "/toi/toiList/" + user.getId());
+        model.addAttribute("url", "/toi/toiListOfUser?user=" + user.getId());
         model.addAttribute("body", bodyForPagination);
-        model.addAttribute("querySymbol", "?");
+        model.addAttribute("querySymbol", "&");
         return "toiList";
     }
 
@@ -93,7 +93,7 @@ public class ToiController {
         model.addAttribute("user", user);
         model.addAttribute("page", page);
         model.addAttribute("toiList", page.getContent());
-        model.addAttribute("url", "/toi/toiList/" + user.getId());
+        model.addAttribute("url", "/toi/favoriteToisOfUser");
         model.addAttribute("body", bodyForPagination);
         model.addAttribute("querySymbol", "?");
         return "toiList";
@@ -111,6 +111,7 @@ public class ToiController {
     ) {
         if (creator != null) {
             toi.setCreator(creator);
+            model.addAttribute("creator", creator);
         }
         Page<Toi> page = toiService.getToiPage(toi, pageable, favorite, authenticatedUser);
         List<Integer> bodyForPagination = paginationManager.getBody(page);
@@ -125,7 +126,6 @@ public class ToiController {
         model.addAttribute("selectedDate2", date2);
         model.addAttribute("sort", sort);
 
-        model.addAttribute("creator", creator);
         if (favorite) {
             model.addAttribute("user", authenticatedUser);
             model.addAttribute("favorite", true);
@@ -185,7 +185,7 @@ public class ToiController {
 
         String url = "/toi/searchToi?name=" + name + "&type=" + toi.getType() + "&date1=" + date1 + "&date2=" + date2
                 + "&city=" + toi.getCity() + "&numberOfGuests=" + numberOfGuests + "&place=" + toi.getPlace()
-                + "&sort=" + sort;
+                + "&sort=" + sort + "&creator=" + toi.getCreator().getId();
         return url;
     }
 
