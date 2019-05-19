@@ -393,12 +393,4 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--main-color-dark);
 }
 
-.disabled-red {
-    background-color: #CB6F89;
-}
-
-.disabled-red:hover {
-    background-color: #CB6F89;
-}
-
 /*   ---------------------other__end---------------------   */

@@ -115,7 +115,7 @@
                         <a href="/user/editProfile"><spring:message code="user.page.option.edit.profile"/></a><br/>
                         <a href=""><spring:message code="user.page.option.messages"/></a><br/>
                         <a href=""><spring:message code="user.page.option.favorite.restaurants"/></a><br/>
-                        <a href="/tamada/favorite/tamadas"><spring:message
+                        <a href="/tamada/favoriteTamadasOfUser"><spring:message
                                 code="user.page.option.favorite.tamadas"/></a><br/>
                         <a href="/toi/favoriteToisOfUser"><spring:message
                                 code="user.page.option.favorite.tois"/></a><br/>

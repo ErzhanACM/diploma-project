@@ -2,6 +2,7 @@ package kz.kstu.almasov.diplomaproject.service;
 
 import kz.kstu.almasov.diplomaproject.entity.dto.TamadaDTO;
 import kz.kstu.almasov.diplomaproject.entity.review.TamadaReview;
+import kz.kstu.almasov.diplomaproject.entity.toi.Toi;
 import kz.kstu.almasov.diplomaproject.entity.user.Language;
 import kz.kstu.almasov.diplomaproject.entity.user.Tamada;
 import kz.kstu.almasov.diplomaproject.entity.user.User;
@@ -13,12 +14,10 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -166,12 +165,14 @@ public class TamadaService {
     }
 
     public boolean isFavorite(Tamada tamada, User user) {
-        return user.getFavouriteTamadas().contains(tamada);
+        return user.getFavoriteTamadas().contains(tamada);
     }
 
     public Page<Tamada> getFavoriteTamadaPage(User user, Pageable pageable) {
-        List<Tamada> tamadas = user.getFavouriteTamadas();
-        Page<Tamada> page = new PageImpl<>(tamadas, pageable, tamadas.size());
+        List<Tamada> tamadas = user.getFavoriteTamadas();
+        int start = (int) pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > tamadas.size() ? tamadas.size() : (start + pageable.getPageSize());
+        Page<Tamada> page = new PageImpl<>(tamadas.subList(start, end), pageable, tamadas.size());
         return page;
     }
 }

@@ -182,10 +182,14 @@ public class ToiController {
         if (toi.getNumberOfGuests() != null) {
             numberOfGuests = toi.getNumberOfGuests().toString();
         }
+        String creator = "";
+        if (toi.getCreator() != null) {
+            creator = toi.getCreator().getId().toString();
+        }
 
         String url = "/toi/searchToi?name=" + name + "&type=" + toi.getType() + "&date1=" + date1 + "&date2=" + date2
                 + "&city=" + toi.getCity() + "&numberOfGuests=" + numberOfGuests + "&place=" + toi.getPlace()
-                + "&sort=" + sort + "&creator=" + toi.getCreator().getId();
+                + "&sort=" + sort + "&creator=" + creator;
         return url;
     }
 

@@ -1,22 +1,13 @@
 package kz.kstu.almasov.diplomaproject.service;
 
-import kz.kstu.almasov.diplomaproject.entity.dto.TamadaDTO;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
-import kz.kstu.almasov.diplomaproject.entity.review.TamadaReview;
 import kz.kstu.almasov.diplomaproject.entity.toi.Toi;
 import kz.kstu.almasov.diplomaproject.entity.user.*;
-import kz.kstu.almasov.diplomaproject.repository.RestaurantAdminRepository;
-import kz.kstu.almasov.diplomaproject.repository.TamadaRepository;
-import kz.kstu.almasov.diplomaproject.repository.TamadaReviewRepository;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
 import kz.kstu.almasov.diplomaproject.validation.UserValidator;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -123,26 +114,31 @@ public class UserService implements UserDetailsService {
 
     public void addToiToFavorites(User user, Toi toi) {
         List<Toi> favoriteTois = new ArrayList<>();
-        favoriteTois.addAll(user.getFavouriteTois());
+        favoriteTois.addAll(user.getFavoriteTois());
         favoriteTois.add(toi);
-        user.getFavouriteTois().clear();
+        user.getFavoriteTois().clear();
         userRepository.save(user);
-        user.setFavouriteTois(favoriteTois);
+        user.setFavoriteTois(favoriteTois);
         userRepository.save(user);
     }
 
     public void deleteToiFromFavorites(User user, Toi toi) {
-        user.getFavouriteTois().remove(toi);
+        user.getFavoriteTois().remove(toi);
         userRepository.save(user);
     }
 
     public void addTamadaToFavorites(User user, Tamada tamada) {
-        user.getFavouriteTamadas().add(tamada);
+        List<Tamada> favoriteTamadas = new ArrayList<>();
+        favoriteTamadas.addAll(user.getFavoriteTamadas());
+        favoriteTamadas.add(tamada);
+        user.getFavoriteTamadas().clear();
+        userRepository.save(user);
+        user.setFavoriteTamadas(favoriteTamadas);
         userRepository.save(user);
     }
 
     public void deleteTamadaFromFavorites(User user, Tamada tamada) {
-        user.getFavouriteTamadas().remove(tamada);
+        user.getFavoriteTamadas().remove(tamada);
         userRepository.save(user);
     }
 }

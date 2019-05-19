@@ -2,7 +2,6 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ attribute name="tamada" required="true" type="kz.kstu.almasov.diplomaproject.entity.user.Tamada" %>
 <%@ attribute name="user" required="true" type="kz.kstu.almasov.diplomaproject.entity.user.User" %>
-<%@ attribute name="favouriteTamadas" required="true" type="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -26,23 +25,11 @@
             <p class="card-text"><spring:message code="label.experience"/>: ${tamada.experience} <spring:message
                     code="label.years"/></p>
             <p class="card-text"><spring:message code="label.languages"/>: <c:forEach items="${tamada.languages}"
-                                                                                      var="language">${language} </c:forEach></p>
+                                                                                      var="language"><spring:message code="${language}" /> </c:forEach></p>
             <div class="row justify-content-center">
                 <form:form method="get" action="/user/${user.id}">
                     <button type="submit" class="btn custom-btn dark-btn"><spring:message
                             code="button.open.page"/></button>
-                </form:form>
-                <form:form method="get" action="#">
-                    <c:if test="${favouriteTamadas.contains(tamada)}">
-                        <button disabled type="submit" class="btn disabled-red custom-btn red-btn ml-2">
-                            <spring:message code="button.already.added"/>
-                        </button>
-                    </c:if>
-                    <c:if test="${!favouriteTamadas.contains(tamada)}">
-                        <button type="submit" class="btn custom-btn red-btn ml-2">
-                            <spring:message code="action.add.to.favorites"/>
-                        </button>
-                    </c:if>
                 </form:form>
             </div>
         </div>

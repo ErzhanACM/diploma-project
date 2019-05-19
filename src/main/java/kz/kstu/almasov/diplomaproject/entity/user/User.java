@@ -60,30 +60,30 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_toi_favourite",
-            joinColumns = { @JoinColumn(name = "toi_id") },
-            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+            name = "user_toi_favorite",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "toi_id") }
     )
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Toi> favouriteTois = new ArrayList<>();
+    private List<Toi> favoriteTois = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_restaurant_favourite",
-            joinColumns = { @JoinColumn(name = "restaurant_id") },
-            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+            name = "user_restaurant_favorite",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "restaurant_id") }
     )
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Restaurant> favouriteRestaurants = new ArrayList<>();
+    private List<Restaurant> favoriteRestaurants = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_tamada_favourite",
-            joinColumns = { @JoinColumn(name = "tamada_id") },
-            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+            name = "user_tamada_favorite",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tamada_id") }
     )
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Tamada> favouriteTamadas = new ArrayList<>();
+    private List<Tamada> favoriteTamadas = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

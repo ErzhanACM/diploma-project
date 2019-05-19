@@ -145,7 +145,7 @@
         <div class="row mt-3 mb-4" id="cards">
 
             <c:forEach items="${tamadaList}" var="tamada">
-                <tag:tamada_card tamada="${tamada}" user="${tamada.user}" favouriteTamadas="${tamada.user.favouriteTamadas}"/>
+                <tag:tamada_card tamada="${tamada}" user="${tamada.user}"/>
             </c:forEach>
 
         </div>

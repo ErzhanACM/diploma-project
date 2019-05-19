@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="form"  uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
@@ -43,7 +43,8 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="cooperation-tab" data-toggle="tab" href="#cooperation" role="tab"
-                           aria-controls="cooperation" aria-selected="false"><spring:message code="nav.item.cooperation"/></a>
+                           aria-controls="cooperation" aria-selected="false"><spring:message
+                                code="nav.item.cooperation"/></a>
                     </li>
                 </ul>
 
@@ -73,16 +74,18 @@
 
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label><i class="fa fa-calendar"></i> <spring:message code="label.toi.date"/></label>
+                                    <label><i class="fa fa-calendar"></i> <spring:message
+                                            code="label.toi.date"/></label>
                                 </div>
                                 <div class="col-md-9">
-                                    <p><fmt:formatDate value="${toi.date}" type="date" dateStyle = "long"/></p>
+                                    <p><fmt:formatDate value="${toi.date}" type="date" dateStyle="long"/></p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label><i class="fa fa-map-marker"></i> <spring:message code="label.toi.city"/></label>
+                                    <label><i class="fa fa-map-marker"></i> <spring:message
+                                            code="label.toi.city"/></label>
                                 </div>
                                 <div class="col-md-9">
                                     <p>${toi.city}</p>
@@ -91,7 +94,8 @@
 
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label><i class="fa fa-building"></i> <spring:message code="label.toi.place"/></label>
+                                    <label><i class="fa fa-building"></i> <spring:message
+                                            code="label.toi.place"/></label>
                                 </div>
                                 <div class="col-md-9">
                                     <p>${toi.place}</p>
@@ -100,7 +104,8 @@
 
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label><i class="fa fa-users"></i> <spring:message code="label.toi.number.of.guests"/></label>
+                                    <label><i class="fa fa-users"></i> <spring:message
+                                            code="label.toi.number.of.guests"/></label>
                                 </div>
                                 <div class="col-md-9">
                                     <p>${toi.numberOfGuests}</p>
@@ -109,7 +114,8 @@
 
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label><i class="fa fa-pencil"></i> <spring:message code="label.toi.description"/></label>
+                                    <label><i class="fa fa-pencil"></i> <spring:message
+                                            code="label.toi.description"/></label>
                                 </div>
                                 <div class="col-md-9">
                                     <p>${toi.description}</p>
@@ -119,7 +125,8 @@
                         <div class="tab-pane fade" id="cooperation" role="tabpanel" aria-labelledby="cooperation-tab">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <label><i class="fa fa-microphone"></i> <spring:message code="label.for.tamada"/></label>
+                                    <label><i class="fa fa-microphone"></i> <spring:message
+                                            code="label.for.tamada"/></label>
                                 </div>
                                 <div class="col-md-8">
                                     <p>Требуется Тамада со знанием 3 языков (казахский, русский, английский)
@@ -127,12 +134,15 @@
                                         Вежливый, без пошлых приколов и конкурсов.</p>
                                 </div>
                                 <div class="col-md-2">
-                                    <button class="btn btn-sm custom-btn red-btn"><spring:message code="button.respond"/>!</button>
+                                    <button class="btn btn-sm custom-btn red-btn"><spring:message
+                                            code="button.respond"/>!
+                                    </button>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
-                                    <label><i class="fa fa-glass"></i> <spring:message code="label.for.restaurant.administrator"/></label>
+                                    <label><i class="fa fa-glass"></i> <spring:message
+                                            code="label.for.restaurant.administrator"/></label>
                                 </div>
                                 <div class="col-md-8">
                                     <p>Требуется Тамада со знанием 3 языков (казахский, русский, английский)
@@ -140,7 +150,9 @@
                                         Вежливый, без пошлых приколов и конкурсов.</p>
                                 </div>
                                 <div class="col-md-2">
-                                    <button class="btn btn-sm custom-btn red-btn"><spring:message code="button.respond"/>!</button>
+                                    <button class="btn btn-sm custom-btn red-btn"><spring:message
+                                            code="button.respond"/>!
+                                    </button>
                                 </div>
                             </div>
 
@@ -160,11 +172,11 @@
                 <p><spring:message code="for.performer"/></p>
                 <a href="#"><spring:message code="button.edit.toi"/></a><br/>
                 <c:if test="${isFavorite}">
-                <form:form method="post" action="/user/deleteToiFromFavorites/${toi.id}">
-                    <button type="submit" class=""><spring:message
-                            code="action.delete.from.favorites"/></button>
-                    <br/>
-                </form:form>
+                    <form:form method="post" action="/user/deleteToiFromFavorites/${toi.id}">
+                        <button type="submit" class=""><spring:message
+                                code="action.delete.from.favorites"/></button>
+                        <br/>
+                    </form:form>
                 </c:if>
                 <c:if test="${!isFavorite}">
                     <form:form method="post" action="/user/addToiToFavorites/${toi.id}">
