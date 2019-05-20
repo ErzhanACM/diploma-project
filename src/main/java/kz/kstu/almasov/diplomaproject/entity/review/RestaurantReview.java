@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 @Data
@@ -40,4 +41,7 @@ public class RestaurantReview {
     @Length(max = 30, message = "review.headline.length.error")
     @NotBlank(message = "review.headline.null.error")
     private String headline;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
 }

@@ -42,6 +42,12 @@
                 class="hint-span">*</span></p>
     </div>
 
+    <c:if test="${not empty message}">
+        <div class="row justify-content-center mb-4">
+            <p><spring:message code="${message}"/></p>
+        </div>
+    </c:if>
+
     <form:form method="post" action="/tamada/addReview" class="needs-validation" novalidate="true">
 
         <div class="form-row">
@@ -112,7 +118,8 @@
                 <label for="reviewText"><spring:message code="label.text"/></label>
                 <textarea class="form-control <c:if test="${not empty textError}">is-invalid</c:if>"
                           type="textarea" rows="7" minlength="10" id="reviewText" name="text"
-                          placeholder="<spring:message code="placeholder.text"/>"><c:if test="${not empty tamadaReview}">${tamadaReview.text}</c:if></textarea>
+                          placeholder="<spring:message code="placeholder.text"/>"><c:if
+                        test="${not empty tamadaReview}">${tamadaReview.text}</c:if></textarea>
                 <div class="invalid-feedback">
                     <spring:message code="${textError}"/>
                 </div>

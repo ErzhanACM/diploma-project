@@ -73,11 +73,13 @@ public class TamadaController {
 
     @GetMapping("/searchTamada")
     public String searchTamada(
+            @AuthenticationPrincipal User authenticatedUser,
             @Valid TamadaDTO tamada,
             BindingResult bindingResult,
             Model model,
             @RequestParam Map<String, String> form,
             @RequestParam(required = false, defaultValue = "servicesPrice") String sort,
+            @RequestParam(name = "favorite", required = false, defaultValue = "false") boolean favorite,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable
     ) {
         if (bindingResult.hasErrors()) {
@@ -85,9 +87,14 @@ public class TamadaController {
             model.mergeAttributes(errorsMap);
             model.addAttribute("searchedTamada", tamada);
         } else {
-            Page<Tamada> page = tamadaService.getTamadaPage(tamada, pageable, form);
+            Page<Tamada> page = tamadaService.getTamadaPage(tamada, pageable, form, favorite, authenticatedUser);
             List<Integer> bodyForPagination = tamadaPaginationManager.getBody(page);
             String url = getUrl(tamada, sort);
+
+            if (favorite) {
+                model.addAttribute("user", authenticatedUser);
+                model.addAttribute("favorite", true);
+            }
 
             model.addAttribute("searchedTamada", tamada);
             model.addAttribute("page", page);

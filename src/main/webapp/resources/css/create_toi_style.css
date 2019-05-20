@@ -11,3 +11,9 @@
 p {
     text-align: center;
 }
+
+.review_date {
+    text-align: right;
+    font-style: italic;
+    font-size: 0.9rem;
+}

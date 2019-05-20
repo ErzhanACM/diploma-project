@@ -60,7 +60,10 @@
                         ${user.secondName} ${user.firstName} ${user.patronymic}
                     </h6>
                     <c:if test="${not empty tamada}">
-                        <p class="proile-rating"><spring:message code="rating"/>: <span>${tamada.rating}/10</span></p>
+                        <p class="proile-rating"><spring:message code="rating"/>: <span><fmt:formatNumber type="number"
+                                                                                                          maxIntegerDigits="1"
+                                                                                                          value="${tamada.rating}"/>/10</span>
+                        </p>
                     </c:if>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -93,7 +96,13 @@
                 </c:if>
 
                 <c:if test="${!myPage and (not empty tamada)}">
-                    <button class="btn custom-btn dark-btn red-btn mb-3">write review</button>
+                    <form action="/tamada/addReview" method="get">
+                        <button type="submit" class="btn custom-btn dark-btn red-btn mb-3"><spring:message
+                                code="user.page.action.add.review"/></button>
+                        <input type="hidden" name="tamada" value="${tamada.id}">
+                        <input type="hidden" name="user"
+                               value="<security:authentication property="principal.id"/>">
+                    </form>
                 </c:if>
             </div>
         </div>
@@ -181,7 +190,7 @@
                                     <label><spring:message code="label.birthday"/></label>
                                 </div>
                                 <div class="col-md-9">
-                                    <p><fmt:formatDate value="${user.birthday}" type="date" dateStyle = "long"/></p>
+                                    <p><fmt:formatDate value="${user.birthday}" type="date" dateStyle="long"/></p>
                                 </div>
                             </div>
                         </c:if>
@@ -191,7 +200,7 @@
                                     <label><spring:message code="label.city"/></label>
                                 </div>
                                 <div class="col-md-9">
-                                    <p>${user.city}</p>
+                                    <p><spring:message code="${user.city}"/></p>
                                 </div>
                             </div>
                         </c:if>

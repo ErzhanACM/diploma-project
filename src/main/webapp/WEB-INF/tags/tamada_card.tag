@@ -2,9 +2,11 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ attribute name="tamada" required="true" type="kz.kstu.almasov.diplomaproject.entity.user.Tamada" %>
 <%@ attribute name="user" required="true" type="kz.kstu.almasov.diplomaproject.entity.user.User" %>
+<%@ attribute name="authorized_user" required="true" type="kz.kstu.almasov.diplomaproject.entity.user.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <div class="col-md-4 mt-3">
     <div class="card card-custom">
@@ -18,7 +20,7 @@
                 class="card-img-top mt-4" alt="${user.username}_avatar">
         <div class="card-body">
             <h5 class="card-title"><a href="/user/${user.id}" class="red-link">${user.username}</a></h5>
-            <h6><spring:message code="rating"/>: ${tamada.rating}/10</h6>
+            <h6><spring:message code="rating"/>: <fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${tamada.rating}" />/10</h6>
             <h6 class="my-3">${user.firstName} ${user.secondName} ${user.patronymic}</h6>
             <p class="card-text"><spring:message code="label.price.for.services"/>: ${tamada.servicesPrice}
                 <spring:message code="tenge"/></p>

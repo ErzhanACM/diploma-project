@@ -73,7 +73,7 @@ public class TamadaService {
         return page;
     }
 
-    public Page<Tamada> getTamadaPage(TamadaDTO tamada, Pageable pageable, Map<String, String> form) {
+    public Page<Tamada> getTamadaPage(TamadaDTO tamada, Pageable pageable, Map<String, String> form, boolean favorite, User user) {
         Double rating = 0.0;
         if (Strings.isNotEmpty(tamada.getRating())) {
             rating = new Double(tamada.getRating());
@@ -96,7 +96,24 @@ public class TamadaService {
                 languagesFromForm.add(key);
             }
         }
+        if (favorite) {
+            page = checkFavoriteTamadas(page, pageable, user);
+        }
         return removeTamadasByRatingAndLanguages(page, rating, languagesFromForm, pageable);
+    }
+
+    private Page<Tamada> checkFavoriteTamadas(Page<Tamada> page, Pageable pageable, User user) {
+        List<Tamada> favoriteTamadas = user.getFavoriteTamadas();
+        List<Tamada> tamadas = new ArrayList<>(page.getContent());
+        Iterator<Tamada> iterator = tamadas.iterator();
+        while (iterator.hasNext()) {
+            Tamada tamada = iterator.next();
+            if (!favoriteTamadas.contains(tamada)) {
+                iterator.remove();
+            }
+        }
+        Page<Tamada> newPage = new PageImpl<>(tamadas, pageable, tamadas.size());
+        return newPage;
     }
 
     private Page<Tamada> removeTamadasByRatingAndLanguages(Page<Tamada> page, Double rating, List<String> languages, Pageable pageable) {
@@ -153,6 +170,8 @@ public class TamadaService {
     }
 
     public void saveReview(TamadaReview tamadaReview) {
+        Date date = new Date();
+        tamadaReview.setDate(date);
         tamadaReviewRepository.save(tamadaReview);
     }
 
@@ -173,6 +192,7 @@ public class TamadaService {
         int start = (int) pageable.getOffset();
         int end = (start + pageable.getPageSize()) > tamadas.size() ? tamadas.size() : (start + pageable.getPageSize());
         Page<Tamada> page = new PageImpl<>(tamadas.subList(start, end), pageable, tamadas.size());
+        setRatingFromReviews(page);
         return page;
     }
 }

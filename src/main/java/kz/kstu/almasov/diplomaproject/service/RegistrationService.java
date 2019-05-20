@@ -67,6 +67,8 @@ public class RegistrationService {
         Tamada tamada = new Tamada();
         tamada.setUser(user);
         tamada.setRating(0d);
+        tamada.setServicesPrice(0);
+        tamada.setExperience(0);
         tamadaRepository.save(tamada);
     }
 

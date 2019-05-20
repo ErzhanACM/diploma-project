@@ -26,9 +26,12 @@
 <tag:navbar/>
 
 <div class="container mt-5">
-    <div class="row justify-content-center mt-4">
-        <h4 class="page-title"><spring:message code="page.title.tamada.searching"/></h4>
-    </div>
+
+    <c:if test="${empty user}">
+        <div class="row justify-content-center mt-4">
+            <h4 class="page-title"><spring:message code="page.title.tamada.searching"/></h4>
+        </div>
+    </c:if>
 
     <div class="card mt-3 mb-5">
         <div class="card-header" id="headingOne">
@@ -43,88 +46,94 @@
             </h5>
         </div>
 
-        <div class="collapse multi-collapse <c:if test="${not empty searchedTamada}">show</c:if>" aria-labelledby="headingOne" id="option_search">
+        <div class="collapse multi-collapse <c:if test="${not empty searchedTamada}">show</c:if>"
+             aria-labelledby="headingOne" id="option_search">
             <div class="card-body">
                 <form:form method="get" action="/tamada/searchTamada" class="needs-validation" novalidate="true">
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <label for="tamadaRating"><spring:message code="rating"/></label>
-                        <input class="form-control <c:if test="${not empty ratingError}">is-invalid</c:if>" type="text" id="tamadaRating" name="rating"
-                               value="<c:if test="${not empty searchedTamada}">${searchedTamada.rating}</c:if>">
-                        <div class="invalid-feedback">
-                            <spring:message code="${ratingError}"/>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="tamadaRating"><spring:message code="rating"/></label>
+                            <input class="form-control <c:if test="${not empty ratingError}">is-invalid</c:if>"
+                                   type="text" id="tamadaRating" name="rating"
+                                   value="<c:if test="${not empty searchedTamada}">${searchedTamada.rating}</c:if>">
+                            <div class="invalid-feedback">
+                                <spring:message code="${ratingError}"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="tamadaServicesPrice"><spring:message code="label.price.for.services"/>(max)</label>
-                        <input class="form-control <c:if test="${not empty servicesPriceError}">is-invalid</c:if>" type="text"
-                               id="tamadaServicesPrice" name="servicesPrice"
-                               value="<c:if test="${not empty searchedTamada}">${searchedTamada.servicesPrice}</c:if>">
-                        <div class="invalid-feedback">
-                            <spring:message code="${servicesPriceError}"/>
+                        <div class="col-md-4">
+                            <label for="tamadaServicesPrice"><spring:message
+                                    code="label.price.for.services"/>(max)</label>
+                            <input class="form-control <c:if test="${not empty servicesPriceError}">is-invalid</c:if>"
+                                   type="text"
+                                   id="tamadaServicesPrice" name="servicesPrice"
+                                   value="<c:if test="${not empty searchedTamada}">${searchedTamada.servicesPrice}</c:if>">
+                            <div class="invalid-feedback">
+                                <spring:message code="${servicesPriceError}"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="tamadaExperience"><spring:message code="label.experience"/></label>
-                        <input class="form-control <c:if test="${not empty experienceError}">is-invalid</c:if>" type="text"
-                               id="tamadaExperience" name="experience"
-                               value="<c:if test="${not empty searchedTamada}">${searchedTamada.experience}</c:if>">
-                        <div class="invalid-feedback">
-                            <spring:message code="${experienceError}"/>
+                        <div class="col-md-4">
+                            <label for="tamadaExperience"><spring:message code="label.experience"/></label>
+                            <input class="form-control <c:if test="${not empty experienceError}">is-invalid</c:if>"
+                                   type="text"
+                                   id="tamadaExperience" name="experience"
+                                   value="<c:if test="${not empty searchedTamada}">${searchedTamada.experience}</c:if>">
+                            <div class="invalid-feedback">
+                                <spring:message code="${experienceError}"/>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="row mt-2">
-                    <div class="col-md-4">
-                        <label><spring:message code="label.language.proficiency"/>:</label>
-                        <br>
-                        <label class="checkbox-inline">
-                            <input class="ml-2 pr-3" type="checkbox" name="english" value=""
-                                   <c:if test="${selected_languages.contains('english')}">checked</c:if>><spring:message
-                                code="english"/>
-                        </label>
-                        <label class="checkbox-inline">
-                            <input class="ml-2 pr-3" type="checkbox" name="russian" value=""
-                                   <c:if test="${selected_languages.contains('russian')}">checked</c:if>><spring:message
-                                code="russian"/>
-                        </label>
-                        <label class="checkbox-inline">
-                            <input class="ml-2 pr-3" type="checkbox" name="kazakh" value=""
-                                   <c:if test="${selected_languages.contains('kazakh')}">checked</c:if>><spring:message
-                                code="kazakh"/>
-                        </label>
-                        <label class="checkbox-inline">
-                            <input class="ml-2 pr-3" type="checkbox" name="french" value=""
-                                   <c:if test="${selected_languages.contains('french')}">checked</c:if>><spring:message
-                                code="french"/>
-                        </label>
-                        <label class="checkbox-inline">
-                            <input class="ml-2 pr-3" type="checkbox" name="italian" value=""
-                                   <c:if test="${selected_languages.contains('italian')}">checked</c:if>><spring:message
-                                code="italian"/>
-                        </label>
                     </div>
 
-                    <div class="col-md-4">
-                        <label for="sortOptions"><spring:message code="label.sort.by"/></label>
-                        <select class="form-control" name="sort" id="sortOptions">
-                            <c:if test="${not empty sort}">
-                                <option value="${sort}"><spring:message code="by.${sort}"/></option>
-                            </c:if>
-                            <option value="servicesPrice"><spring:message code="by.servicesPrice"/></option>
-                            <option value="experience"><spring:message code="by.experience"/></option>
-                        </select>
-                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-4">
+                            <label><spring:message code="label.language.proficiency"/>:</label>
+                            <br>
+                            <label class="checkbox-inline">
+                                <input class="ml-2 pr-3" type="checkbox" name="english" value=""
+                                       <c:if test="${selected_languages.contains('english')}">checked</c:if>><spring:message
+                                    code="english"/>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input class="ml-2 pr-3" type="checkbox" name="russian" value=""
+                                       <c:if test="${selected_languages.contains('russian')}">checked</c:if>><spring:message
+                                    code="russian"/>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input class="ml-2 pr-3" type="checkbox" name="kazakh" value=""
+                                       <c:if test="${selected_languages.contains('kazakh')}">checked</c:if>><spring:message
+                                    code="kazakh"/>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input class="ml-2 pr-3" type="checkbox" name="french" value=""
+                                       <c:if test="${selected_languages.contains('french')}">checked</c:if>><spring:message
+                                    code="french"/>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input class="ml-2 pr-3" type="checkbox" name="italian" value=""
+                                       <c:if test="${selected_languages.contains('italian')}">checked</c:if>><spring:message
+                                    code="italian"/>
+                            </label>
+                        </div>
 
-                    <div class="col-md-4 mt-4">
-                        <div class="row justify-content-center">
-                            <button type="submit" class="btn custom-btn dark-btn px-4 py-2"><spring:message
-                                    code="button.search"/></button>
+                        <div class="col-md-4">
+                            <label for="sortOptions"><spring:message code="label.sort.by"/></label>
+                            <select class="form-control" name="sort" id="sortOptions">
+                                <c:if test="${not empty sort}">
+                                    <option value="${sort}"><spring:message code="by.${sort}"/></option>
+                                </c:if>
+                                <option value="servicesPrice"><spring:message code="by.servicesPrice"/></option>
+                                <option value="experience"><spring:message code="by.experience"/></option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mt-4">
+                            <div class="row justify-content-center">
+                                <button type="submit" class="btn custom-btn dark-btn px-4 py-2"><spring:message
+                                        code="button.search"/></button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <input type="hidden" name="favorite" value="${favorite}">
 
                 </form:form>
 
@@ -133,19 +142,34 @@
     </div>
 
     <c:if test="${empty tamadaList}">
-        <div class="my-5">
-            <h5><spring:message code="your.search.returner.no.mathces"/></h5>
-        </div>
+        <c:if test="${not empty user}">
+            <h5><spring:message code="user.has.no.favorite.tamada"/></h5>
+        </c:if>
+        <c:if test="${empty user}">
+            <div class="my-5">
+                <h5><spring:message code="your.search.returner.no.mathces"/></h5>
+            </div>
+        </c:if>
     </c:if>
 
     <c:if test="${not empty tamadaList}">
+
+        <c:if test="${not empty user}">
+            <h5><spring:message code="favorite.tamadas.of.user"/></h5><a href="/user/${user.id}"
+                                                                         class="red-link ml-2">${user.username}</a>
+        </c:if>
+        <c:if test="${empty user}">
+            <div class="my-5">
+                <h5><spring:message code="tamadas.found"/></h5>
+            </div>
+        </c:if>
 
         <tag:pagination url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
 
         <div class="row mt-3 mb-4" id="cards">
 
             <c:forEach items="${tamadaList}" var="tamada">
-                <tag:tamada_card tamada="${tamada}" user="${tamada.user}"/>
+                <tag:tamada_card tamada="${tamada}" user="${tamada.user}" authorized_user="${user}"/>
             </c:forEach>
 
         </div>

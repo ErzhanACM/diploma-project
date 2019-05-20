@@ -34,7 +34,7 @@
     </div>
 
     <div class="row justify-content-center mt-2">
-        <a href="/user/${tamada.user.id}" class="link-center red-link ml-2">${tamada.user.username}</a>
+        <a href="/user/${tamada.user.id}" class="link-center red-link ml-2 link-big">${tamada.user.username}</a>
     </div>
 
     <c:if test="${empty reviews}">
@@ -61,6 +61,7 @@
                                 <a href="/user/${review.userId.id}"
                                    class="card-header card-header-white">${review.userId.username}</a>
                                 <div class="card-body">
+                                    <h6 class="review_date">${review.date}</h6>
                                     <h5 class="card-title">mark: ${review.rating}/10</h5>
                                     <h5 class="card-title">${review.headline}</h5>
                                     <p class="card-text">${review.text}</p>
