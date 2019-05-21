@@ -6,10 +6,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Diploma project</title>
+    <title><spring:message code="app.name" /></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -130,8 +129,8 @@
                                 </div>
                                 <div class="col-md-8">
                                     <p>Требуется Тамада со знанием 3 языков (казахский, русский, английский)
-                                        для проведения свадьбы в апреле 2019. Город Темиртау. Опыт работы от 5 лет.
-                                        Вежливый, без пошлых приколов и конкурсов.</p>
+                                        для проведения свадьбы в апреле 2019. Город Алмата. Опыт работы от 5 лет.
+                                        Личные качества: вежливый, добрый, интересный и ответственный.</p>
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-sm custom-btn red-btn"><spring:message
@@ -145,9 +144,7 @@
                                             code="label.for.restaurant.administrator"/></label>
                                 </div>
                                 <div class="col-md-8">
-                                    <p>Требуется Тамада со знанием 3 языков (казахский, русский, английский)
-                                        для проведения свадьбы в апреле 2019. Город Темиртау. Опыт работы от 5 лет.
-                                        Вежливый, без пошлых приколов и конкурсов.</p>
+                                    <p>Ищу лучший ресторан в южной столице!</p>
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-sm custom-btn red-btn"><spring:message

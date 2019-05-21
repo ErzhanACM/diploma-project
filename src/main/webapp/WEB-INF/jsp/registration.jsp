@@ -120,7 +120,7 @@
             <h3><spring:message code="headline.do.you.have.account"/></h3>
             <h4><spring:message code="headline.if.have.account.sign.in"/></h4>
             <div class="row justify-content-center">
-                <a href="/registration" class="btn btn-dark custom-btn dark-btn mt-4"><spring:message code="button.sign.in"/>!</a>
+                <a href="/login" class="btn btn-dark custom-btn dark-btn mt-4"><spring:message code="button.sign.in"/>!</a>
             </div>
         </div>
     </div>

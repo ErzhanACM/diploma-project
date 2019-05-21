@@ -4,10 +4,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Diploma project</title>
+    <title><spring:message code="app.name" /></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 

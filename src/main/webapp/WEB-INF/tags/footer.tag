@@ -1,5 +1,6 @@
 <%@ tag body-content="empty" pageEncoding="UTF-8" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!-- Footer -->
 <footer class="page-footer font-small stylish-color-dark mt-5 pt-4">
@@ -11,12 +12,14 @@
         <div class="row">
 
             <!-- Grid column -->
-            <div class="col-md-4 mx-auto">
+            <div class="col-md-5 mx-auto">
 
                 <!-- Content -->
-                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
-                <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
-                    adipisicing elit.</p>
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4"><spring:message code="app.name"/></h5>
+                <p class="text-justify"><spring:message code="app.name"/> is the organization of events with pleasure</p>
+                <p class="text-justify"><spring:message code="app.name"/> is a platform for collaboration, job searching</p>
+                <p class="text-justify"><spring:message code="app.name"/> is a collection of all the useful information about planning
+                    and organizing events</p>
 
             </div>
             <!-- Grid column -->
@@ -31,16 +34,16 @@
 
                 <ul class="list-unstyled text-center">
                     <li>
-                        <a href="#">My Page</a>
+                        <a href="#">My page</a>
                     </li>
                     <li>
-                        <a href="#">Settings</a>
+                        <a href="#">Edit profile</a>
                     </li>
                     <li>
                         <a href="#">Create Toi</a>
                     </li>
                     <li>
-                        <a href="#">Toi List</a>
+                        <a href="#">My Tois</a>
                     </li>
                     <li>
                         <a href="#">Help</a>
@@ -56,20 +59,17 @@
             <div class="col-md-2 mx-auto">
 
                 <!-- Links -->
-                <h5 class="font-weight-bold text-uppercase my-3">For Resrtaurants</h5>
+                <h5 class="font-weight-bold text-uppercase my-3">For Resrtaurant Administrators</h5>
 
                 <ul class="list-unstyled text-center">
                     <li>
-                        <a href="#">My Page</a>
+                        <a href="#">Register restaurant</a>
                     </li>
                     <li>
-                        <a href="#">Settings</a>
+                        <a href="#">My restaurants</a>
                     </li>
                     <li>
-                        <a href="#">Create Toi</a>
-                    </li>
-                    <li>
-                        <a href="#">Toi List</a>
+                        <a href="#">Find toi</a>
                     </li>
                     <li>
                         <a href="#">Help</a>
@@ -89,16 +89,10 @@
 
                 <ul class="list-unstyled text-center">
                     <li>
-                        <a href="#">My Page</a>
+                        <a href="#">Reviews</a>
                     </li>
                     <li>
-                        <a href="#">Settings</a>
-                    </li>
-                    <li>
-                        <a href="#">Create Toi</a>
-                    </li>
-                    <li>
-                        <a href="#">Toi List</a>
+                        <a href="#">Find toi</a>
                     </li>
                     <li>
                         <a href="#">Help</a>
@@ -116,33 +110,36 @@
 
     <hr>
 
-    <!-- Call to action -->
-    <ul class="list-unstyled list-inline text-center py-2">
-        <li class="list-inline-item">
-            <h5 class="mb-1">Register for free</h5>
-        </li>
-        <li class="list-inline-item">
-            <a href="#!" class="btn custom-btn light-btn btn-rounded">Sign up!</a>
-        </li>
-    </ul>
-    <!-- Call to action -->
+    <security:authorize access="!isAuthenticated()">
+        <ul class="list-unstyled list-inline text-center py-2">
+            <li class="list-inline-item">
+                <h5 class="mb-1">Register for free</h5>
+            </li>
+            <li class="list-inline-item">
+                <a href="/registration" class="btn custom-btn light-btn btn-rounded">Sign up!</a>
+            </li>
+        </ul>
 
-    <hr>
+        <hr>
+    </security:authorize>
 
     <!-- Social buttons -->
     <ul class="list-unstyled list-inline text-center">
         <li class="list-inline-item">
-            <a class="btn-social btn-floating btn-fb btn-lg custom-btn dark-btn" href="https://www.facebook.com" target="_blank">
+            <a class="btn-social btn-floating btn-fb btn-lg custom-btn dark-btn" href="https://www.facebook.com"
+               target="_blank">
                 <i class="fa fa-facebook"> </i>
             </a>
         </li>
         <li class="list-inline-item">
-            <a class="btn-floating btn-tw btn-lg custom-btn dark-btn" href="https://twitter.com/?lang=ru" target="_blank">
+            <a class="btn-floating btn-tw btn-lg custom-btn dark-btn" href="https://twitter.com/?lang=ru"
+               target="_blank">
                 <i class="fa fa-twitter"> </i>
             </a>
         </li>
         <li class="list-inline-item">
-            <a class="btn-floating btn-tw btn-lg custom-btn dark-btn" href="https://www.instagram.com/erzhanacm/?hl=ru" target="_blank">
+            <a class="btn-floating btn-tw btn-lg custom-btn dark-btn" href="https://www.instagram.com/erzhanacm/?hl=ru"
+               target="_blank">
                 <i class="fa fa-instagram"></i>
             </a>
         </li>
@@ -156,7 +153,7 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center pb-5">© 2018 Copyright:
-        <a href="/"> APP_NAME.com</a>
+        <a href="/"> <spring:message code="app.name"/>.com</a>
     </div>
     <!-- Copyright -->
 

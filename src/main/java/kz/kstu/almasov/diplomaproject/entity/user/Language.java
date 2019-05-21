@@ -1,5 +1,5 @@
 package kz.kstu.almasov.diplomaproject.entity.user;
 
 public enum Language {
-    ENGLISH, RUSSIAN, KAZAKH, ITALIAN, FRENCH;
+    ENGLISH, RUSSIAN, KAZAKH, ITALIAN, FRENCH, GERMAN, TURKISH;
 }

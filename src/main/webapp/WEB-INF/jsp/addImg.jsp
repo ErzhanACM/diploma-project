@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <title>Diploma project</title>
+    <title><spring:message code="app.name" /></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 

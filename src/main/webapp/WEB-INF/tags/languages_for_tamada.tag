@@ -25,6 +25,12 @@
         <label class="checkbox-inline">
             <input class="ml-2 pr-3" type="checkbox" name="italian" value="" <c:if test="${tamada_languages.contains('italian')}">checked</c:if>><spring:message code="italian"/>
         </label>
+        <label class="checkbox-inline">
+            <input class="ml-2 pr-3" type="checkbox" name="turkish" value="" <c:if test="${tamada_languages.contains('turkish')}">checked</c:if>><spring:message code="turkish"/>
+        </label>
+        <label class="checkbox-inline">
+            <input class="ml-2 pr-3" type="checkbox" name="german" value="" <c:if test="${tamada_languages.contains('german')}">checked</c:if>><spring:message code="german"/>
+        </label>
 
 
         <div class="invalid-feedback">

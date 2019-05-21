@@ -77,7 +77,7 @@ public class RegistrationService {
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Hello, %s! \n" +
-                            "Welcome to APPLICATION_NAME! Please, visit next link: http://localhost:8080/user/activate/%s",
+                            "Welcome to Mezumi! Please, visit next link: http://localhost:8080/user/activate/%s",
                     user.getUsername(),
                     user.getActivationCode()
             );

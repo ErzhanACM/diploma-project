@@ -2,7 +2,7 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,34 +24,78 @@
 
 <tag:navbar/>
 
-<security:authorize access="isAuthenticated()">
-    authenticated as <security:authentication property="principal.username" />
-    roles are <security:authentication property="principal.roles" />
-</security:authorize>
+<div class="container-fluid px-2 py-2">
 
-<div class="container-fluid">
-    <div class="greeting-div">
-        <div class="row justify-content-center mx-auto">
-            <h1><spring:message code="welcome"/> WEB_APP_NAME</h1>
-        </div>
-        <div class="row justify-content-center mt-4 mx-auto">
-            <h3><spring:message code="plan.and.organize.your.events.with.pleasure"/></h3>
+    <div class="row mt-4 justify-content-center ">
+
+        <div class="col-md-6">
+            <h2><spring:message code="app.name"/></h2>
+            <h3 class="text-uppercase"><spring:message code="plan.and.organize.your.events.with.pleasure"/></h3>
         </div>
 
     </div>
 
+    <div class="row mt-4 justify-content-center ">
 
-    <div class="row align-items-center justify-content-center about-app-div">
+        <div class="col-md-6">
+            <h4><spring:message code="about"/> <spring:message code="app.name"/></h4>
+        </div>
+
+    </div>
+
+    <div class="row my-4 justify-content-center">
+
+        <div class="col-md-3">
+            <img src="<c:url value="/resources/img/about1.jpg"/>">
+        </div>
+
+        <div class="col-md-3">
+            <h5 class="mt-3"><spring:message code="organizing.events" /></h5>
+            <div class="mt-4">
+                <p><spring:message code="create.your.events" /></p>
+                <p><spring:message code="find.tamadas" /></p>
+                <p><spring:message code="find.restaurants" /></p>
+                <p><spring:message code="have.deal.with.them.with.no.problem" /></p>
+            </div>
+        </div>
 
     </div>
 
-    <div class="row align-items-center justify-content-center our-advantages-div">
+    <div class="row my-5 justify-content-center">
+
+        <div class="col-md-3">
+            <h5 class="mt-3"><spring:message code="platform.for.cooperation" /></h5>
+            <div class="mt-4">
+                <p><spring:message code="find.customers" /></p>
+                <p><spring:message code="offer.cooperation" /></p>
+                <p><spring:message code="find.suitable.event.tamada.restaurant" /></p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <img src="<c:url value="/resources/img/about2.jpg"/>">
+        </div>
 
     </div>
 
-    <div class="row align-items-center justify-content-center our-team-div">
+    <div class="row my-4 justify-content-center">
+
+        <div class="col-md-3">
+            <img src="<c:url value="/resources/img/about3.jpg"/>">
+        </div>
+
+        <div class="col-md-3">
+            <h5 class="mt-3"><spring:message code="learn.about.organizing" /></h5>
+            <div class="mt-4">
+                <p><spring:message code="learn.lot.of.useful.information" /></p>
+                <p><spring:message code="get.experience.in.organizing" /></p>
+                <p><spring:message code="share.useful.information" /></p>
+                <p><spring:message code="save.favorite.tamadas.and.restaurants" /></p>
+            </div>
+        </div>
 
     </div>
+
 </div>
 
 <tag:footer/>

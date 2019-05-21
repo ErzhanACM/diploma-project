@@ -113,6 +113,16 @@
                                        <c:if test="${selected_languages.contains('italian')}">checked</c:if>><spring:message
                                     code="italian"/>
                             </label>
+                            <label class="checkbox-inline">
+                                <input class="ml-2 pr-3" type="checkbox" name="turkish" value=""
+                                       <c:if test="${selected_languages.contains('turkish')}">checked</c:if>><spring:message
+                                    code="turkish"/>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input class="ml-2 pr-3" type="checkbox" name="german" value=""
+                                       <c:if test="${selected_languages.contains('german')}">checked</c:if>><spring:message
+                                    code="german"/>
+                            </label>
                         </div>
 
                         <div class="col-md-4">
@@ -142,28 +152,31 @@
     </div>
 
     <c:if test="${empty tamadaList}">
-        <c:if test="${not empty user}">
-            <h5><spring:message code="user.has.no.favorite.tamada"/></h5>
-        </c:if>
-        <c:if test="${empty user}">
-            <div class="my-5">
-                <h5><spring:message code="your.search.returner.no.mathces"/></h5>
-            </div>
-        </c:if>
+        <div class="row justify-content-center mt-4">
+            <c:if test="${not empty user}">
+                <h5><spring:message code="user.has.no.favorite.tamada"/></h5><a href="/user/${user.id}"
+                                                                                class="red-link ml-2">${user.username}</a>
+            </c:if>
+            <c:if test="${empty user}">
+                <div class="my-5">
+                    <h5><spring:message code="your.search.returner.no.mathces"/></h5>
+                </div>
+            </c:if>
+        </div>
     </c:if>
 
     <c:if test="${not empty tamadaList}">
-
-        <c:if test="${not empty user}">
-            <h5><spring:message code="favorite.tamadas.of.user"/></h5><a href="/user/${user.id}"
-                                                                         class="red-link ml-2">${user.username}</a>
-        </c:if>
-        <c:if test="${empty user}">
-            <div class="my-5">
-                <h5><spring:message code="tamadas.found"/></h5>
-            </div>
-        </c:if>
-
+        <div class="row justify-content-center mt-4">
+            <c:if test="${not empty user}">
+                <h5><spring:message code="favorite.tamadas.of.user"/></h5><a href="/user/${user.id}"
+                                                                             class="red-link ml-2">${user.username}</a>
+            </c:if>
+            <c:if test="${empty user}">
+                <div class="my-5">
+                    <h5><spring:message code="tamadas.found"/></h5>
+                </div>
+            </c:if>
+        </div>
         <tag:pagination url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
 
         <div class="row mt-3 mb-4" id="cards">

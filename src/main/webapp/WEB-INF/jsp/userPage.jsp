@@ -61,8 +61,8 @@
                     </h6>
                     <c:if test="${not empty tamada}">
                         <p class="proile-rating"><spring:message code="rating"/>: <span><fmt:formatNumber type="number"
-                                                                                                          maxIntegerDigits="1"
-                                                                                                          value="${tamada.rating}"/>/10</span>
+                                                                                                          maxFractionDigits="1"
+                                                                                                          value="${tamada.rating}"/> /10</span>
                         </p>
                     </c:if>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -112,7 +112,7 @@
                     <p><spring:message code="user.page.actions"/></p>
                     <form:form method="get" action="/toi/toiListOfUser">
                         <button type="submit" class=""><spring:message
-                                code="user.page.option.tois"/></button>
+                                code="user.page.option.my.tois"/></button>
                         <br/>
                         <input type="hidden" name="user" value="${user.id}">
                     </form:form>
