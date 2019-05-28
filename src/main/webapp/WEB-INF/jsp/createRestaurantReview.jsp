@@ -48,10 +48,10 @@
         </div>
     </c:if>
 
-    <form:form method="post" action="/tamada/addReview" class="needs-validation" novalidate="true">
+    <form:form method="post" action="/restaurant/addReview" class="needs-validation" novalidate="true">
 
         <div class="form-row">
-            <p><spring:message code="tamada"/>: ${tamada.user.username}</p>
+            <p><spring:message code="restaurant"/>: ${restaurant.name}</p>
         </div>
 
         <div class="form-row mb-3">
@@ -104,7 +104,7 @@
                 <input id="reviewHeadline" type="text" name="headline"
                        class="form-control <c:if test="${not empty headlineError}">is-invalid</c:if>"
                        placeholder="<spring:message code="placeholder.headline"/>"
-                       value="<c:if test="${not empty tamadaReview}">${tamadaReview.headline}</c:if>">
+                       value="<c:if test="${not empty restaurantReview}">${restaurantReview.headline}</c:if>">
                 <div class="invalid-feedback">
                     <spring:message code="${headlineError}"/>
                 </div>
@@ -119,7 +119,7 @@
                 <textarea class="form-control <c:if test="${not empty textError}">is-invalid</c:if>"
                           type="textarea" rows="7" minlength="10" id="reviewText" name="text"
                           placeholder="<spring:message code="placeholder.text"/>"><c:if
-                        test="${not empty tamadaReview}">${tamadaReview.text}</c:if></textarea>
+                        test="${not empty restaurantReview}">${restaurantReview.text}</c:if></textarea>
                 <div class="invalid-feedback">
                     <spring:message code="${textError}"/>
                 </div>
@@ -127,7 +127,7 @@
 
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <input type="hidden" name="tamadaId" value="${tamada.id}">
+        <input type="hidden" name="restaurantId" value="${restaurant.id}">
         <input type="hidden" name="userId" value="<security:authentication property="principal.id" />">
         <div class="row justify-content-center">
             <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit"><spring:message

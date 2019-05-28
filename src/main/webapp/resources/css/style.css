@@ -98,6 +98,11 @@ hr {
     color: var(--main-color-light-2x);
 }
 
+footer p {
+    color: var(--main-color-light);
+    text-align: center;
+}
+
 footer a {
     color: var(--main-color-light);
 }
@@ -274,6 +279,14 @@ h1, h2, h3, h4, h5, h6 {
 /*   ---------------------nuvbar---------------------   */
 .logo {
     width: 5%;
+}
+
+.logo_nuvbar {
+    width: 10%;
+}
+
+img {
+    width: 100%;
 }
 
 .navbar {

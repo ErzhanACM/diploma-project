@@ -5,8 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title><spring:message code="app.name" /></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -30,7 +29,7 @@
 <div class="container px-4 pt-4">
 
     <div class="row justify-content-center mt-4">
-        <h4 class="page-title"><spring:message code="page.title.adding.review"/></h4>
+        <h4 class="page-title"><spring:message code="page.title.editing.review"/></h4>
     </div>
 
     <div class="row justify-content-center mt-2">
@@ -42,52 +41,46 @@
                 class="hint-span">*</span></p>
     </div>
 
-    <c:if test="${not empty message}">
-        <div class="row justify-content-center mb-4">
-            <p><spring:message code="${message}"/></p>
-        </div>
-    </c:if>
-
-    <form:form method="post" action="/tamada/addReview" class="needs-validation" novalidate="true">
+    <form:form method="post" action="/restaurant/updateReview" class="needs-validation" novalidate="true">
 
         <div class="form-row">
-            <p><spring:message code="tamada"/>: ${tamada.user.username}</p>
+            <p><spring:message code="restaurant"/>: ${review.restaurantId.name}</p>
         </div>
 
         <div class="form-row mb-3">
 
             <div class="col">
-                <label for="reviewRating"><spring:message code="rating"/> *</label>
+                <label for="reviewRating"><spring:message code="rating"/></label>
                 <div id="reviewRating">
                     <label class="checkbox-inline mr-3">
-                        <input type="radio" name="rating" value="1" checked>1
+                        <input type="radio" name="rating" value="1" <c:if test="${review.rating == 1}">checked</c:if>>1
                     </label>
                     <label class="checkbox-inline mr-3">
-                        <input type="radio" name="rating" value="2">2
+                        <input type="radio" name="rating" value="2" <c:if test="${review.rating == 2}">checked</c:if>>2
                     </label>
                     <label class="checkbox-inline mr-3">
-                        <input type="radio" name="rating" value="3">3
+                        <input type="radio" name="rating" value="3" <c:if test="${review.rating == 3}">checked</c:if>>3
                     </label>
                     <label class="checkbox-inline mr-3">
-                        <input type="radio" name="rating" value="4">4
+                        <input type="radio" name="rating" value="4" <c:if test="${review.rating == 4}">checked</c:if>>4
                     </label>
                     <label class="checkbox-inline mr-3">
-                        <input type="radio" name="rating" value="5">5
+                        <input type="radio" name="rating" value="5" <c:if test="${review.rating == 5}">checked</c:if>>5
                     </label>
                     <label class="checkbox-inline mr-3">
-                        <input type="radio" name="rating" value="6">6
+                        <input type="radio" name="rating" value="6" <c:if test="${review.rating == 6}">checked</c:if>>6
                     </label>
                     <label class="checkbox-inline mr-3">
-                        <input type="radio" name="rating" value="7">7
+                        <input type="radio" name="rating" value="7" <c:if test="${review.rating == 7}">checked</c:if>>7
                     </label>
                     <label class="checkbox-inline mr-3">
-                        <input type="radio" name="rating" value="8">8
+                        <input type="radio" name="rating" value="8" <c:if test="${review.rating == 8}">checked</c:if>>8
                     </label>
                     <label class="checkbox-inline mr-3">
-                        <input type="radio" name="rating" value="9">9
+                        <input type="radio" name="rating" value="9" <c:if test="${review.rating == 9}">checked</c:if>>9
                     </label>
                     <label class="checkbox-inline mr-3">
-                        <input type="radio" name="rating" value="10">10
+                        <input type="radio" name="rating" value="10" <c:if test="${review.rating == 10}">checked</c:if>>10
                     </label>
                 </div>
                 <div class="invalid-feedback">
@@ -100,11 +93,11 @@
         <div class="form-row">
 
             <div class="col-md-8 mb-3">
-                <label for="reviewHeadline"><spring:message code="label.headline"/> *</label>
+                <label for="reviewHeadline"><spring:message code="label.headline"/></label>
                 <input id="reviewHeadline" type="text" name="headline"
                        class="form-control <c:if test="${not empty headlineError}">is-invalid</c:if>"
                        placeholder="<spring:message code="placeholder.headline"/>"
-                       value="<c:if test="${not empty tamadaReview}">${tamadaReview.headline}</c:if>">
+                       value="<c:if test="${not empty review}">${review.headline}</c:if>">
                 <div class="invalid-feedback">
                     <spring:message code="${headlineError}"/>
                 </div>
@@ -118,8 +111,7 @@
                 <label for="reviewText"><spring:message code="label.text"/></label>
                 <textarea class="form-control <c:if test="${not empty textError}">is-invalid</c:if>"
                           type="textarea" rows="7" minlength="10" id="reviewText" name="text"
-                          placeholder="<spring:message code="placeholder.text"/>"><c:if
-                        test="${not empty tamadaReview}">${tamadaReview.text}</c:if></textarea>
+                          placeholder="<spring:message code="placeholder.text"/>"><c:if test="${not empty review}">${review.text}</c:if></textarea>
                 <div class="invalid-feedback">
                     <spring:message code="${textError}"/>
                 </div>
@@ -127,11 +119,12 @@
 
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <input type="hidden" name="tamadaId" value="${tamada.id}">
+        <input type="hidden" name="id" value="${review.id}">
+        <input type="hidden" name="restaurantId" value="${review.restaurantId.id}">
         <input type="hidden" name="userId" value="<security:authentication property="principal.id" />">
         <div class="row justify-content-center">
             <button class="btn mt-3 px-5 custom-btn dark-btn " type="submit"><spring:message
-                    code="button.add.review"/></button>
+                    code="button.edit.review"/></button>
         </div>
     </form:form>
 

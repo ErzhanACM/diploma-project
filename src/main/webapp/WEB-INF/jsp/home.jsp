@@ -28,8 +28,15 @@
 
     <div class="row mt-4 justify-content-center ">
 
+        <div class="col-md-1">
+            <img src="<c:url value="/resources/img/logo.png"/>" class="">
+        </div>
+
+    </div>
+
+    <div class="row mt-4 justify-content-center ">
+
         <div class="col-md-6">
-            <h2><spring:message code="app.name"/></h2>
             <h3 class="text-uppercase"><spring:message code="plan.and.organize.your.events.with.pleasure"/></h3>
         </div>
 

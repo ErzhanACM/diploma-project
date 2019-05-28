@@ -21,7 +21,6 @@
 }
 .profile-img img{
     width: 70%;
-    height: 100%;
 }
 .profile-img .file {
     position: relative;
@@ -96,6 +95,11 @@
 .profile-work ul{
     list-style: none;
 }
+
+.profile-work form {
+    margin: 0px;
+}
+
 .profile-tab label{
     font-weight: 600;
     color: var(--complementary-color);

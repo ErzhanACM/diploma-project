@@ -2,6 +2,7 @@ package kz.kstu.almasov.diplomaproject.service;
 
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserRegistrationDTO;
+import kz.kstu.almasov.diplomaproject.entity.restaurant.Restaurant;
 import kz.kstu.almasov.diplomaproject.entity.toi.Toi;
 import kz.kstu.almasov.diplomaproject.entity.user.*;
 import kz.kstu.almasov.diplomaproject.repository.UserRepository;
@@ -139,6 +140,22 @@ public class UserService implements UserDetailsService {
 
     public void deleteTamadaFromFavorites(User user, Tamada tamada) {
         user.getFavoriteTamadas().remove(tamada);
+        userRepository.save(user);
+    }
+
+    public void addRestaurantToFavorites(User user, Restaurant restaurant) {
+        List<Restaurant> favoriteRestaurants = new ArrayList<>();
+        favoriteRestaurants.addAll(user.getFavoriteRestaurants());
+        favoriteRestaurants.add(restaurant);
+        user.getFavoriteRestaurants().clear();
+        userRepository.save(user);
+        user.setFavoriteRestaurants(favoriteRestaurants);
+        userRepository.save(user);
+    }
+
+
+    public void deleteRestaurantFromFavorites(User user, Restaurant restaurant) {
+        user.getFavoriteRestaurants().remove(restaurant);
         userRepository.save(user);
     }
 }

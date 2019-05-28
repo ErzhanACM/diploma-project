@@ -29,11 +29,11 @@
 <div class="container px-4 pt-4">
 
     <div class="row justify-content-center mt-4">
-        <h4 class="page-title"><spring:message code="page.title.tamada.reviews"/></h4>
+        <h4 class="page-title"><spring:message code="page.title.restaurant.reviews"/></h4>
     </div>
 
     <div class="row justify-content-center mt-2">
-        <a href="/user/${tamada.user.id}" class="link-center red-link ml-2 link-big">${tamada.user.username}</a>
+        <a href="/restaurant/${restaurant.id}" class="link-center red-link ml-2 link-big">${restaurant.name}</a>
     </div>
 
     <c:if test="${empty reviews}">
@@ -68,12 +68,12 @@
                                 <c:if test="${review.userId.id == authenticatedUserId}">
                                     <div class="card-footer">
                                         <div class="row justify-content-center">
-                                            <form:form method="get" action="/tamada/editReview">
+                                            <form:form method="get" action="/restaurant/editReview">
                                                 <input type="hidden" name="reviewId" value="${review.id}">
                                                 <button type="submit" class="btn custmom-btn light-btn"><spring:message code="button.edit.review" /></button>
                                             </form:form>
 
-                                            <form:form method="post" action="/tamada/deleteReview">
+                                            <form:form method="post" action="/restaurant/deleteReview">
                                                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                                                 <input type="hidden" name="reviewId" value="${review.id}">
                                                 <button type="submit" class="btn custmom-btn red-btn ml-5"><spring:message code="button.delete.review" />

@@ -171,10 +171,8 @@
                 <h5><spring:message code="favorite.tamadas.of.user"/></h5><a href="/user/${user.id}"
                                                                              class="red-link ml-2">${user.username}</a>
             </c:if>
-            <c:if test="${empty user}">
-                <div class="my-5">
-                    <h5><spring:message code="tamadas.found"/></h5>
-                </div>
+            <c:if test="${empty user}">ь
+                <h5><spring:message code="tamadas.found"/></h5>
             </c:if>
         </div>
         <tag:pagination url="${url}" page="${page}" body="${body}" querySymbol="${querySymbol}"/>
@@ -182,7 +180,7 @@
         <div class="row mt-3 mb-4" id="cards">
 
             <c:forEach items="${tamadaList}" var="tamada">
-                <tag:tamada_card tamada="${tamada}" user="${tamada.user}" authorized_user="${user}"/>
+                <tag:tamada_card tamada="${tamada}" user="${tamada.user}"/>
             </c:forEach>
 
         </div>

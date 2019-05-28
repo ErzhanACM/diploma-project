@@ -1,9 +1,11 @@
 <%@ tag body-content="empty" pageEncoding="UTF-8" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <nav class="navbar navbar-expand-lg navbar-dark pl-4">
-    <a class="navbar-brand mr-3" href="/"><spring:message code="app.name"/></a>
+    <a class="navbar-brand mr-3 logo_nuvbar" href="/"><img class="img"
+                                                           src="<c:url value="/resources/img/logo_nuvbar.png"/>"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,15 +22,17 @@
                        aria-haspopup="true"
                        aria-expanded="false"><spring:message code="navbar.item.toi"/></a>
                     <div class="dropdown-menu dropdown-menu-dark">
-                        <a class="dropdown-item" href="/toi/toiList"><spring:message code="navbar.item.toi.list"/></a>
                         <a class="dropdown-item" href="/toi/createToi"><spring:message
                                 code="navbar.item.toi.create"/></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/toi/toiListOfUser?user=<security:authentication property="principal.id"/>">
-                            <spring:message code="navbar.item.toi.my.tois"/> </a>
+                        <a class="dropdown-item" href="/toi/toiList"><spring:message code="navbar.item.toi.list"/></a>
                         <a class="dropdown-item" href="/toi/favoriteToisOfUser"><spring:message
                                 code="navbar.item.favorites.tois.list"/> <span
                                 class="nav-item-span update"><spring:message code="update"/> !</span></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item"
+                           href="/toi/toiListOfUser?user=<security:authentication property="principal.id"/>">
+                            <spring:message code="navbar.item.toi.my.tois"/> </a>
                     </div>
                 </li>
 
@@ -42,6 +46,12 @@
                         <a class="dropdown-item" href="/tamada/favoriteTamadasOfUser"><spring:message
                                 code="navbar.item.favorites.tamada.list"/> <span
                                 class="nav-item-span update"><spring:message code="update"/> !</span></a>
+                        <security:authorize access="hasAuthority('TAMADA')">
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item"
+                               href="/tamada/reviewList/<security:authentication property="principal.id"/>"><spring:message
+                                    code="navbar.item.tamada.reviews"/></a>
+                        </security:authorize>
                     </div>
                 </li>
 
@@ -57,9 +67,14 @@
                         <a class="dropdown-item" href="/restaurant/favoriteRestaurantOfUser"><spring:message
                                 code="navbar.item.favorites.restaurant.list"/> <span
                                 class="nav-item-span update"><spring:message code="update"/> !</span></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.restaurant.registrate"/></a>
-                        <a class="dropdown-item" href="#"><spring:message code="navbar.item.my.restaurants"/></a>
+                        <security:authorize access="hasAnyAuthority('ADMIN', 'RESTAURANT')">
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/restaurant/registrate"><spring:message
+                                    code="navbar.item.restaurant.registrate"/></a>
+                            <a class="dropdown-item"
+                               href="/restaurant/restaurantListOfUser?user=<security:authentication property="principal.id"/>"><spring:message
+                                    code="navbar.item.my.restaurants"/></a>
+                        </security:authorize>
                     </div>
                 </li>
 

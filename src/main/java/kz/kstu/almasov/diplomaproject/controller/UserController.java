@@ -1,6 +1,7 @@
 package kz.kstu.almasov.diplomaproject.controller;
 
 import kz.kstu.almasov.diplomaproject.entity.dto.TamadaDTO;
+import kz.kstu.almasov.diplomaproject.entity.restaurant.Restaurant;
 import kz.kstu.almasov.diplomaproject.entity.toi.Toi;
 import kz.kstu.almasov.diplomaproject.entity.user.*;
 import kz.kstu.almasov.diplomaproject.entity.dto.UserDTO;
@@ -181,6 +182,26 @@ public class UserController {
     ) {
         userService.deleteTamadaFromFavorites(user, tamada);
         return "redirect:/user/" + tamada.getUser().getId();
+    }
+
+    @PostMapping("/addRestaurantToFavorites/{restaurant}")
+    public String addRestaurantToFavorites(
+            @PathVariable Restaurant restaurant,
+            @AuthenticationPrincipal User user,
+            Model model
+    ) {
+        userService.addRestaurantToFavorites(user, restaurant);
+        return "redirect:/restaurant/" + restaurant.getId();
+    }
+
+    @PostMapping("/deleteRestaurantFromFavorites/{restaurant}")
+    public String deleteRestaurantFromFavorites(
+            @PathVariable Restaurant restaurant,
+            @AuthenticationPrincipal User user,
+            Model model
+    ) {
+        userService.deleteRestaurantFromFavorites(user, restaurant);
+        return "redirect:/restaurant/" + restaurant.getId();
     }
 
 }

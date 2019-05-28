@@ -34,7 +34,7 @@
             <div class="col-md-4">
                 <div class="profile-img">
                     <c:if test="${empty user.avatarFileName}">
-                        <img src="/img/unknown_avatar.jpg"
+                        <img src="<c:url value="/resources/img/unknown_user_avatar.png"/>"
                              alt=""/>
                     </c:if>
                     <c:if test="${not empty user.avatarFileName}">
@@ -109,13 +109,21 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
-                    <p><spring:message code="user.page.actions"/></p>
+                    <p><spring:message code="page.actions"/></p>
                     <form:form method="get" action="/toi/toiListOfUser">
                         <button type="submit" class=""><spring:message
                                 code="user.page.option.my.tois"/></button>
                         <br/>
                         <input type="hidden" name="user" value="${user.id}">
                     </form:form>
+                    <c:if test="${not empty restaurantAdmin}">
+                        <form:form method="get" action="/restaurant/restaurantListOfUser">
+                            <button type="submit" class=""><spring:message
+                                    code="user.page.option.restaurants"/></button>
+                            <br/>
+                            <input type="hidden" name="user" value="${user.id}">
+                        </form:form>
+                    </c:if>
                     <c:if test="${not empty tamada}">
                         <a href="/tamada/reviewList/${tamada.id}"><spring:message
                                 code="user.page.option.reviews"/></a><br/>
@@ -123,7 +131,7 @@
                     <c:if test="${myPage}">
                         <a href="/user/editProfile"><spring:message code="user.page.option.edit.profile"/></a><br/>
                         <a href=""><spring:message code="user.page.option.messages"/></a><br/>
-                        <a href=""><spring:message code="user.page.option.favorite.restaurants"/></a><br/>
+                        <a href="/restaurant/favoriteRestaurantsOfUser"><spring:message code="user.page.option.favorite.restaurants"/></a><br/>
                         <a href="/tamada/favoriteTamadasOfUser"><spring:message
                                 code="user.page.option.favorite.tamadas"/></a><br/>
                         <a href="/toi/favoriteToisOfUser"><spring:message

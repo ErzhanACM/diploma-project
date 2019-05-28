@@ -102,7 +102,6 @@
                     <option value=""><spring:message code="undefined"/></option>
                     <option value="temirtau"><spring:message code="temirtau"/></option>
                     <option value="karaganda"><spring:message code="karaganda"/></option>
-                    <option value="astana"><spring:message code="astana"/></option>
                     <option value="almaty"><spring:message code="almaty"/></option>
                     <option value="nursultan"><spring:message code="nursultan"/></option>
                 </select>

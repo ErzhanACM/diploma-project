@@ -139,8 +139,12 @@
                     <option value=""><spring:message code="undefined"/></option>
                     <option value="temirtau"><spring:message code="temirtau"/></option>
                     <option value="karaganda"><spring:message code="karaganda"/></option>
-                    <option value="astana"><spring:message code="astana"/></option>
                     <option value="almaty"><spring:message code="almaty"/></option>
+                    <option value="nursultan"><spring:message code="nursultan"/></option>
+                    <option value="nursultan"><spring:message code="nursultan"/></option>
+                    <option value="nursultan"><spring:message code="nursultan"/></option>
+                    <option value="nursultan"><spring:message code="nursultan"/></option>
+                    <option value="nursultan"><spring:message code="nursultan"/></option>
                     <option value="nursultan"><spring:message code="nursultan"/></option>
                 </select>
                 <div class="invalid-feedback">
@@ -153,10 +157,10 @@
         <div class="form-row">
 
             <div class="col-md-8 mb-3">
-                <label for="toiDescription"><spring:message code="label.toi.description"/></label>
+                <label for="toiDescription"><spring:message code="label.description"/></label>
                 <textarea class="form-control <c:if test="${not empty descriptionError}">is-invalid</c:if>"
                           type="textarea" rows="5" minlength="10" id="toiDescription" name="description"
-                          placeholder="<spring:message code="placeholder.toi.description"/>"><c:if
+                          placeholder="<spring:message code="placeholder.description"/>"><c:if
                         test="${not empty creatingToi}">${creatingToi.description}</c:if></textarea>
                 <div class="invalid-feedback">
                     <spring:message code="${descriptionError}"/>

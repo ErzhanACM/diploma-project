@@ -114,7 +114,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <label><i class="fa fa-pencil"></i> <spring:message
-                                            code="label.toi.description"/></label>
+                                            code="label.description"/></label>
                                 </div>
                                 <div class="col-md-9">
                                     <p>${toi.description}</p>

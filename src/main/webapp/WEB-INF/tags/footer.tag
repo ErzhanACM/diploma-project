@@ -12,95 +12,97 @@
         <div class="row">
 
             <!-- Grid column -->
-            <div class="col-md-5 mx-auto">
+            <div class="col-md-8 mx-auto">
 
                 <!-- Content -->
                 <h5 class="font-weight-bold text-uppercase mt-3 mb-4"><spring:message code="app.name"/></h5>
-                <p class="text-justify"><spring:message code="app.name"/> is the organization of events with pleasure</p>
-                <p class="text-justify"><spring:message code="app.name"/> is a platform for collaboration, job searching</p>
-                <p class="text-justify"><spring:message code="app.name"/> is a collection of all the useful information about planning
-                    and organizing events</p>
+                <p><spring:message code="app.name"/> <spring:message code="footer.p.first" /></p>
+                <p><spring:message code="app.name"/> <spring:message code="footer.p.second" /></p>
+                <p><spring:message code="app.name"/> <spring:message code="footer.p.third" /></p>
 
             </div>
             <!-- Grid column -->
 
-            <hr class="clearfix w-100 d-md-none">
+            <security:authorize access="isAuthenticated()">
 
-            <!-- Grid column -->
-            <div class="col-md-2 mx-auto">
+                <hr class="clearfix w-100 d-md-none">
 
-                <!-- Links -->
-                <h5 class="font-weight-bold text-uppercase my-3">For users</h5>
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
 
-                <ul class="list-unstyled text-center">
-                    <li>
-                        <a href="#">My page</a>
-                    </li>
-                    <li>
-                        <a href="#">Edit profile</a>
-                    </li>
-                    <li>
-                        <a href="#">Create Toi</a>
-                    </li>
-                    <li>
-                        <a href="#">My Tois</a>
-                    </li>
-                    <li>
-                        <a href="#">Help</a>
-                    </li>
-                </ul>
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase my-3"><spring:message code="footer.for.users" /></h5>
 
-            </div>
-            <!-- Grid column -->
+                    <ul class="list-unstyled text-center">
+                        <li>
+                            <a href="/user/<security:authentication property="principal.id" />"><spring:message code="footer.button.my.page" /></a>
+                        </li>
+                        <li>
+                            <a href="/user/editProfile"><spring:message code="footer.button.edit.profile" /></a>
+                        </li>
+                        <li>
+                            <a href="/toi/createToi"><spring:message code="footer.button.create.toi" /></a>
+                        </li>
+                        <li>
+                            <a href="/toi/toiListOfUser?user=<security:authentication property="principal.id"/>"><spring:message code="footer.button.my.tois" /></a>
+                        </li>
+                        <li>
+                            <a href="#"><spring:message code="footer.button.help" /></a>
+                        </li>
+                    </ul>
 
-            <hr class="clearfix w-100 d-md-none">
+                </div>
+                <!-- Grid column -->
 
-            <!-- Grid column -->
-            <div class="col-md-2 mx-auto">
+                <security:authorize access="hasAuthority('RESTAURANT')">
 
-                <!-- Links -->
-                <h5 class="font-weight-bold text-uppercase my-3">For Resrtaurant Administrators</h5>
+                    <hr class="clearfix w-100 d-md-none">
 
-                <ul class="list-unstyled text-center">
-                    <li>
-                        <a href="#">Register restaurant</a>
-                    </li>
-                    <li>
-                        <a href="#">My restaurants</a>
-                    </li>
-                    <li>
-                        <a href="#">Find toi</a>
-                    </li>
-                    <li>
-                        <a href="#">Help</a>
-                    </li>
-                </ul>
+                    <!-- Grid column -->
+                    <div class="col-md-2 mx-auto">
 
-            </div>
-            <!-- Grid column -->
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase my-3"><spring:message code="footer.for.restaurant.administrators" /></h5>
 
-            <hr class="clearfix w-100 d-md-none">
+                        <ul class="list-unstyled text-center">
+                            <li>
+                                <a href="/restaurant/registrate"><spring:message code="footer.button.register.restaurant" /></a>
+                            </li>
+                            <li>
+                                <a href="/restaurant/restaurantListOfUser?user=<security:authentication property="principal.id"/>"><spring:message code="footer.button.my.restaurants" /></a>
+                            </li>
+                        </ul>
 
-            <!-- Grid column -->
-            <div class="col-md-2 mx-auto">
+                    </div>
 
-                <!-- Links -->
-                <h5 class="font-weight-bold text-uppercase my-3">For Tamadas</h5>
+                </security:authorize>
+                <!-- Grid column -->
 
-                <ul class="list-unstyled text-center">
-                    <li>
-                        <a href="#">Reviews</a>
-                    </li>
-                    <li>
-                        <a href="#">Find toi</a>
-                    </li>
-                    <li>
-                        <a href="#">Help</a>
-                    </li>
-                </ul>
+                <security:authorize access="hasAuthority('TAMADA')">
 
-            </div>
-            <!-- Grid column -->
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mx-auto">
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase my-3"><spring:message code="footer.for.tamada" /></h5>
+
+                        <ul class="list-unstyled text-center">
+                            <li>
+                                <a href="/user/editProfile"><spring:message code="footer.button.edit.profile" /></a>
+                            </li>
+                            <li>
+                                <a href="/toi/createToi"><spring:message code="footer.button.create.toi" /></a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </security:authorize>
+                <!-- Grid column -->
+
+            </security:authorize>
 
         </div>
         <!-- Grid row -->
